@@ -1,0 +1,40 @@
+{
+  "name": "cookierun-rollingpaper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "cookierun-rollingpaper",
+  "author": "Ki-yong Kim",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.4.0",
+    "gatsby": "^5.10.0",
+    "gatsby-plugin-emotion": "^8.10.0",
+    "gatsby-plugin-google-gtag": "^5.10.0",
+    "gatsby-plugin-i18n": "^1.0.1",
+    "gatsby-plugin-image": "^3.10.0",
+    "gatsby-plugin-manifest": "^5.10.0",
+    "gatsby-plugin-sharp": "^5.10.0",
+    "gatsby-plugin-sitemap": "^6.10.0",
+    "gatsby-source-filesystem": "^5.10.0",
+    "gatsby-source-strapi": "^3.2.0",
+    "gatsby-transformer-remark": "^6.10.0",
+    "gatsby-transformer-sharp": "^5.10.0",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-async-script": "^1.2.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "sharp": "^0.32.1"
+  }
+}
