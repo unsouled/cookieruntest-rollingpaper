@@ -2634,7 +2634,7 @@
   resolved "https://registry.npmjs.org/@strapi/plugin-gatsby-preview/-/plugin-gatsby-preview-0.1.0.tgz"
   integrity sha512-7pVbsYQFaWSwsYeTBKqHxFK4DdDOX97Ub/3m9ZlXzQpEWXxBBeRX3SZnxVC9+PmHckZXPbmXppvDyjtjLWtAcA==
 
-"@strapi/plugin-graphql@^4.10.7":
+"@strapi/plugin-graphql@4.10.7":
   version "4.10.7"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-4.10.7.tgz#693171cc01ce0e9efc76c4874c4bd0678b1a07cf"
   integrity sha512-r7pdI4h7or3hVbYi4/P3Losy67GbwcA/C8paOld4t1ek93HRlPTKdce+nHdL09e0sqGshZPRefcMGRLGLK6IFQ==
