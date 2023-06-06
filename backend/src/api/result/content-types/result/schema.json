@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "results",
+  "info": {
+    "singularName": "result",
+    "pluralName": "results",
+    "displayName": "Result"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "code": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "details": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "bestMatchCookie": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cookie-character.cookie-character"
+    },
+    "worstMatchCookie": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cookie-character.cookie-character"
+    }
+  }
+}
