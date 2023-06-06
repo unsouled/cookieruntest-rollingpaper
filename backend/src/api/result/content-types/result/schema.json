@@ -32,11 +32,6 @@
         }
       }
     },
-    "cookie": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cookie.cookie"
-    },
     "description": {
       "type": "string",
       "pluginOptions": {
@@ -56,12 +51,12 @@
     "bestMatchCookie": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::cookie.cookie"
+      "target": "api::cookie-character.cookie-character"
     },
     "worstMatchCookie": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::cookie.cookie"
+      "target": "api::cookie-character.cookie-character"
     }
   }
 }
