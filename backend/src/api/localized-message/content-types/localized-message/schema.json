@@ -4,7 +4,8 @@
   "info": {
     "singularName": "localized-message",
     "pluralName": "localized-messages",
-    "displayName": "LocalizedMessage"
+    "displayName": "LocalizedMessage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -72,14 +73,12 @@
       "type": "string"
     },
     "logoImage": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
       "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
       "pluginOptions": {
         "i18n": {
           "localized": true
