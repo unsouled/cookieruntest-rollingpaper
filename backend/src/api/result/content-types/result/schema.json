@@ -46,16 +46,6 @@
         }
       },
       "type": "richtext"
-    },
-    "bestMatchCookie": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cookie-character.cookie-character"
-    },
-    "worstMatchCookie": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cookie-character.cookie-character"
     }
   }
 }
