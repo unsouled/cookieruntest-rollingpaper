@@ -4,7 +4,8 @@
   "info": {
     "singularName": "result",
     "pluralName": "results",
-    "displayName": "Result"
+    "displayName": "Result",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -46,6 +47,16 @@
         }
       },
       "type": "richtext"
+    },
+    "bestMatchCookie": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cookie.cookie"
+    },
+    "worstMatchCookie": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cookie.cookie"
     }
   }
 }
