@@ -13,12 +13,45 @@ const Main = styled.main`
 
 const Questions = styled.div`
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+flex-direction: column;
+
 `;
 
-const Answers = styled.div`
+const QuestionText = styled.span`
+  color: ${props => props.color};
+  font-size: 20px;
+  font-weight: 900;
+`;
+
+const Answers = styled.ul`
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 200px;
 `;
+
+const AnswerButton = styled(Button)`
+  height: 70px;
+  margin: 12px 0;
+`;
+
+const colors = [
+  '#9B5ED7',
+  '#59C7D3',
+  '#9FD33A',
+  '#F4C938',
+  '#E07785',
+  '#54A3DE',
+  '#ED8E2B',
+  '#59C7D3',
+  '#E06522',
+];
 
 const Progress = ({ progress }) => (
   <div>
@@ -53,11 +86,16 @@ const QuestionMain = ({ lang, questions }) => {
       <Main>
         <Progress progress={100 * (currentQuestionIdx / questions.length)} />
         <Questions>
-          Q{currentQuestion.order}. {currentQuestion.question}
+          <QuestionText color={colors[currentQuestionIdx]}>Q{currentQuestion.order}.</QuestionText> 
+          <p>
+            {currentQuestion.question}
+          </p>
         </Questions>
         <Answers>
           {currentQuestion.answers.map((answer) => (
-            <Button onClick={() => doAnswer(answer.value)}>{answer.text}</Button>
+            <AnswerButton onClick={() => doAnswer(answer.value)}>
+              {answer.text}
+            </AnswerButton>
           ))}
         </Answers>
       </Main>

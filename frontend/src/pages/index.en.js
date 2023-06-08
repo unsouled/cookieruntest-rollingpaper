@@ -11,8 +11,8 @@ import Modal from 'react-modal';
 Modal.setAppElement('#___gatsby');
 
 export const query = graphql`
-  query ($langKey: String) {
-    strapiLocalizedMessage(locale: {eq: $langKey}) {
+  query {
+    strapiLocalizedMessage {
       id
       logoImage {
         id

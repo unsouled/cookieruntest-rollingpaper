@@ -18,7 +18,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "axios": "^1.4.0",
-    "gatsby": "^5.10.0",
+    "gatsby": "~5.8.0",
     "gatsby-plugin-emotion": "^8.10.0",
     "gatsby-plugin-google-gtag": "^5.10.0",
     "gatsby-plugin-i18n": "^1.0.1",

@@ -10,8 +10,15 @@ console.log(process.env);
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,
   accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: ['answer', 'cookie-character', 'question', 'result'],
-  singleTypes: ['localized-message'],
+  collectionTypes: [
+    'answer', 
+    'question', 
+    'result',
+    'cookie',
+  ],
+  singleTypes: [
+    'localized-message'
+  ],
   remoteFileHeaders: {
     /**
      * Customized request headers
@@ -34,6 +41,15 @@ module.exports = {
       options: strapiConfig,
     },
     'gatsby-plugin-emotion', 
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        // The unique name for each instance
+        name: `pages`,
+        // Path to the directory
+        path: `${__dirname}/src/pages/`,
+      },
+    },
     {
       resolve: 'gatsby-plugin-google-gtag', 
       options: {
