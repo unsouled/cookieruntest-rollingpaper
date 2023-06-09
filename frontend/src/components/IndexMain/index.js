@@ -3,7 +3,7 @@ import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
-import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 const languagesByLocale = {
   'ko': '한국어',

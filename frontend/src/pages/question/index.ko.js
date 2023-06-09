@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { graphql } from 'gatsby';
 import QuestionMain from '/src/components/QuestionMain';
-import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 export const query = graphql`
   query {

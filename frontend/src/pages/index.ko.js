@@ -3,7 +3,7 @@ import { graphql, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import IndexMain from '/src/components/IndexMain';
 import LanguageModal from '/src/components/LanguageModal';
-import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 import { useContext } from 'react';
 
