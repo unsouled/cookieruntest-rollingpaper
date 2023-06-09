@@ -83,7 +83,7 @@ const CouponModal = ({ isOpen, onRequestClose }) => {
                   {localizedMessages['couponSent']}
                 </p>
               </div>
-            ): (
+            ) : (
             <div style={{ 
               padding: '0 15px' 
             }}>

@@ -69,7 +69,7 @@ const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion =
       answers
     };
   });
-	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+  const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
   return (
     <LocalizedMessageContext.Provider value={messages}>
       <QuestionMain 
