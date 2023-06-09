@@ -18,14 +18,12 @@ export const query = graphql`
 					id
 					attributes {
 						title
-						subtitle
 						description
-						startText
 						participantsText
+						startText
+            copyLinkText
 						selectLanguageText
 						copyright
-						characterTestUrl
-						villainTestUrl
 						locale
 					}
 				}

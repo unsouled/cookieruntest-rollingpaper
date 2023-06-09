@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
@@ -81,8 +82,11 @@ const Links = styled.div`
 `;
 
 const EventBanner = styled.div`
-  height: 790px;
-  background: #fff;
+	height: 790px;
+	background: #fff;
+	white-space: pre;
+	word-wrap: break-word;
+	word-break: break-all;
 `;
 
 const CommunityEventBanner = styled.div`
@@ -112,8 +116,8 @@ const ResultShare = styled.div`
   margin: 10px auto;
 `;
 
-const ResultMain = ({ lang }) => {
-  const localizedMessages = useContext(LocalizedMessageContext) || {};
+const ResultMain = ({ lang, messages: localizedMessages }) => {
+console.log(localizedMessages);
   const [modalOpen, setModalOpen] = useState(true);
   const restart = () => {
     navigate(`/${lang}`);
@@ -127,7 +131,11 @@ const ResultMain = ({ lang }) => {
 
   return (
     <Layout>
-      <CouponModal isOpen={modalOpen} onRequestClose={hideModal} />
+			<CouponModal 
+				isOpen={modalOpen} 
+				onRequestClose={hideModal} 
+				messages={localizedMessages}
+			/>
       <Main>
         <Banner />
         <RollingPaper>
@@ -161,7 +169,27 @@ const ResultMain = ({ lang }) => {
           <LinkShareButton />
         </ResultShare>
 
-        <EventBanner />
+        <EventBanner>
+					<div>{localizedMessages['eventName']}</div>
+					<div>{localizedMessages['eventDescription']}</div>
+					<div>{localizedMessages['eventDuration']}</div>
+					<div>{localizedMessages['eventStartAt']}</div>
+					<div>{localizedMessages['eventEndAt']}</div>
+					<div>{localizedMessages['eventPrize1Winners']}</div>
+					<div>{localizedMessages['eventPrize1Name']}</div>
+					<div>{localizedMessages['eventPrize1Sub']}</div>
+					<div>{localizedMessages['eventPrize2Winners']}</div>
+					<div>{localizedMessages['eventPrize2Name']}</div>
+					<div>{localizedMessages['eventPrize3Winners']}</div>
+					<div>{localizedMessages['eventPrize3Name']}</div>
+					<div>{localizedMessages['eventHashtags']}</div>
+					<div>{localizedMessages['eventCopyText']}</div>
+					<div>{localizedMessages['eventParticipationText']}</div>
+					<div>{localizedMessages['eventParticipationDescription']}</div>
+					<ReactMarkdown>
+						{localizedMessages['eventNotices']}
+					</ReactMarkdown>
+        </EventBanner>
 
         <CommunityEventBanner />
 
@@ -192,9 +220,10 @@ const ResultMain = ({ lang }) => {
   );
 }
 
-const ResultPage = ({ pageContext: { langKey, code } }) => {
+const ResultPage = ({ pageContext: { langKey, code, localizedMessages } }) => {
+console.log(localizedMessages);
   return (
-    <ResultMain lang={langKey} />
+    <ResultMain lang={langKey} messages={localizedMessages} />
   );
 }
 

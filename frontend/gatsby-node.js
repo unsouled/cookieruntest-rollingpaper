@@ -1,5 +1,53 @@
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
+  const { data } = await graphql(`
+    query {
+      strapiLocalizedMessage {
+        localizations {
+          data {
+            attributes {
+              locale
+              eventCopyText
+              eventDescription
+              eventDuration
+              eventEndAt
+              eventHashtags
+              eventName
+              eventNotices
+              eventParticipationDescription
+              eventPrize1Name
+              eventParticipationText
+              eventPrize1Sub
+              eventPrize1Winners
+              eventPrize2Name
+              eventPrize2Winners
+              eventPrize3Winners
+              eventPrize3Name
+              eventStartAt
+              resultBestMatch
+              resultDescription
+              resultDownloadSticker
+              resultShare
+              resultRetest
+              resultTitle
+              resultTryCharacterTest
+              resultTryVillainTest
+              resultWorstMatch
+              couponGiftReceived
+              couponLinkToGame
+              couponInputId
+              couponMyInfo
+              couponReceiveGift
+              couponSent
+              couponShowResult
+              couponTryLater
+            }
+          }
+        }
+      }
+    }
+  `);
+
   [
     ['ko', 'ITJ', 'a0561aa2'],
     ['ko', 'ITP', 'c8d22567'],
@@ -40,22 +88,21 @@ exports.createPages = async ({ graphql, actions }) => {
     ['th', 'IFJ', '5fc93bb6'],
     ['th', 'IFP', '92f5c54e'],
     ['th', 'EFJ', 'd2ffa229'],
-    ['th', 'EFP', '4d48b9f5']
+    ['th', 'EFP', '4d48b9f5'],
+    ['zh-Hans', 'ITJ', 'a0561aa2'],
+    ['zh-Hans', 'ITP', 'c8d22567'],
+    ['zh-Hans', 'ETJ', '569f0735'],
+    ['zh-Hans', 'ETP', '400193f4'],
+    ['zh-Hans', 'IFJ', '5fc93bb6'],
+    ['zh-Hans', 'IFP', '92f5c54e'],
+    ['zh-Hans', 'EFJ', 'd2ffa229'],
+    ['zh-Hans', 'EFP', '4d48b9f5']
   ].forEach(([ langKey, _, code ])=> {
+		const messages = data.strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
     actions.createPage({
       path: `${langKey}/result/${code}`,
       component: require.resolve(`./src/components/ResultMain/index.js`),
-      context: { langKey, code },
+      context: { langKey, code, localizedMessages: messages },
     });
   });
-  /*
-  data.allContentfulResult.nodes.forEach(node => {
-    const langKey = node.node_locale.split('-')[0];
-    actions.createPage({
-      path: `${langKey}/result/${node.code}`,
-      component: require.resolve(`./src/components/ResultMain/index.js`),
-      context: { siteData, eventData, seoData, node, lang: langKey },
-    });
-  });
-  */
 }

@@ -1,31 +1,59 @@
 import React, { useState } from 'react';
-import { navigate } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import IndexMain from '/src/components/IndexMain';
 import LanguageModal from '/src/components/LanguageModal';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
+
+import { useContext } from 'react';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#___gatsby');
 
-const IndexPage = () => {
+export const query = graphql`
+  query {
+    strapiLocalizedMessage {
+			localizations {
+				data {
+					id
+					attributes {
+						title
+						description
+						participantsText
+						startText
+            copyLinkText
+						selectLanguageText
+						copyright
+						locale
+					}
+				}
+			}
+    }
+  }
+`;
+
+const IndexPage = ({ data: { strapiLocalizedMessage = {} }, pageContext: { langKey } }) => {
   const [counter, setCounter] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
+	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+  console.log(messages);
+
   return (
-    <>
-      <IndexMain showModal={() => setModalVisible(true)} lang="zh-Hans" />
-      <LanguageModal isOpen={modalVisible} onRequestClose={closeModal} lang="zh-Hans" />
-    </>
-  )
+    <LocalizedMessageContext.Provider value={messages}>
+      <IndexMain showModal={() => setModalVisible(true)} lang={langKey} />
+      <LanguageModal isOpen={modalVisible} onRequestClose={closeModal} lang={langKey} />
+    </LocalizedMessageContext.Provider>
+  );
 }
 
 export default IndexPage;
 
-export const Head = () => (
+export const Head = ({ pageContext: { langKey } }) => (
   <>
-    <html lang="zh" />
+    <html lang={langKey} />
     <title>Cookierun</title>
-    <body className="lang-zh" />
+    <body className={`lang-${langKey} index`} />
   </>
 );

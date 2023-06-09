@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Modal from 'react-modal';
 import parseISO from 'date-fns/parseISO'
 import format from 'date-fns/format';
 import Button from '../Button';
-import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 Modal.setAppElement('#___gatsby');
 
@@ -45,8 +44,7 @@ const customStyles = {
   }
 };
 
-const CouponModal = ({ isOpen, onRequestClose }) => {
-  const localizedMessages = useContext(LocalizedMessageContext) || {};
+const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) => {
   const [received, setReceived] = useState(false);
 
   return (
@@ -55,7 +53,7 @@ const CouponModal = ({ isOpen, onRequestClose }) => {
       onRequestClose={onRequestClose}
       style={customStyles}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', margin: '0 auto', width: '100%', height: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '380px', height: '100%' }}>
         <a href="#" onClick={onRequestClose} style={{ textAlign: 'right', display: 'block' }}>
           <StaticImage 
             loading="eager"
