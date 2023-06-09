@@ -13,19 +13,23 @@ Modal.setAppElement('#___gatsby');
 export const query = graphql`
   query {
     strapiLocalizedMessage {
-      id
-      logoImage {
-        id
-      }
-      copyright
-      characterTestUrl
-      description
-      participantsText
-      selectLanguageText
-      startText
-      subtitle
-      title
-      villainTestUrl
+			localizations {
+				data {
+					id
+					attributes {
+						title
+						subtitle
+						description
+						startText
+						participantsText
+						selectLanguageText
+						copyright
+						characterTestUrl
+						villainTestUrl
+						locale
+					}
+				}
+			}
     }
   }
 `;
@@ -35,10 +39,10 @@ const IndexPage = ({ data: { strapiLocalizedMessage = {} }, pageContext: { langK
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
-  console.log(strapiLocalizedMessage);
+	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
 
   return (
-    <LocalizedMessageContext.Provider value={strapiLocalizedMessage}>
+    <LocalizedMessageContext.Provider value={messages}>
       <IndexMain showModal={() => setModalVisible(true)} lang={langKey} />
       <LanguageModal isOpen={modalVisible} onRequestClose={closeModal} lang={langKey} />
     </LocalizedMessageContext.Provider>
@@ -51,6 +55,6 @@ export const Head = ({ pageContext: { langKey } }) => (
   <>
     <html lang={langKey} />
     <title>Cookierun</title>
-    <body className={`lang-${langKey}`} />
+    <body className={`lang-${langKey} index`} />
   </>
 );

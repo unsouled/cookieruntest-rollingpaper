@@ -4,40 +4,74 @@ import QuestionMain from '/src/components/QuestionMain';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 export const query = graphql`
-  query ($langKey: String) {
-    strapiLocalizedMessage(locale: {eq: $langKey}) {
-      id
-      logoImage {
-        id
-      }
-      copyright
-      characterTestUrl
-      description
-      participantsText
-      selectLanguageText
-      startText
-      subtitle
-      title
-      villainTestUrl
+  query {
+    strapiLocalizedMessage {
+			localizations {
+				data {
+					id
+					attributes {
+						title
+						subtitle
+						description
+						startText
+						participantsText
+						selectLanguageText
+						copyright
+						characterTestUrl
+						villainTestUrl
+						locale
+					}
+				}
+			}
     }
 
-    allStrapiQuestion(sort: {order: ASC}, filter: {locale: {eq: $langKey}}) {
+    allStrapiQuestion(sort: {order: ASC}) {
       nodes {
         answers {
-          text
-          value
+          localizations {
+            data {
+              attributes {
+                text
+                value
+                locale
+              }
+            }
+          }
         }
-        order
         question
+        localizations {
+          data {
+            attributes {
+              order
+              question
+              locale
+            }
+          }
+        }
       }
     }
   }
 `;
 
-const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion }, pageContext: { langKey } }) => {
-  const questions = allStrapiQuestion.nodes;
+const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion = [] }, pageContext: { langKey } }) => {
+  const questions = allStrapiQuestion.nodes.map((questionNode) => {
+    const answers = questionNode.answers.map((answerNode) => {
+      const match = answerNode.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+      return {
+        text: match.text, 
+        value: match.value
+      }
+    });
+    const { order, question } = questionNode.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+    return {
+      order,
+      question,
+      answers
+    };
+  });
+	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
   return (
-    <LocalizedMessageContext.Provider value={strapiLocalizedMessage}>
+    <LocalizedMessageContext.Provider value={messages}>
       <QuestionMain 
         lang={langKey} 
         questions={questions}
