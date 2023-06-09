@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
@@ -8,6 +8,8 @@ import FacebookShareButton from '/src/components/FacebookShareButton';
 import TwitterShareButton from '/src/components/TwitterShareButton';
 import LinkShareButton from '/src/components/LinkShareButton';
 import Button from '/src/components/Button';
+import CouponModal from '/src/components/CouponModal';
+import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
 
 const StyledButton = styled(Button)`
   height: 50px;
@@ -111,19 +113,29 @@ const ResultShare = styled.div`
 `;
 
 const ResultMain = ({ lang }) => {
+  const localizedMessages = useContext(LocalizedMessageContext) || {};
+  const [modalOpen, setModalOpen] = useState(true);
   const restart = () => {
     navigate(`/${lang}`);
   }
+  const showModal = () => {
+    setModalOpen(true);
+  };
+  const hideModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <Layout>
+      <CouponModal isOpen={modalOpen} onRequestClose={hideModal} />
       <Main>
         <Banner />
         <RollingPaper>
           <RollingPaperTitle>
-            롤링 페이퍼 도착!
+            {localizedMessages['resultTitle']}
           </RollingPaperTitle>
           <RollingPaperDescription>
-            꾸욱~ 눌러 저장하세요!
+            {localizedMessages['resultDescription']}
           </RollingPaperDescription>
           <RollingPaperImage>
           </RollingPaperImage>
@@ -131,17 +143,17 @@ const ResultMain = ({ lang }) => {
 
         <PartnerCookies>
           <BestCookie>
-            잘맞는 유형
+            {localizedMessages['resultBestMatch']}
             <div></div>
           </BestCookie>
           <WorstCookie>
-            안맞는 유형
+            {localizedMessages['resultWorstMatch']}
             <div></div>
           </WorstCookie>
         </PartnerCookies>
 
         <ResultShare>
-          <div>결과 공유하기</div>
+          <div>{localizedMessages['resultShare']}</div>
           <KakaotalkShareButton />
           <LineShareButton />
           <TwitterShareButton />
@@ -154,17 +166,22 @@ const ResultMain = ({ lang }) => {
         <CommunityEventBanner />
 
         <StyledButton onClick={restart}>
-          테스트 다시하기
+          {localizedMessages['resultRetest']}
         </StyledButton>
-        <StyledButton onClick={restart}>
-          스티커 이미지 다운 받기
+        <StyledButton>
+          {localizedMessages['resultDownloadSticker']}
         </StyledButton>
         <Links>
-          <StyledButton onClick={restart}>
-            빌런테스트도 해 보기
+          <StyledButton onClick={() => {
+            window.location.href = 'https://villain.cookieruntest.com';
+          }}>
+            {localizedMessages['resultTryVillainTest']}
           </StyledButton>
-          <StyledButton onClick={restart}>
-            성격 테스트도 해 보기
+
+          <StyledButton onClick={() => {
+            window.location.href = 'https://cookieruntest.com';
+          }}>
+            {localizedMessages['resultTryCharacterTest']}
           </StyledButton>
         </Links>
         <Copyright>
@@ -174,7 +191,6 @@ const ResultMain = ({ lang }) => {
     </Layout>
   );
 }
-
 
 const ResultPage = ({ pageContext: { langKey, code } }) => {
   return (

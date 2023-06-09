@@ -55,6 +55,6 @@ export const Head = ({ pageContext: { langKey } }) => (
   <>
     <html lang={langKey} />
     <title>Cookierun</title>
-    <body className={`lang-${langKey}`} />
+    <body className={`lang-${langKey} index`} />
   </>
 );

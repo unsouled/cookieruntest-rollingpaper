@@ -8,21 +8,39 @@ import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
 const languagesByLocale = {
   'ko': '한국어',
   'en': 'English',
+  'zh-Hans': '简体中文',
   'zh': '繁體中文',
   'th': 'ภาษาไทย',
   'ja': '日本語',
 };
 
-const Banner = () => (
-  <div>
-    배너
-  </div>
-);
+const Banner = styled.div`
+  background: #6B3F17;
+  height: 70px;
+  margin: 0 -1rem;
+`;
 
 const Title = styled.div`
+  width: 260px;
+  margin: 0 auto;
+  text-align: center;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 35px;
+  margin-top: 20px;
+  margin-bottom: 48px;
 `;
 
 const Description = styled.div`
+`;
+
+
+const ParticipantsText = styled.div`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  color: #6C4126;
+  text-align: center;
 `;
 
 const CustomLayout = styled(Layout)`
@@ -31,6 +49,7 @@ const CustomLayout = styled(Layout)`
 
 const Main = styled.main`
   background: #fff;
+  padding: 15px;
 `;
 
 const Buttons = styled.div`
@@ -56,35 +75,40 @@ const CopyButton = styled(Button)`
 
 const IndexMain = ({ showModal, lang = 'en' }) => {
   const localizedMessages = useContext(LocalizedMessageContext) || {};
-  console.log(localizedMessages);
   const handleStart = () => {
     navigate(`/${lang}/question`);
   };
 
   return (
     <CustomLayout>
-      <Main>
-        <Banner />
-        <div css={{ width: '100px', justifyContent: 'flex-end', display: 'flex' }}>
+      <Banner />
+      <div css={{ display: 'flex' }}>
+        <div css={{ flex:1 }}>
+        </div>
+        <div css={{ width: '100px', justifyContent: 'flex-end', display: 'flex', padding: '20px 0' }}>
           <span onClick={showModal} css={{ textAlign: 'left', fontSize: '20px', width: '84px', display: 'inline-block' }}>
             {languagesByLocale[lang]}
           </span>
           <span css={{ fontSize: '20px', lineHeight: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           </span>
         </div>
-
-        <Title>
-          {localizedMessages['title']}
-        </Title>
+      </div>
+      <Main>
         <Description>
           {localizedMessages['description']}
         </Description>
+        <Title>
+          {localizedMessages['title']}
+        </Title>
+        <ParticipantsText>
+          {localizedMessages['participantsText']}
+        </ParticipantsText>
         <Buttons>
           <StartButton onClick={handleStart}>
             {localizedMessages['startText']}
           </StartButton>
           <CopyButton>
-            링크 복사하기
+            {localizedMessages['copyLinkText']}
           </CopyButton>
         </Buttons>
       </Main>

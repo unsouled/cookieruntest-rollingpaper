@@ -7,6 +7,9 @@ body {
   padding: 0;
   background: #F2EEE5;
 }
+body.index {
+  background: linear-gradient(180deg, #FCEAAB 0%, #FFE071 100%) !important;
+}
 #___gatsby,
 #gatsby-focus-wrapper {
   height: 100%;

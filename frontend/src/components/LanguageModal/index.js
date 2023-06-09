@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import Modal from 'react-modal';
+import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
 
 const ModalContent = styled.div`
   z-index: 5000;
@@ -36,39 +37,67 @@ const Title = styled.div`
 const languagesByLocale = {
   'ko': '한국어',
   'en': 'English',
+  'zh-Hans': '简体中文',
   'zh': '繁體中文',
   'th': 'ภาษาไทย',
   'ja': '日本語',
 };
 
-const LanguageModal = ({ siteData, isOpen, onRequestClose, style, lang }) => (
-  <Modal 
-    isOpen={isOpen}
-    onRequestClose={onRequestClose}
-    style={style}
-  >
-    <ModalContent>
-      <Title>
-        <div css={{ width: 30, height: 30 }}>
-        </div>
-        <div css={{ flex: 1 }}>
-          {"siteData.selectLanguageText"}
-        </div>
-        <a href="#" onClick={onRequestClose}>
-          X
-        </a>
-      </Title>
+const customStyles = {
+  overlay: {
+    border: 0,
+    background: 'transparent',
+    zIndex: 9999
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    width: '100%',
+    height: '100%',
+    border: 0,
+    borderRadius: 0,
+    marginRight: '-50%',
+    textAlign: 'center',
+    padding: 20,
+    transform: 'translate(-50%, -50%)',
+    background: 'rgba(28, 28, 30, 0.6)',
+  },
+};
 
-      <LanguageSelector>
-        <LanguageSelectorItem selected={lang === 'ko'} onClick={() => { onRequestClose(); navigate('/ko'); }}>{languagesByLocale['ko']}</LanguageSelectorItem>
-        <LanguageSelectorItem selected={lang === 'en'} onClick={() => { onRequestClose(); navigate('/en'); }}>{languagesByLocale['en']}</LanguageSelectorItem>
-        <LanguageSelectorItem selected={lang === 'zh'} onClick={() => { onRequestClose(); navigate('/zh'); }}>{languagesByLocale['zh']}</LanguageSelectorItem>
-        <LanguageSelectorItem selected={lang === 'th'} onClick={() => { onRequestClose(); navigate('/th'); }}>{languagesByLocale['th']}</LanguageSelectorItem>
-        <LanguageSelectorItem selected={lang === 'ja'} onClick={() => { onRequestClose(); navigate('/ja'); }}>{languagesByLocale['ja']}</LanguageSelectorItem>
-      </LanguageSelector>
+const LanguageModal = ({ isOpen, onRequestClose, lang }) => {
+  const localizedMessages = useContext(LocalizedMessageContext) || {};
+  return (
+    <Modal 
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      style={customStyles}
+    >
+      <ModalContent>
+        <Title>
+          <div css={{ width: 30, height: 30 }}>
+          </div>
+          <div css={{ flex: 1 }}>
+            {localizedMessages['siteData.selectLanguageText']}
+          </div>
+          <a href="#" onClick={onRequestClose}>
+            X
+          </a>
+        </Title>
 
-    </ModalContent>
-  </Modal>
-); 
+        <LanguageSelector>
+          <LanguageSelectorItem selected={lang === 'ko'} onClick={() => { onRequestClose(); navigate('/ko'); }}>{languagesByLocale['ko']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'en'} onClick={() => { onRequestClose(); navigate('/en'); }}>{languagesByLocale['en']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'zh-Hans'} onClick={() => { onRequestClose(); navigate('/zh-Hans'); }}>{languagesByLocale['zh-Hans']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'zh'} onClick={() => { onRequestClose(); navigate('/zh'); }}>{languagesByLocale['zh']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'th'} onClick={() => { onRequestClose(); navigate('/th'); }}>{languagesByLocale['th']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'ja'} onClick={() => { onRequestClose(); navigate('/ja'); }}>{languagesByLocale['ja']}</LanguageSelectorItem>
+        </LanguageSelector>
+
+      </ModalContent>
+    </Modal>
+  ); 
+}
 
 export default LanguageModal;
