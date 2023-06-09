@@ -9,7 +9,7 @@ import TwitterShareButton from '/src/components/TwitterShareButton';
 import LinkShareButton from '/src/components/LinkShareButton';
 import Button from '/src/components/Button';
 import CouponModal from '/src/components/CouponModal';
-import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 const StyledButton = styled(Button)`
   height: 50px;

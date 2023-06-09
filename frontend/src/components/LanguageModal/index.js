@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import Modal from 'react-modal';
-import LocalizedMessageContext from '/src/contexts/localizedMessageContext';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 const ModalContent = styled.div`
   z-index: 5000;
