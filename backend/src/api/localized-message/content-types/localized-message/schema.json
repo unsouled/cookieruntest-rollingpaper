@@ -22,7 +22,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "description": {
       "pluginOptions": {
@@ -259,7 +259,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "eventDuration": {
       "pluginOptions": {
