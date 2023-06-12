@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import KakaotalkShareButton from '/src/components/KakaotalkShareButton';
@@ -212,6 +213,7 @@ console.log(localizedMessages);
             {localizedMessages['resultTryCharacterTest']}
           </StyledButton>
         </Links>
+        <GatsbyImage image={getImage(localizedMessages['logoImage'])} />
         <Copyright>
           Copyright 2023 Devsisters. All rights reserved
         </Copyright>
@@ -221,7 +223,6 @@ console.log(localizedMessages);
 }
 
 const ResultPage = ({ pageContext: { langKey, code, localizedMessages } }) => {
-console.log(localizedMessages);
   return (
     <ResultMain lang={langKey} messages={localizedMessages} />
   );

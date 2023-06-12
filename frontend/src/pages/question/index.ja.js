@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import QuestionMain from '/src/components/QuestionMain';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
@@ -10,15 +10,7 @@ export const query = graphql`
 				data {
 					id
 					attributes {
-						title
-						subtitle
-						description
-						startText
-						participantsText
-						selectLanguageText
-						copyright
-						characterTestUrl
-						villainTestUrl
+            analyzingText
 						locale
 					}
 				}

@@ -18,6 +18,7 @@ const IdInput = styled.input`
 
   ::placeholder {
     color: #D3CBC4;
+    fontWeight: 700;
   }
 `;
 
@@ -38,7 +39,7 @@ const customStyles = {
     borderRadius: 0,
     marginRight: '-50%',
     textAlign: 'center',
-    padding: 20,
+    padding: '30px 20px',
     transform: 'translate(-50%, -50%)',
     background: 'rgba(28, 28, 30, 0.6)',
   }
@@ -53,7 +54,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
       onRequestClose={onRequestClose}
       style={customStyles}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '380px', height: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '280px', height: '100%' }}>
         <a href="#" onClick={onRequestClose} style={{ textAlign: 'right', display: 'block' }}>
           <StaticImage 
             loading="eager"
@@ -72,7 +73,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
 
             {received ? (
               <div style={{ 
-                padding: '0 15px' 
+                padding: '20px 15px' 
               }}>
                 <p style={{
                   fontSize: '28px',
@@ -83,21 +84,22 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               </div>
             ) : (
             <div style={{ 
-              padding: '0 15px' 
+              padding: '20px 15px' 
             }}>
               <p style={{
                 fontSize: '28px',
                 fontWeight: 700,
+                marginBottom: '12px'
               }}>
                 {localizedMessages['couponGiftReceived']}
               </p>
-              <p style={{ background: '#E86D58', color: '#fff', fontSize: '14px', fontWeight: 700, marginBottom: '25px' }}>
+              <p style={{ height: '25px', justifyContent: 'center', alignItems: 'center',display: 'flex', background: '#E86D58', color: '#fff', fontSize: '14px', fontWeight: 700, marginBottom: '25px' }}>
                 2023/06/27 - 2023/07/27
               </p>
               <p style={{ fontSize: '24px', color: '#D3CBC4', fontWeight: 700 }}>
                 <IdInput type="text" placeholder={localizedMessages['couponInputId']} />
               </p>
-              <p style={{ fontSize: '14px', fontWeight: 700 }}>
+              <p style={{ fontSize: '12px', fontWeight: 700, textAlign: 'right', color: '#D3CBC4', margin: '5px 0' }}>
                 {localizedMessages['couponMyInfo']}
               </p>
             </div>
@@ -114,17 +116,18 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               </Button>
             )}
             </p>
-
+            <div style={{ marginTop: '28px' }}>
+              {received ? (
+                <a href="#" onClick={onRequestClose} style={{ textDecoration: 'none', color: '#DCC9BA' }}>
+                  {localizedMessages['couponShowResult']}
+                </a>
+              ) : (
+                <a href="#" onClick={onRequestClose} style={{ textDecoration: 'none', color: '#DCC9BA' }}>
+                  {localizedMessages['couponTryLater']}
+                </a>
+              )}
+            </div>
         </div>
-        {received ? (
-          <a href="#" onClick={onRequestClose}>
-            {localizedMessages['couponShowResult']}
-          </a>
-        ) : (
-          <a href="#" onClick={onRequestClose}>
-            {localizedMessages['couponTryLater']}
-          </a>
-        )}
       </div>
     </Modal>
   );

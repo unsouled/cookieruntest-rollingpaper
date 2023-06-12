@@ -25,8 +25,8 @@ const LanguageSelector = styled.div`
 
 const LanguageSelectorItem = styled.div`
   font-weight: 500;
-  padding: 30px; 
-  color: ${props => props.selected ? '#FFB900': '#000'};
+  padding: 20px; 
+  color: ${props => props.selected ? '#FFB900': '#fff'};
   font-family: var(--font-sans);
 `;
 
@@ -62,7 +62,7 @@ const customStyles = {
     textAlign: 'center',
     padding: 20,
     transform: 'translate(-50%, -50%)',
-    background: 'rgba(28, 28, 30, 0.6)',
+    background: 'rgba(28, 28, 30, 0.94)',
   },
 };
 
@@ -78,8 +78,8 @@ const LanguageModal = ({ isOpen, onRequestClose, lang }) => {
         <Title>
           <div css={{ width: 30, height: 30 }}>
           </div>
-          <div css={{ flex: 1 }}>
-            {localizedMessages['siteData.selectLanguageText']}
+          <div css={{ flex: 1, color: '#fff' }}>
+            {localizedMessages['selectLanguageText']}
           </div>
           <a href="#" onClick={onRequestClose}>
             X

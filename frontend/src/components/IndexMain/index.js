@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { navigate } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
@@ -32,8 +33,11 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
+  flex: 1;
+  transform: rotate(-6.87deg);
+  font-size: 20px;
+  font-weight: 700;
 `;
-
 
 const ParticipantsText = styled.div`
   font-weight: 700;
@@ -50,6 +54,10 @@ const CustomLayout = styled(Layout)`
 const Main = styled.main`
   background: #fff;
   padding: 15px;
+  min-height: 470px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 5px 10px rgba(243, 190, 58, 0.2);
 `;
 
 const Buttons = styled.div`
@@ -60,7 +68,7 @@ const Buttons = styled.div`
 const StartButton = styled(Button)`
   background: linear-gradient(270deg, #FDCB27 0%, #FDCB27 100%);
   font-size: 25px;
-  padding: 24px 0;
+  padding: 16px 0;
   font-weight: 700;
   margin: 6px 0;
 `;
@@ -83,10 +91,18 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
     <CustomLayout>
       <Banner />
       <div css={{ display: 'flex' }}>
+        <div css={{ width: '100px', justifyContent: 'flex', padding: '20px 0' }}>
+          <StaticImage 
+            css={{ width: 25 }}
+            src="../../images/img-icon-cro.png" 
+            srcSet="../../images/img-icon-cro@3x.png 3x, ../../images/img-icon-cro@2x.png 2x" 
+            alt=""
+          />
+        </div>
         <div css={{ flex:1 }}>
         </div>
         <div css={{ width: '100px', justifyContent: 'flex-end', display: 'flex', padding: '20px 0' }}>
-          <span onClick={showModal} css={{ textAlign: 'left', fontSize: '20px', width: '84px', display: 'inline-block' }}>
+          <span onClick={showModal} css={{ textAlign: 'left', fontSize: '20px', width: '84px', display: 'inline-block', fontWeight: 700 }}>
             {languagesByLocale[lang]}
           </span>
           <span css={{ fontSize: '20px', lineHeight: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -94,15 +110,17 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
         </div>
       </div>
       <Main>
-        <Description>
-          {localizedMessages['description']}
-        </Description>
-        <Title>
-          {localizedMessages['title']}
-        </Title>
-        <ParticipantsText>
-          {localizedMessages['participantsText']}
-        </ParticipantsText>
+        <div css={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Description>
+            {localizedMessages['description']}
+          </Description>
+          <Title>
+            {localizedMessages['title']}
+          </Title>
+          <ParticipantsText>
+            {localizedMessages['participantsText']}
+          </ParticipantsText>
+        </div>
         <Buttons>
           <StartButton onClick={handleStart}>
             {localizedMessages['startText']}

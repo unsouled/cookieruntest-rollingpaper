@@ -9,6 +9,14 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-top: 70px
+`;
+
+const Banner = styled.div`
+  background: #6B3F17;
+  height: 70px;
+  margin: 0 -1rem;
+  margin-bottom: -70px;
 `;
 
 const Questions = styled.div`
@@ -83,6 +91,7 @@ const QuestionMain = ({ lang, questions }) => {
 
   return (
     <Layout>
+      <Banner />
       <Main>
         <Progress progress={100 * (currentQuestionIdx / questions.length)} />
         <Questions>
