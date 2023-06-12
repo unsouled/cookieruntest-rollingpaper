@@ -99,7 +99,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "copyLinkText": {
       "pluginOptions": {
@@ -187,7 +187,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "couponGiftReceived": {
       "pluginOptions": {
@@ -195,7 +195,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "couponInputId": {
       "pluginOptions": {
@@ -219,7 +219,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "couponReceiveGift": {
       "pluginOptions": {
@@ -251,7 +251,7 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "text"
     },
     "eventDescription": {
       "pluginOptions": {
@@ -380,6 +380,14 @@
         }
       },
       "type": "richtext"
+    },
+    "participantsDisclaimer": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
