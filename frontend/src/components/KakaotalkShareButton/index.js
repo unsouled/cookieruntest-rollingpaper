@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react';
+import styled from '@emotion/styled';
 import makeAsyncScriptLoader from 'react-async-script';
 import ShareButton from '/src/components/ShareButton';
+
+const StyledShareButton = styled(ShareButton)`
+  background-color: #FEE500;
+`;
 
 const scriptUrl = 'https://developers.kakao.com/sdk/js/kakao.min.js';
 const KakaotalkShareButton = ({ onClick, isScriptLoaded, isScriptLoadSucceed, url, templateId, templateArgs, children, ...rest }) => {
   return (
-    <ShareButton style={{ border: 0, verticalAlign: 'top', padding: 0 }} onClick={(e) => {
+    <StyledShareButton style={{ border: 0, verticalAlign: 'top', padding: 0 }} onClick={(e) => {
       window.Kakao.Link.sendScrap({
         requestUrl: url,
         templateId,
@@ -14,7 +19,7 @@ const KakaotalkShareButton = ({ onClick, isScriptLoaded, isScriptLoadSucceed, ur
       onClick(e);
     }}>
       {children}
-    </ShareButton>
+    </StyledShareButton>
   );
 }
 

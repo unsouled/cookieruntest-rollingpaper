@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
 import hash from '/src/utils/hash';
+import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 const Main = styled.main`
   display: flex;
@@ -25,7 +26,7 @@ const Questions = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-flex-direction: column;
+  flex-direction: column;
 
 `;
 
@@ -62,31 +63,86 @@ const colors = [
   '#E06522',
 ];
 
+const Note = styled.div`
+  flexDirection: column;
+  width: 163px;
+  margin: auto;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 1;
+  background: #fff;
+  height: 188px;
+  word-wrap: break-word;
+  word-break: break-word;
+  box-shadow: inset 0px -3px 0px #DCC9BA;
+  overflow: hidden;
+`;
+
 const Progress = ({ progress }) => (
   <div></div>
 );
 
+const Analyzing = () => {
+  const localizedMessages = useContext(LocalizedMessageContext) || {};
+  const [dotdotdot, setDotDotDot] = useState('');
+  useEffect(() => {
+      const interval = setTimeout(() => setDotDotDot(dotdotdot + '.'), 1300);
+      return () => {
+        clearTimeout(interval);
+      }
+  }, [dotdotdot]);
+  return (
+    <div css={{ flexDirection: 'column', minHeight: '100%', display: 'flex' }}>
+      <Note>
+        <div css={{ position: 'relative', background: '#fff', wordBreak: 'break-all' }}>
+          {localizedMessages['analyzingText']}{dotdotdot}
+        </div>
+      </Note>
+    </div>
+  );
+}
+
 const QuestionMain = ({ lang, questions }) => {
+  const [analyzing, setAnalyzing] = useState(false);
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const next = () => {
     setCurrentQuestionIdx(currentQuestionIdx + 1);
   }
   const currentQuestion = questions[currentQuestionIdx];
   const selectedAnswers = useRef({});
-  const doAnswer = (value) => {
+  const wait = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  };
+  const doAnswer = async (value) => {
     const current = selectedAnswers.current;
     current[value] |= 0;
     current[value] += 1;
     if (currentQuestionIdx !== questions.length - 1) {
       next();
     } else {
+      setAnalyzing(true);
       let abcd = '';
       abcd += (current['I'] || 0) > (current['E'] || 0) ? 'I' : 'E';
       abcd += (current['T'] || 0) > (current['F'] || 0) ? 'T' : 'F';
       abcd += (current['P'] || 0) > (current['J'] || 0) ? 'P' : 'J';
+
+      await wait(4000);
       navigate(`/${lang}/result/${hash(abcd)}`);
     }
   };
+
+  if (analyzing) {
+    return (
+      <Layout>
+        <Banner />
+        <Analyzing lang={lang} />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

@@ -57,6 +57,7 @@ const PartnerCookies = styled.div`
 const BestCookie = styled.div`
   flex: 1;
   color: #9FD33A;
+  font-weight: 700;
   div {
     margin-top: 10px;
     background: #fff;
@@ -67,6 +68,7 @@ const BestCookie = styled.div`
 const WorstCookie = styled.div`
   flex: 1;
   color: #E06522;
+  font-weight: 700;
   div {
     margin-top: 10px;
     background: #fff;
@@ -192,7 +194,7 @@ console.log(localizedMessages);
 
           <div css={{
             background: '#FFFFFF',
-            padding: '0 10px',
+            padding: '0 15px 20px',
             margin: '0',
             color: '#141414',
           }}>
@@ -267,10 +269,10 @@ console.log(localizedMessages);
              {localizedMessages['eventCopyText']}
             </Button>
           </div>
-            <ReactMarkdown className="notices">
-              {localizedMessages['eventNotices']}
-            </ReactMarkdown>
-          </div>
+          <ReactMarkdown className="notices">
+            {localizedMessages['eventNotices']}
+          </ReactMarkdown>
+        </div>
         </EventArea>
 
         <CommunityEventBanner />
