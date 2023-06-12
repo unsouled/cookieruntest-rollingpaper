@@ -246,7 +246,7 @@ console.log(localizedMessages);
               </div>
             </div>
             <div css={{ color: '#C8C8C8', textAlign: 'center', fontSize: '11px', fontWeight: 400, lineHeight: '16px', paddingBottom: '8px', whiteSpace: 'pre-wrap' }}>
-              eventData.prizeDisclaimer.prizeDisclaimer
+              {localizedMessages['participantsDisclaimer']}
             </div>
 
           <div css={{ fontWeight: 700, textAlign: 'center', fontSize: '18px', marginTop: '10px', padding: '5px 0' }}>
