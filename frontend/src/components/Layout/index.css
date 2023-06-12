@@ -625,7 +625,7 @@ span.diamond {
 .notices {
   font-size: 12px;
   line-height: 18px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #cbc0b7;
 }
 .notices ul li {
   margin: 0;
@@ -633,7 +633,7 @@ span.diamond {
   white-space: pre-wrap;
 }
 .notices a {
-  color: #fff;
+  color: #cbc0b7;
 }
 
 .player-wrapper {

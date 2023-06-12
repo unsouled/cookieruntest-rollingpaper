@@ -73,6 +73,10 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
 
             {received ? (
               <div style={{ 
+                minHeight: '190px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 padding: '20px 15px' 
               }}>
                 <p style={{

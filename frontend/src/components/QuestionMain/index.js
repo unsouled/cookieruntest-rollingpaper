@@ -29,7 +29,7 @@ flex-direction: column;
 
 `;
 
-const QuestionText = styled.span`
+const QuestionNumber = styled.span`
   color: ${props => props.color};
   font-size: 20px;
   font-weight: 900;
@@ -47,6 +47,7 @@ const Answers = styled.ul`
 const AnswerButton = styled(Button)`
   height: 70px;
   margin: 12px 0;
+  background: linear-gradient(90deg, #925318 0%, #6B4026 97.86%);
 `;
 
 const colors = [
@@ -62,9 +63,7 @@ const colors = [
 ];
 
 const Progress = ({ progress }) => (
-  <div>
-    {progress}
-  </div>
+  <div></div>
 );
 
 const QuestionMain = ({ lang, questions }) => {
@@ -95,8 +94,8 @@ const QuestionMain = ({ lang, questions }) => {
       <Main>
         <Progress progress={100 * (currentQuestionIdx / questions.length)} />
         <Questions>
-          <QuestionText color={colors[currentQuestionIdx]}>Q{currentQuestion.order}.</QuestionText> 
-          <p>
+          <QuestionNumber color={colors[currentQuestionIdx]}>Q{currentQuestion.order}.</QuestionNumber> 
+          <p css={{ fontWeight: 700 }}>
             {currentQuestion.question}
           </p>
         </Questions>
