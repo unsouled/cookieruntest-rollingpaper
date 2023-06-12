@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { navigate } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Modal from 'react-modal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
@@ -62,7 +63,7 @@ const customStyles = {
     textAlign: 'center',
     padding: 20,
     transform: 'translate(-50%, -50%)',
-    background: 'rgba(28, 28, 30, 0.94)',
+    background: 'rgba(28, 28, 30, 0.6)',
   },
 };
 
@@ -81,8 +82,14 @@ const LanguageModal = ({ isOpen, onRequestClose, lang }) => {
           <div css={{ flex: 1, color: '#fff' }}>
             {localizedMessages['selectLanguageText']}
           </div>
-          <a href="#" onClick={onRequestClose}>
-            X
+          <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
+            <StaticImage 
+              loading="eager"
+              src="../../images/btn-close.png" 
+              srcSet="../../images/btn-close@3x.png 3x, ../../images/btn-close@2x.png 2x" 
+              placeholder="none"
+              alt="" 
+            />
           </a>
         </Title>
 

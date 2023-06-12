@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
+import { StaticImage } from 'gatsby-plugin-image';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
 import hash from '/src/utils/hash';
@@ -83,7 +84,14 @@ const Note = styled.div`
 `;
 
 const Progress = ({ progress }) => (
-  <div></div>
+  <div css={{ paddingTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <StaticImage
+      src="../../images/jelly-beans@3x.png"
+      placeholder="none"
+      width={303}
+      height={48}
+    />
+  </div>
 );
 
 const Analyzing = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import KakaotalkShareButton from '/src/components/KakaotalkShareButton';
@@ -133,10 +133,11 @@ const Banner = styled.div`
 const ResultShare = styled.div`
   text-align: center;
   margin: 10px auto;
+  font-weight: 700;
+  font-size: 20px;
 `;
 
 const ResultMain = ({ lang, messages: localizedMessages }) => {
-console.log(localizedMessages);
   const [modalOpen, setModalOpen] = useState(true);
   const restart = () => {
     navigate(`/${lang}`);
@@ -218,7 +219,12 @@ console.log(localizedMessages);
                   </div>
                 </div>
               </div>
-              <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+               <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                 <StaticImage 
+                    src="../../images/img-event-reward-1@3x.png"
+                    width={120} height={87} 
+                    placeholder="none"
+                  />
               </div>
             </div>
             <div css={{ borderBottom: '1px solid #F3F3F3', padding: '16px 0', display: 'flex' }}>
@@ -231,6 +237,11 @@ console.log(localizedMessages);
               </p>
               </div>
               <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <StaticImage 
+                  src="../../images/img-event-reward-2@3x.png"
+                  width={100} height={100} 
+                  placeholder="none"
+                />
               </div>
             </div>
             <div css={{ padding: '16px 0', display: 'flex' }}>
@@ -243,6 +254,11 @@ console.log(localizedMessages);
               </p>
               </div>
               <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <StaticImage 
+                  src="../../images/img-event-reward-3@3x.png"
+                  width={104} height={65} 
+                  placeholder="none"
+                />
               </div>
             </div>
             <div css={{ color: '#C8C8C8', textAlign: 'center', fontSize: '11px', fontWeight: 400, lineHeight: '16px', paddingBottom: '8px', whiteSpace: 'pre-wrap' }}>
@@ -250,7 +266,21 @@ console.log(localizedMessages);
             </div>
 
           <div css={{ fontWeight: 700, textAlign: 'center', fontSize: '18px', marginTop: '10px', padding: '5px 0' }}>
+            <div>
+              <span style={{
+                background: 'rgba(253, 203, 39, 0.8)',
+                color: 'transparent',
+                borderRadius: '5px',
+                marginTop: '-20px',
+                padding: '0 4px',
+                display: 'inline-block',
+                height: 18,
+                lineHeight: 0
+              }}>{localizedMessages['eventParticipationText']}</span>
+            </div>
+            <div style={{ marginTop: '-28px' }}>
             {localizedMessages['eventParticipationText']}
+            </div>
           </div>
           <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '25px', fontWeight: 400, textAlign: 'center' }}>
             {localizedMessages['eventParticipationDescription']}

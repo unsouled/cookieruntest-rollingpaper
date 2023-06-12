@@ -17,8 +17,8 @@ const languagesByLocale = {
 
 const Banner = styled.div`
   background: #6B3F17;
-  height: 70px;
   margin: 0 -1rem;
+  height: 70px;
 `;
 
 const Title = styled.div`
@@ -55,6 +55,8 @@ const Main = styled.main`
   background: #fff;
   padding: 15px;
   min-height: 470px;
+  max-width: 440px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 5px 10px rgba(243, 190, 58, 0.2);
@@ -90,10 +92,11 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
   return (
     <CustomLayout>
       <Banner />
-      <div css={{ display: 'flex' }}>
+      <div css={{ display: 'flex', maxWidth: '440px', margin: '0 auto' }}>
         <div css={{ width: '100px', justifyContent: 'flex', padding: '20px 0' }}>
           <StaticImage 
-            css={{ width: 25 }}
+            width={25}
+            height={25}
             src="../../images/img-icon-cro.png" 
             srcSet="../../images/img-icon-cro@3x.png 3x, ../../images/img-icon-cro@2x.png 2x" 
             alt=""
@@ -106,6 +109,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
             {languagesByLocale[lang]}
           </span>
           <span css={{ fontSize: '20px', lineHeight: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <StaticImage src="../../images/polygon@3x.png" width={10} height={8} />
           </span>
         </div>
       </div>

@@ -81,6 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
         component: require.resolve(`./src/components/ResultMain/index.js`),
         context: { langKey, code: hashedCode, localizedMessages: messages },
       });
+      console.log(`${langKey}/result/${hashedCode}`);
     });
   });
 

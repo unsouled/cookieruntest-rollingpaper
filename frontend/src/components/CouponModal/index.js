@@ -55,15 +55,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
       style={customStyles}
     >
       <div style={{ display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '280px', height: '100%' }}>
-        <a href="#" onClick={onRequestClose} style={{ textAlign: 'right', display: 'block' }}>
-          <StaticImage 
-            loading="eager"
-            src="../../images/btn-close.png" 
-            srcSet="../../images/btn-close@3x.png 3x, ../../images/btn-close@2x.png 2x" 
-            placeholder="none"
-            alt="" 
-          />
-        </a>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minWidth: '280px' }}>
           <div style={{ 
             background: 'linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 100%), #FFFFFF',
@@ -122,13 +113,37 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             </p>
             <div style={{ marginTop: '28px' }}>
               {received ? (
-                <a href="#" onClick={onRequestClose} style={{ textDecoration: 'none', color: '#DCC9BA' }}>
-                  {localizedMessages['couponShowResult']}
-                </a>
+                <div style={{ display: 'flex' }}>
+                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
+                    {localizedMessages['couponShowResult']}
+                  </a>
+                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
+                    <StaticImage 
+                      loading="eager"
+                      src="../../images/btn-close.png" 
+                      srcSet="../../images/btn-close@3x.png 3x, ../../images/btn-close@2x.png 2x" 
+                      placeholder="none"
+                      alt="" 
+                    />
+                  </a>
+                </div>
               ) : (
-                <a href="#" onClick={onRequestClose} style={{ textDecoration: 'none', color: '#DCC9BA' }}>
-                  {localizedMessages['couponTryLater']}
-                </a>
+                <div style={{ display: 'flex' }}>
+                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
+                    {localizedMessages['couponTryLater']}
+
+                  </a>
+                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
+                    <StaticImage 
+                      loading="eager"
+                      src="../../images/btn-close.png" 
+                      srcSet="../../images/btn-close@3x.png 3x, ../../images/btn-close@2x.png 2x" 
+                      placeholder="none"
+                      alt="" 
+                    />
+                  </a>
+                </div>
+
               )}
             </div>
         </div>
