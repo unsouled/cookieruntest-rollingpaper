@@ -22,6 +22,8 @@ const StyledButton = styled(Button)`
 const Main = styled.main`
   display: flex;
   flex-direction: column;
+  width: 320px;
+  margin: 0 auto;
 `;
 
 const RollingPaper = styled.div`
@@ -36,7 +38,9 @@ const RollingPaperTitle = styled.div`
 
 const RollingPaperImage = styled.div`
   background: #6B3F17;
+  width: 320px;
   height: 450px;
+  margin: 0 auto;
 `;
 
 const RollingPaperDescription = styled.div`
@@ -48,31 +52,46 @@ const RollingPaperDescription = styled.div`
 
 const PartnerCookies = styled.div`
   display: flex;
+  width: 320px;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   text-align: center;
-  margin: 20px 0;
+  margin: 20px auto;
 `;
 
 const BestCookie = styled.div`
-  flex: 1;
   color: #9FD33A;
   font-weight: 700;
   div {
+    letter-spacing: -1px;
+    font-size 16px;
+    color: #1C1C1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 155px;
+    height: 165px;
     margin-top: 10px;
     background: #fff;
-    height: 160px;
+    border-radius: 5px;
   }
 `;
 
 const WorstCookie = styled.div`
-  flex: 1;
   color: #E06522;
   font-weight: 700;
   div {
+    letter-spacing: -1px;
+    font-size 16px;
+    color: #1C1C1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 155px;
+    height: 165px;
     margin-top: 10px;
     background: #fff;
-    height: 160px;
+    border-radius: 5px;
   }
 `;
 
@@ -85,32 +104,43 @@ const Links = styled.div`
 `;
 
 const EventArea = styled.div({
-  background: '#FFEEC2',
-  marginTop: '30px',
+  width: '320px',
+  margin: '10px auto 0',
   'h1': { 
-    margin: 0,
+    margin: '0 0 0 0',
     color: '#fff', 
     textAlign: 'center',
     fontSize: '18px',
-    transform: 'rotate(-3deg)',
     position: 'relative',
     display: 'flex',
     margin: '0 auto',
     top: '-24px',
     justifyContent: 'center',
+    background: 'url("/images/img-result-bg-event-title@3x.png") no-repeat',
+    backgroundSize: 'cover',
+    width: '178px',
+    height: '45px',
     alignItems: 'center',
     'span': {
+      transform: 'rotate(-3deg)',
       padding: '10px 16px',
-      background: '#FDCB27',
     }
   },
-  'h2': { color: '#000', margin: '0 0 26px 0', textAlign: 'center', textShadow: '0px 5px 15px rgba(189, 116, 0, 0.5)', whiteSpace: 'pre-wrap', fontSize: '26px', lineHeight: '32px' }
+  'h2': { color: '#000', margin: '-10px 0 26px 0', textAlign: 'center', textShadow: '0px 5px 15px rgba(200, 180, 10, 0.8)', whiteSpace: 'pre-wrap', fontSize: '26px', lineHeight: '32px' }
 });
 
+const EventAreaTitle = styled.div`
+  width: 320px;
+  height: 130px;
+  background: url("/images/img-result-event-bg@3x.png");
+  background-size: cover;
+`;
+
 const CommunityEventBanner = styled.div`
+  width: 320px;
   height: 320px;
   background: #6B3F17;
-  margin-bottom: 15px;
+  margin: 0 auto 15px;
   border-radius: 5px;
 `;
 
@@ -127,12 +157,12 @@ const Copyright = styled.div`
 const Banner = styled.div`
   background: #6B3F17;
   height: 400px;
-  margin: 0 -1rem;
+  margin: 0 -2rem;
 `;
 
 const ResultShare = styled.div`
   text-align: center;
-  margin: 10px auto;
+  margin: 10px auto 20px;
   font-weight: 700;
   font-size: 20px;
 `;
@@ -172,11 +202,16 @@ const ResultMain = ({ lang, messages: localizedMessages }) => {
         <PartnerCookies>
           <BestCookie>
             {localizedMessages['resultBestMatch']}
-            <div></div>
+            <div>
+              청량시원 쌉싸름<br />
+              사람
+            </div>
           </BestCookie>
           <WorstCookie>
             {localizedMessages['resultWorstMatch']}
-            <div></div>
+            <div>
+              매콤딱딱<br />사람
+            </div>
           </WorstCookie>
         </PartnerCookies>
 
@@ -190,19 +225,36 @@ const ResultMain = ({ lang, messages: localizedMessages }) => {
         </ResultShare>
 
         <EventArea>
-          <h1><span>{localizedMessages['eventName']}</span></h1>
-          <h2>{localizedMessages['eventDescription']}</h2>
+          <EventAreaTitle>
+            <h1>
+              <span>{localizedMessages['eventName']}</span>
+              <StaticImage
+                src="../../images/img-bg-arrow@3x.png"
+                style={{ position: 'absolute', right: -60, top: -8 }}
+                width={29}
+                height={66}
+                placeholder="none"
+              />
 
+            </h1>
+            <h2>{localizedMessages['eventDescription']}</h2>
+          </EventAreaTitle>
           <div css={{
             background: '#FFFFFF',
             padding: '0 15px 20px',
-            margin: '0',
+            margin: '-14px 0 0 0',
             color: '#141414',
           }}>
-            <div css={{ color: '#fff', margin: '14px 0', background: '#E86D58', fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
+            <div css={{ color: '#fff', margin: '14px 0', background: 'url("/images/img-bg-event-duration.png") no-repeat', backgroundSize: 'cover',  fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
+              <StaticImage
+                src="../../images/img-star@3x.png"
+                width={35}
+                height={36}
+                placeholder="none"
+                style={{ position: 'absolute',left: -14, top: -25 }}
+              />
               {localizedMessages['eventDuration']}: {localizedMessages['eventStartAt']} ~ {localizedMessages['eventEndAt']}
             </div>
-
             <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
               <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <span css={{ marginBottom: '8px', fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#9FD33A', borderRadius: '5px', color: '#fff' }}>

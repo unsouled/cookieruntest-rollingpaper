@@ -37,6 +37,7 @@ const customStyles = {
     width: '100%',
     height: '100%',
     border: 0,
+    overflow: 'hidden',
     borderRadius: 0,
     marginRight: '-50%',
     textAlign: 'center',

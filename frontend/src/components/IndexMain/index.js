@@ -17,8 +17,7 @@ const languagesByLocale = {
 
 const Banner = styled.div`
   background: #6B3F17;
-  max-width: 360px;
-  margin: 0 auto;
+  margin: 0 -1rem;
   height: 70px;
 `;
 

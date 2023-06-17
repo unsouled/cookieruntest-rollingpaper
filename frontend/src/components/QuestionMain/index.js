@@ -12,6 +12,9 @@ const Main = styled.main`
   flex-direction: column;
   height: 100%;
   margin-top: -70px;
+  background: url('/images/img-note-bg.png') repeat-y center;
+  ackground-size: 319p× 454px;
+  position: relative;
 `;
 
 const Background = styled.div`
@@ -23,9 +26,10 @@ const Background = styled.div`
 `;
 
 const Banner = styled.div`
+position: relative;
+  z-index: 10;
   background: #6B3F17;
-  max-width: 360px;
-  margin: 0 auto;
+  margin: 0 -1rem;
   height: 70px;
 `;
 
@@ -55,7 +59,8 @@ const Answers = styled.ul`
 
 const AnswerButton = styled(Button)`
   height: 70px;
-  margin: 12px 0;
+  width: 320px;
+  margin: 12px auto;
   background: linear-gradient(90deg, #925318 0%, #6B4026 97.86%);
 `;
 
@@ -109,12 +114,12 @@ const Note = styled.div`
 `;
 
 const Progress = ({ progress }) => (
-  <div css={{ paddingTop: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+  <div css={{ paddingTop: 84, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <StaticImage
       src="../../images/jelly-beans@3x.png"
       placeholder="none"
-      width={303}
-      height={48}
+      width={304}
+      height={38}
     />
   </div>
 );
