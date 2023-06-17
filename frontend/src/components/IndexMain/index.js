@@ -36,7 +36,7 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 900;
   font-size: 35px;
-  line-height: 48px;
+  line-height: 46px;
   white-space: pre-wrap;
 `;
 
