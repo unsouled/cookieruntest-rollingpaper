@@ -135,6 +135,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                 <p style={{
                   fontSize: '28px',
                   fontWeight: 700,
+                  whiteSpace: 'pre-wrap',
                 }}>
                   {localizedMessages['couponSentRich']}
                 </p>
@@ -146,7 +147,8 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               <p style={{
                 fontSize: '28px',
                 fontWeight: 700,
-                marginBottom: '12px'
+                marginBottom: '12px',
+                whiteSpace: 'pre-wrap',
               }}>
                 {localizedMessages['couponGiftReceivedRich']}
               </p>
@@ -166,7 +168,8 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             <p style={{ width: '100%' }}>
             {received ? (
               <Button style={{ width: '100%', background: 'url("/images/img-button-bg@3x.png") no-repeat', backgroundSize: 'cover', height: '75px', fontSize: '25px' }} onClick={() => setReceived(true)}>
-                {localizedMessages['couponLinkToGame']}
+                <span style={{ fontSize: 19 }}>{localizedMessages['couponGameName']}</span><br />
+                <span style={{ fontSize: 25 }}>{localizedMessages['couponLink']}</span>
               </Button>
             ) : (
               <Button style={{ width: '100%', background: 'url("/images/img-button-bg@3x.png") no-repeat', backgroundSize: 'cover', height: '75px', fontSize: '25px' }} onClick={() => setReceived(true)}>
@@ -176,7 +179,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             </p>
             <div style={{ marginTop: '28px' }}>
               {received ? (
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', position: 'absolute', left: 0, right: 0, justifyContent: 'center', alignItems: 'center' }}>
                   <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
                     {localizedMessages['couponShowResult']}
                   </a>
@@ -193,7 +196,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                   </a>
                 </div>
               ) : (
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', position: 'absolute', left: 0, right: 0, justifyContent: 'center', alignItems: 'center' }}>
                   <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
                     {localizedMessages['couponTryLater']}
                   </a>

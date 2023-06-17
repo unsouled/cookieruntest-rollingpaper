@@ -20,6 +20,8 @@ export const query = graphql`
 						title
 						titleRich
 						description
+						description1
+						description2
 						participantsText
 						startText
             copyLinkText

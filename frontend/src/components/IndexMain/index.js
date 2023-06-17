@@ -31,21 +31,25 @@ const Banner = styled.div`
 
 const Title = styled.div`
   width: 260px;
-  margin: 0 auto;
+  margin: 90px auto 0;
   text-align: center;
   font-style: normal;
   font-weight: 900;
   font-size: 35px;
-  margin-top: 20px;
-  margin-bottom: 48px;
+  line-height: 48px;
   white-space: pre-wrap;
 `;
 
 const Description = styled.div`
+  position: absolute;
+  margin-top: 20px;
+  line-height: 26px;
+  left: 15px;
   flex: 1;
   transform: rotate(-6.87deg);
   font-size: 20px;
   font-weight: 700;
+  width: 230px;
 `;
 
 const ParticipantsText = styled.div`
@@ -78,6 +82,8 @@ const Main = styled.main`
 const Buttons = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
 `;
 
 const StartButton = styled(Button)`
@@ -133,7 +139,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
       <Main>
         <div css={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
           <StaticImage 
-            css={{ position: 'absolute', top: 75, left: '-35px' }}
+            css={{ position: 'absolute', top: 95, left: '-35px' }}
             width={99}
             height={117}
             src="../../images/img-cookie-1.png" 
@@ -142,7 +148,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
             placeholder="none"
           />
           <StaticImage 
-            css={{ position: 'absolute', top: 155, right: '-35px' }}
+            css={{ position: 'absolute', top: 195, right: '-35px' }}
             width={83}
             height={86}
             src="../../images/img-cookie-2.png" 
@@ -152,16 +158,38 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
           />
 
           <Description>
-            {localizedMessages['description']}
+            <div>{localizedMessages['description1']}</div>
+            <div style={{ textAlign: 'left' }}>
+             <StaticImage 
+                style={{ left: -10, top: -8, marginTop: 20, marginRight: 0, transform: 'rotate(8.29deg)' }}
+                width={77}
+                height={14}
+                src="../../images/img-xxx.png" 
+                srcSet="../../images/img-xxx@3x.png 3x, ../../images/img-xxx@2x.png 2x" 
+                alt=""
+                placeholder="none"
+              />
+              {localizedMessages['description2']}
+              <StaticImage 
+                style={{ left: 6, top: -14 }}
+                width={41}
+                height={37}
+                src="../../images/img-heart.png" 
+                srcSet="../../images/img-heart@3x.png 3x, ../../images/img-heart@2x.png 2x" 
+                alt=""
+                placeholder="none"
+              />
+
+            </div>
           </Description>
           <Title>
             {localizedMessages['titleRich']}
           </Title>
+        </div>
+        <Buttons>
           <ParticipantsText>
             {sf(localizedMessages['participantsText'], { participants: new Intl.NumberFormat(lang, { maximumSignificantDigits: 3 }).format(0) })}
           </ParticipantsText>
-        </div>
-        <Buttons>
           <StartButton onClick={handleStart}>
             {localizedMessages['startText']}
           </StartButton>
