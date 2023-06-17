@@ -198,6 +198,7 @@ exports.createPages = async ({ graphql, actions }) => {
   supportedLocales.forEach(langKey => {
     resultCode.forEach(code => {
       const hashedCode = hash(code); 
+      console.log(hashedCode);
       const messages = data.strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
       const eventImage = data.strapiEventImage;
       const resultImage = data.allStrapiResultImage.nodes.filter(({ code }) => code === hashedCode);
@@ -209,9 +210,6 @@ exports.createPages = async ({ graphql, actions }) => {
         component: require.resolve(`./src/components/ResultMain/index.js`),
         context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData },
       });
-      console.log(`${langKey}/result/${hashedCode}`);
-      console.log(eventImage);
-      console.log(resultImageData);
     });
   });
 
