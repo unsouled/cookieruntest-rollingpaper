@@ -6,6 +6,14 @@ import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
+const sf = function(s, args) {
+  let formatted = s;
+  for (const arg in args) {
+    formatted = formatted.replace("{" + arg + "}", args[arg]);
+  }
+  return formatted;
+};
+
 const languagesByLocale = {
   'ko': '한국어',
   'en': 'English',
@@ -149,7 +157,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
             {localizedMessages['title']}
           </Title>
           <ParticipantsText>
-            {localizedMessages['participantsText']}
+            {sf(localizedMessages['participantsText'], { participants: new Intl.NumberFormat(lang, { maximumSignificantDigits: 3 }).format(0) })}
           </ParticipantsText>
         </div>
         <Buttons>

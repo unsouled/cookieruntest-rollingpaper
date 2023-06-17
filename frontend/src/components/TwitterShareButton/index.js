@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import ShareButton from '/src/components/ShareButton';
 
 const StyledShareButton = styled(ShareButton)`
-  background-color: #2AA3EF;
+  background: url('/images/twitter@3x.png') no-repeat center center #2AA3EF;
+  background-size: 18px 14px;
 `;
 
 export default (props) => (

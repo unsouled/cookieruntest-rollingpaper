@@ -11,6 +11,7 @@ export const query = graphql`
 					id
 					attributes {
             analyzingText
+            analyzingTextRich
 						locale
 					}
 				}

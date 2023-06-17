@@ -9,6 +9,9 @@ import LineShareButton from '/src/components/LineShareButton';
 import FacebookShareButton from '/src/components/FacebookShareButton';
 import TwitterShareButton from '/src/components/TwitterShareButton';
 import LinkShareButton from '/src/components/LinkShareButton';
+import WechatShareButton from '/src/components/WechatShareButton';
+import WeiboShareButton from '/src/components/WeiboShareButton';
+import QQShareButton from '/src/components/QQShareButton';
 import Button from '/src/components/Button';
 import CouponModal from '/src/components/CouponModal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
@@ -126,7 +129,7 @@ const EventArea = styled.div({
       padding: '10px 16px',
     }
   },
-  'h2': { color: '#000', margin: '-10px 0 26px 0', textAlign: 'center', textShadow: '0px 5px 15px rgba(200, 180, 10, 0.8)', whiteSpace: 'pre-wrap', fontSize: '26px', lineHeight: '32px' }
+  'h2': { color: '#000', margin: '-10px 0 26px 0', textAlign: 'center', textShadow: '0px 5px 15px rgba(200, 180, 10, 0.8)', whiteSpace: 'pre-wrap', fontSize: '26px', lineHeight: '32px', wordWrap: 'pre-wrap' }
 });
 
 const EventAreaTitle = styled.div`
@@ -222,6 +225,9 @@ const ResultMain = ({ lang, messages: localizedMessages }) => {
           <TwitterShareButton />
           <FacebookShareButton />
           <LinkShareButton />
+          <WechatShareButton />
+          <QQShareButton />
+          <WeiboShareButton />
         </ResultShare>
 
         <EventArea>
@@ -237,7 +243,7 @@ const ResultMain = ({ lang, messages: localizedMessages }) => {
               />
 
             </h1>
-            <h2>{localizedMessages['eventDescription']}</h2>
+            <h2>{localizedMessages['eventDescriptionRich']}</h2>
           </EventAreaTitle>
           <div css={{
             background: '#FFFFFF',
@@ -345,9 +351,9 @@ const ResultMain = ({ lang, messages: localizedMessages }) => {
             height: '50px',
           }}>
             <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap' }}>
-              {localizedMessages['eventHashtags']}
+              {localizedMessages['eventHashtagsRich']}
             </span>
-            <Button style={{ background: '#FDCB27', fontSize: '18px', borderRadius: '5px 15px 15px 5px', margin: 0 }}>
+            <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0 }}>
              {localizedMessages['eventCopyText']}
             </Button>
           </div>

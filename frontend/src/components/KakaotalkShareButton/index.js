@@ -4,7 +4,8 @@ import makeAsyncScriptLoader from 'react-async-script';
 import ShareButton from '/src/components/ShareButton';
 
 const StyledShareButton = styled(ShareButton)`
-  background-color: #FEE500;
+  background: url('/images/kakaotalk@3x.png') no-repeat center center #FEE500;
+  background-size: 18px 18px;
 `;
 
 const scriptUrl = 'https://developers.kakao.com/sdk/js/kakao.min.js';
