@@ -76,18 +76,142 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      strapiEventImage {
+        ja {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 320,
+                height: 320
+              )
+            }
+          }
+        }
+        ko {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 320,
+                height: 320
+              )
+            }
+          }
+        }
+        en {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 320,
+                height: 320
+              )
+            }
+          }
+        }
+        th {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 320,
+                height: 320
+              )
+            }
+          }
+        }
+        zh {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 320,
+                height: 320
+              )
+            }
+          }
+        }
+        zhHans {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 320,
+                height: 320
+              )
+            }
+          }
+        }
+      }
+      allStrapiResultImage {
+        nodes {
+          code
+          ko {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 320,
+                  height: 450
+                )
+              }
+            }
+          }
+          en {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 320,
+                  height: 450
+                )
+              }
+            }
+          }
+          th {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 320,
+                  height: 450
+                )
+              }
+            }
+          }
+          zh {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 320,
+                  height: 450
+                )
+              }
+            }
+          }
+          zhHans {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 320,
+                  height: 450
+                )
+              }
+            }
+          }
+        }
+      }
     }
   `);
   supportedLocales.forEach(langKey => {
     resultCode.forEach(code => {
       const hashedCode = hash(code); 
       const messages = data.strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+      const eventImage = data.strapiEventImage;
+      const resultImage = data.allStrapiResultImage.nodes.filter(({ code }) => code === hashedCode);
+
+      const resultImageData = resultImage.length > 0 ? resultImage[0][langKey !== 'zh-Hans' ? langKey : 'zhHans'] : null;
+      
       actions.createPage({
         path: `${langKey}/result/${hashedCode}`,
         component: require.resolve(`./src/components/ResultMain/index.js`),
-        context: { langKey, code: hashedCode, localizedMessages: messages },
+        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData },
       });
       console.log(`${langKey}/result/${hashedCode}`);
+      console.log(eventImage);
+      console.log(resultImageData);
     });
   });
 

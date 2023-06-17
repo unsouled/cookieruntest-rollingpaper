@@ -14,9 +14,11 @@ const strapiConfig = {
     'answer', 
     'question', 
     'result',
-    'cookie',
+    'people-type',
+    'result-image',
   ],
   singleTypes: [
+    'event-image',
     'localized-message'
   ],
   remoteFileHeaders: {
