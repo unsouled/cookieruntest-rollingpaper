@@ -350,7 +350,7 @@ const ResultMain = ({ lang, messages: localizedMessages }) => {
             margin: '12px 0',
             height: '50px',
           }}>
-            <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap' }}>
+            <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
               {localizedMessages['eventHashtagsRich']}
             </span>
             <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0 }}>

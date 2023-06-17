@@ -38,6 +38,7 @@ const Title = styled.div`
   font-size: 35px;
   margin-top: 20px;
   margin-bottom: 48px;
+  white-space: pre-wrap;
 `;
 
 const Description = styled.div`
@@ -154,7 +155,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
             {localizedMessages['description']}
           </Description>
           <Title>
-            {localizedMessages['title']}
+            {localizedMessages['titleRich']}
           </Title>
           <ParticipantsText>
             {sf(localizedMessages['participantsText'], { participants: new Intl.NumberFormat(lang, { maximumSignificantDigits: 3 }).format(0) })}

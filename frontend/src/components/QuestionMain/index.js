@@ -12,7 +12,7 @@ const Main = styled.main`
   flex-direction: column;
   height: 100%;
   margin-top: -70px;
-  background: url('/images/img-note-bg.png') repeat-y center;
+  background: url('/images/img-note-bg.png') repeat-y center #F2EEE5;
   ackground-size: 319p× 454px;
   position: relative;
 `;
@@ -137,8 +137,11 @@ const Analyzing = () => {
     <div css={{ flexDirection: 'column', minHeight: '100%', display: 'flex' }}>
       <NoteWrapper>
         <Note>
-          <div css={{ position: 'relative', wordBreak: 'break-all', background: '#fff' }}>
-            {localizedMessages['analyzingText']}{dotdotdot}
+          <div css={{
+            position: 'relative', whiteSpace: 'pre-wrap',
+            wordBreak: 'break-all', background: '#fff' 
+          }}>
+            {localizedMessages['analyzingTextRich']}{dotdotdot}
           </div>
         </Note>
         <Spring />
