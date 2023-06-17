@@ -136,7 +136,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                   fontSize: '28px',
                   fontWeight: 700,
                 }}>
-                  {localizedMessages['couponSent']}
+                  {localizedMessages['couponSentRich']}
                 </p>
               </div>
             ) : (
@@ -148,7 +148,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                 fontWeight: 700,
                 marginBottom: '12px'
               }}>
-                {localizedMessages['couponGiftReceived']}
+                {localizedMessages['couponGiftReceivedRich']}
               </p>
               <p style={{ height: '25px', justifyContent: 'center', alignItems: 'center',display: 'flex', background: 'url("/images/img-coupon-bg@3x.png") no-repeat', backgroundSize: 'cover', color: '#fff', fontSize: '14px', fontWeight: 700, marginBottom: '25px' }}>
                 2023/06/27 - 2023/07/27

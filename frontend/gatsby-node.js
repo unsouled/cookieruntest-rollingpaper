@@ -68,6 +68,8 @@ exports.createPages = async ({ graphql, actions }) => {
               couponTryLater
               eventDescriptionRich
               eventHashtagsRich
+              couponGiftReceivedRich
+              couponGiftSentRich
             }
           }
         }
