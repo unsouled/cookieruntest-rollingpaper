@@ -37,6 +37,14 @@
       "relation": "oneToMany",
       "target": "api::answer.answer",
       "mappedBy": "question"
+    },
+    "questionRich": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }

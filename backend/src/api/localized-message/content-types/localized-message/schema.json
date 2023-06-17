@@ -420,6 +420,22 @@
         }
       },
       "type": "richtext"
+    },
+    "couponGiftReceivedRich": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "couponSentRich": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }
