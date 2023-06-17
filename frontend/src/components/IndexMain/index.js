@@ -17,7 +17,8 @@ const languagesByLocale = {
 
 const Banner = styled.div`
   background: #6B3F17;
-  margin: 0 -1rem;
+  max-width: 360px;
+  margin: 0 auto;
   height: 70px;
 `;
 
@@ -53,11 +54,15 @@ const CustomLayout = styled(Layout)`
 
 const Main = styled.main`
   background: #fff;
-  padding: 15px;
-  min-height: 470px;
-  max-width: 440px;
+  background: url('/images/img-bg-main@3x.png') no-repeat;
+  background-size: 310px 470px;
+  border-radius: 6px;
+  width: 310px;
+  height: 470px;
+  /*max-width: 440px;*/
   margin: 0 auto;
   display: flex;
+  padding: 15px;
   flex-direction: column;
   box-shadow: 0px 5px 10px rgba(243, 190, 58, 0.2);
 `;
@@ -92,7 +97,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
   return (
     <CustomLayout>
       <Banner />
-      <div css={{ display: 'flex', maxWidth: '440px', margin: '0 auto' }}>
+      <div css={{ display: 'flex', maxWidth: '320px', margin: '0 auto' }}>
         <div css={{ width: '100px', justifyContent: 'flex', padding: '20px 0' }}>
           <StaticImage 
             width={25}
@@ -100,6 +105,7 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
             src="../../images/img-icon-cro.png" 
             srcSet="../../images/img-icon-cro@3x.png 3x, ../../images/img-icon-cro@2x.png 2x" 
             alt=""
+            placeholder="none"
           />
         </div>
         <div css={{ flex:1 }}>
@@ -109,12 +115,34 @@ const IndexMain = ({ showModal, lang = 'en' }) => {
             {languagesByLocale[lang]}
           </span>
           <span css={{ fontSize: '20px', lineHeight: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <StaticImage src="../../images/polygon@3x.png" width={10} height={8} />
+            <StaticImage 
+              src="../../images/polygon@3x.png" width={10} height={8} 
+              placeholder="none"
+            />
           </span>
         </div>
       </div>
       <Main>
-        <div css={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div css={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
+          <StaticImage 
+            css={{ position: 'absolute', top: 75, left: '-35px' }}
+            width={99}
+            height={117}
+            src="../../images/img-cookie-1.png" 
+            srcSet="../../images/img-cookie-1@3x.png 3x, ../../images/img-cookie-1@2x.png 2x" 
+            alt=""
+            placeholder="none"
+          />
+          <StaticImage 
+            css={{ position: 'absolute', top: 155, right: '-35px' }}
+            width={83}
+            height={86}
+            src="../../images/img-cookie-2.png" 
+            srcSet="../../images/img-cookie-2@3x.png 3x, ../../images/img-cookie-2@2x.png 2x" 
+            alt=""
+            placeholder="none"
+          />
+
           <Description>
             {localizedMessages['description']}
           </Description>

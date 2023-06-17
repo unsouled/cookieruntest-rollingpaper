@@ -11,14 +11,22 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-top: 70px
+  margin-top: -70px;
+`;
+
+const Background = styled.div`
+  width: 360px;
+  position: absolute;
+  padding: 0;
+  margin: 0 auto;
+  min-height: 100%;
 `;
 
 const Banner = styled.div`
   background: #6B3F17;
+  max-width: 360px;
+  margin: 0 auto;
   height: 70px;
-  margin: 0 -1rem;
-  margin-bottom: -70px;
 `;
 
 const Questions = styled.div`
@@ -28,7 +36,6 @@ const Questions = styled.div`
   align-items: center;
   text-align: center;
   flex-direction: column;
-
 `;
 
 const QuestionNumber = styled.span`
@@ -64,10 +71,26 @@ const colors = [
   '#E06522',
 ];
 
+const NoteWrapper = styled.div`
+  top: 203px;
+  width: 164px;
+  min-height: 100%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: -25px;
+`;
+
+const Spring = styled.div`
+  background: url("/images/img-sketchbook@3x.png") no-repeat top center;
+  background-size: 142px 25px;
+  width: 163px;
+  height: 25px;
+  position: absolute;
+  top: 4px;
+`;
+
 const Note = styled.div`
   flexDirection: column;
-  width: 163px;
-  margin: auto;
   font-weight: 700;
   font-size: 20px;
   display: flex;
@@ -75,16 +98,18 @@ const Note = styled.div`
   justify-content: center;
   text-align: center;
   opacity: 1;
-  background: #fff;
   height: 188px;
   word-wrap: break-word;
   word-break: break-word;
   box-shadow: inset 0px -3px 0px #DCC9BA;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 5px;
   overflow: hidden;
 `;
 
 const Progress = ({ progress }) => (
-  <div css={{ paddingTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+  <div css={{ paddingTop: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <StaticImage
       src="../../images/jelly-beans@3x.png"
       placeholder="none"
@@ -105,11 +130,14 @@ const Analyzing = () => {
   }, [dotdotdot]);
   return (
     <div css={{ flexDirection: 'column', minHeight: '100%', display: 'flex' }}>
-      <Note>
-        <div css={{ position: 'relative', background: '#fff', wordBreak: 'break-all' }}>
-          {localizedMessages['analyzingText']}{dotdotdot}
-        </div>
-      </Note>
+      <NoteWrapper>
+        <Note>
+          <div css={{ position: 'relative', wordBreak: 'break-all', background: '#fff' }}>
+            {localizedMessages['analyzingText']}{dotdotdot}
+          </div>
+        </Note>
+        <Spring />
+      </NoteWrapper>
     </div>
   );
 }
@@ -146,8 +174,61 @@ const QuestionMain = ({ lang, questions }) => {
   if (analyzing) {
     return (
       <Layout>
-        <Banner />
-        <Analyzing lang={lang} />
+        <Background>
+          <Banner />
+          <StaticImage css={{ position: 'absolute', top: 303, left: 54, width: 63, height: 104 }}
+            src="../../images/img-cookie-sketch2@3x.png"
+            srcSet="../../images/img-cookie-sketch2@3x.png 3x, ../../images/img-cookie-sketch2@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 305, right: 48, width: 91, height: 109 }}
+            src="../../images/img-cookie-sketch@3x.png"
+            srcSet="../../images/img-cookie-sketch@3x.png 3x,../../images/img-cookie-sketch@32.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 540, right: 65, width: 31, height: 31 }}
+            src="../../images/img-bg-part1@3x.png"
+            srcSet="../../images/img-bg-part1@3x.png 3x, ../../images/img-bg-part1@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 460, left: 2, width: 88, height: 67 }}
+            src="../../images/img-bg-part2@3x.png"
+            srcSet="../../images/img-bg-part2@3x.png 3x, ../../images/img-bg-part2@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 152, right: -10, width: 88, height: 107 }}
+            src="../../images/img-bg-part3@3x.png"
+            srcSet="../../images/img-bg-part3@3x.png 3x, ../../images/img-bg-part3@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 520, left: 90, width: 38, height: 20 }}
+            src="../../images/img-bg-part4@3x.png"
+            srcSet="../../images/img-bg-part4@3x.png 3x, ../../images/img-bg-part4@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 180, left: 70, width: 36, height: 33 }}
+            src="../../images/img-bg-part5@3x.png"
+            srcSet="../../images/img-bg-part5@3x.png 3x, ../../images/img-bg-part5@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 120, left: 100, width: 32, height: 26 }}
+            src="../../images/img-bg-part6@3x.png"
+            srcSet="../../images/img-bg-part6@3x.png 3x, ../../images/img-bg-part6@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 90, right: 90, width: 41, height: 26 }}
+            src="../../images/img-bg-part7@3x.png"
+            srcSet="../../images/img-bg-part7@3x.png 3x, ../../images/img-bg-part7@2x.png 2x"
+            placeholder="none"
+          />
+          <StaticImage css={{ position: 'absolute', top: 594, right: 150, width: 9, height: 18 }}
+            src="../../images/img-bg-part8@3x.png"
+            srcSet="../../images/img-bg-part8@3x.png 3x, ../../images/img-bg-part8@2x.png 2x"
+            placeholder="none"
+          />
+
+          <Analyzing lang={lang} />
+        </Background>
       </Layout>
     );
   }
