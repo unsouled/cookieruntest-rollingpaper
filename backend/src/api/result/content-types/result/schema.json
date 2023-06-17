@@ -48,15 +48,20 @@
       },
       "type": "richtext"
     },
-    "bestMatchCookie": {
+    "bestMatch": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::cookie.cookie"
+      "target": "api::people-type.people-type"
     },
-    "worstMatchCookie": {
+    "worstMatch": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::cookie.cookie"
+      "target": "api::people-type.people-type"
+    },
+    "people_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::people-type.people-type"
     }
   }
 }

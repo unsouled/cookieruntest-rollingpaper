@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * cookie router
+ * people-type router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::cookie.cookie');
+module.exports = createCoreRouter('api::people-type.people-type');

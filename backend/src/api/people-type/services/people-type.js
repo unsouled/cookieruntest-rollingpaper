@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * cookie service
+ * people-type service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::cookie.cookie');
+module.exports = createCoreService('api::people-type.people-type');
