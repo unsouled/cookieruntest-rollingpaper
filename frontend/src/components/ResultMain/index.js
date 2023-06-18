@@ -355,21 +355,26 @@ const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage
               </p>
               <div css={{
                 display: 'flex',
-                background: '#F3F1EC',
-                borderRadius: '15px 5px 5px 15px',
                 margin: '12px 0',
                 height: '50px',
               }}>
-              <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
-              {localizedMessages['eventHashtagsRich']}
-              </span>
-              <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0 }}>
-              {localizedMessages['eventCopyText']}
-              </Button>
+                <div css={{
+                  display: 'flex',
+                  flex: 1,
+                  borderRadius: '15px 5px 5px 15px',
+                  background: '#F3F1EC',
+                }}>
+                  <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
+                    {localizedMessages['eventHashtagsRich']}
+                  </span>
+                </div>
+                <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0 }}>
+                  {localizedMessages['eventCopyText']}
+                </Button>
               </div>
-              <ReactMarkdown className="notices">
-              {localizedMessages['eventNotices']}
-              </ReactMarkdown>
+                <ReactMarkdown className="notices">
+                  {localizedMessages['eventNotices']}
+                </ReactMarkdown>
               </div>
 
               </EventArea>

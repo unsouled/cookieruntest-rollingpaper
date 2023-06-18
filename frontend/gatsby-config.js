@@ -12,14 +12,16 @@ const strapiConfig = {
   accessToken: process.env.STRAPI_TOKEN,
   collectionTypes: [
     'answer', 
+    'people-type',
+    'people-type-image',
     'question', 
     'result',
-    'people-type',
     'result-image',
   ],
   singleTypes: [
     'event-image',
-    'localized-message'
+    'localized-message',
+    'logo-image'
   ],
   remoteFileHeaders: {
     /**
