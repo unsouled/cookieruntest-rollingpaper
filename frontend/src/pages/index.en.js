@@ -18,7 +18,10 @@ export const query = graphql`
 					id
 					attributes {
 						title
+						titleRich
 						description
+						description1
+						description2
 						participantsText
 						startText
             copyLinkText
@@ -38,6 +41,7 @@ const IndexPage = ({ data: { strapiLocalizedMessage = {} }, pageContext: { langK
   const closeModal = () => setModalVisible(false);
 
 	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+  console.log(messages);
 
   return (
     <LocalizedMessageContext.Provider value={messages}>

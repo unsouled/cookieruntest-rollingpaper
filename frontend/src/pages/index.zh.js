@@ -18,7 +18,10 @@ export const query = graphql`
 					id
 					attributes {
 						title
+						titleRich
 						description
+						description1
+						description2
 						participantsText
 						startText
             copyLinkText
