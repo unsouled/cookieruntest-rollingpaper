@@ -40,7 +40,6 @@ const RollingPaperTitle = styled.div`
 `;
 
 const RollingPaperImage = styled.div`
-  background: #6B3F17;
   width: 320px;
   height: 450px;
   margin: 0 auto;
@@ -245,162 +244,160 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
           </WorstCookie>
         </PartnerCookies>
 
-              <ResultShare>
-              <div>{localizedMessages['resultShare']}</div>
-              <KakaotalkShareButton />
-              <LineShareButton />
-              <TwitterShareButton />
-              <FacebookShareButton />
-              <LinkShareButton />
-              <WechatShareButton />
-              <QQShareButton />
-              <WeiboShareButton />
-              </ResultShare>
+        <ResultShare>
+          <div>{localizedMessages['resultShare']}</div>
+          <KakaotalkShareButton />
+          <LineShareButton />
+          <TwitterShareButton />
+          <FacebookShareButton />
+          <LinkShareButton />
+          <WechatShareButton />
+          <QQShareButton />
+          <WeiboShareButton />
+        </ResultShare>
 
-              <EventArea>
-              <EventAreaTitle>
-              <h1>
+        <EventArea>
+          <EventAreaTitle>
+            <h1>
               <span>{localizedMessages['eventName']}</span>
               <StaticImage
-              src="../../images/img-bg-arrow@3x.png"
-              style={{ position: 'absolute', right: -60, top: -8 }}
-              width={29}
-              height={66}
+                src="../../images/img-bg-arrow@3x.png"
+                style={{ position: 'absolute', right: -60, top: -8 }}
+                width={29}
+                height={66}
               placeholder="none"
               />
-
-              </h1>
-              <h2>{localizedMessages['eventDescriptionRich']}</h2>
-              </EventAreaTitle>
-              <div css={{
-                background: '#FFFFFF',
-                padding: '0 15px 20px',
-                margin: '-14px 0 0 0',
-                color: '#141414',
-              }}>
-              <div css={{ color: '#fff', margin: '14px 0', background: 'url("/images/img-bg-event-duration.png") no-repeat', backgroundSize: 'cover',  fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
-              <StaticImage
+            </h1>
+            <h2>{localizedMessages['eventDescriptionRich']}</h2>
+          </EventAreaTitle>
+          <div css={{
+            background: '#FFFFFF',
+            padding: '0 15px 20px',
+            margin: '-14px 0 0 0',
+            color: '#141414',
+          }}>
+          <div css={{ color: '#fff', margin: '14px 0', background: 'url("/images/img-bg-event-duration.png") no-repeat', backgroundSize: 'cover',  fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
+            <StaticImage
               src="../../images/img-star@3x.png"
               width={35}
               height={36}
               placeholder="none"
               style={{ position: 'absolute',left: -14, top: -25 }}
-              />
+            />
               {localizedMessages['eventDuration']}: {localizedMessages['eventStartAt']} ~ {localizedMessages['eventEndAt']}
-              </div>
-              <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
+            </div>
+            <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
               <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <span css={{ marginBottom: '8px', fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#9FD33A', borderRadius: '5px', color: '#fff' }}>
-              {localizedMessages['eventPrize1Winners']}
-              </span>
-              <div css={{ fontWeight: 700, fontSize: '20px', whiteSpace: 'pre', paddingTop: '4px' }}>
-              <div css={{ lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
-              <div css={{ fontSize: '22px', lineHeidht: '21px' }}>
-              {localizedMessages['eventPrize1Name']}
-              </div>
-              <span css={{ fontWeight: 400, fontSize: '14px', color: '#a6a6a6' }}>
-              {localizedMessages['eventPrize1Sub']}
-              </span>
-              </div>
-              </div>
+                <span css={{ marginBottom: '8px', fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#9FD33A', borderRadius: '5px', color: '#fff' }}>
+                  {localizedMessages['eventPrize1Winners']}
+                </span>
+                <div css={{ fontWeight: 700, fontSize: '20px', whiteSpace: 'pre', paddingTop: '4px' }}>
+                  <div css={{ lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
+                    <div css={{ fontSize: '22px', lineHeidht: '21px' }}>
+                      {localizedMessages['eventPrize1Name']}
+                    </div>
+                    <span css={{ fontWeight: 400, fontSize: '14px', color: '#a6a6a6' }}>
+                      {localizedMessages['eventPrize1Sub']}
+                    </span>
+                  </div>
+                </div>
               </div>
               <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <StaticImage 
-              src="../../images/img-event-reward-1@3x.png"
-              width={120} height={87} 
-              placeholder="none"
-              />
+                <StaticImage 
+                  src="../../images/img-event-reward-1@3x.png"
+                  width={120} height={87} 
+                  placeholder="none"
+                />
               </div>
-              </div>
-              <div css={{ borderBottom: '1px solid #F3F3F3', padding: '16px 0', display: 'flex' }}>
+            </div>
+            <div css={{ borderBottom: '1px solid #F3F3F3', padding: '16px 0', display: 'flex' }}>
               <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
-              {localizedMessages['eventPrize2Winners']}
-              </span>
-              <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
-              {localizedMessages['eventPrize2Name']}
-              </p>
+                <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
+                  {localizedMessages['eventPrize2Winners']}
+                </span>
+                <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
+                  {localizedMessages['eventPrize2Name']}
+                </p>
               </div>
               <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <StaticImage 
-              src="../../images/img-event-reward-2@3x.png"
-              width={100} height={100} 
-              placeholder="none"
-              />
+                <StaticImage 
+                  src="../../images/img-event-reward-2@3x.png"
+                  width={100} height={100} 
+                  placeholder="none"
+                />
               </div>
-              </div>
-              <div css={{ padding: '16px 0', display: 'flex' }}>
+            </div>
+            <div css={{ padding: '16px 0', display: 'flex' }}>
               <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
-              {localizedMessages['eventPrize3Winners']}
-              </span>
-              <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
-              {localizedMessages['eventPrize3Name']}
-              </p>
+                <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
+                  {localizedMessages['eventPrize3Winners']}
+                </span>
+                <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
+                  {localizedMessages['eventPrize3Name']}
+                </p>
               </div>
               <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <StaticImage 
-              src="../../images/img-event-reward-3@3x.png"
-              width={104} height={65} 
-              placeholder="none"
-              />
+                <StaticImage 
+                  src="../../images/img-event-reward-3@3x.png"
+                  width={104} height={65} 
+                  placeholder="none"
+                />
               </div>
-              </div>
-              <div css={{ color: '#C8C8C8', textAlign: 'center', fontSize: '11px', fontWeight: 400, lineHeight: '16px', paddingBottom: '8px', whiteSpace: 'pre-wrap' }}>
+            </div>
+            <div css={{ color: '#C8C8C8', textAlign: 'center', fontSize: '11px', fontWeight: 400, lineHeight: '16px', paddingBottom: '8px', whiteSpace: 'pre-wrap' }}>
               {localizedMessages['participantsDisclaimer']}
-              </div>
-
-              <div css={{ fontWeight: 700, textAlign: 'center', fontSize: '18px', marginTop: '10px', padding: '5px 0' }}>
+            </div>
+            <div css={{ fontWeight: 700, textAlign: 'center', fontSize: '18px', marginTop: '10px', padding: '5px 0' }}>
               <div>
-              <span style={{
-                background: 'rgba(253, 203, 39, 0.8)',
-                color: 'transparent',
-                borderRadius: '5px',
-                marginTop: '-20px',
-                padding: '0 4px',
-                display: 'inline-block',
-                height: 18,
-                lineHeight: 0
-              }}>{localizedMessages['eventParticipationText']}</span>
+                <span style={{
+                  background: 'rgba(253, 203, 39, 0.8)',
+                  color: 'transparent',
+                  borderRadius: '5px',
+                  marginTop: '-20px',
+                  padding: '0 4px',
+                  display: 'inline-block',
+                  height: 18,
+                  lineHeight: 0
+                }}>{localizedMessages['eventParticipationText']}</span>
               </div>
               <div style={{ marginTop: '-28px' }}>
-              {localizedMessages['eventParticipationText']}
+                {localizedMessages['eventParticipationText']}
               </div>
-              </div>
-              <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '25px', fontWeight: 400, textAlign: 'center' }}>
+            </div>
+            <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '25px', fontWeight: 400, textAlign: 'center' }}>
               {localizedMessages['eventParticipationDescription']}
-              </p>
+            </p>
+            <div css={{
+              display: 'flex',
+              margin: '12px 0',
+              height: '50px',
+              width: '100%',
+            }}>
               <div css={{
                 display: 'flex',
-                margin: '12px 0',
-                height: '50px',
+                flex: 1,
+                borderRadius: '15px 5px 5px 15px',
+                background: '#F3F1EC',
               }}>
-                <div css={{
-                  display: 'flex',
-                  flex: 1,
-                  borderRadius: '15px 5px 5px 15px',
-                  background: '#F3F1EC',
-                }}>
-                  <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
-                    {localizedMessages['eventHashtagsRich']}
-                  </span>
-                </div>
-                <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0 }}>
-                  {localizedMessages['eventCopyText']}
-                </Button>
+                <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
+                  {localizedMessages['eventHashtagsRich']}
+                </span>
               </div>
-                <ReactMarkdown className="notices">
-                  {localizedMessages['eventNotices']}
-                </ReactMarkdown>
-              </div>
+              <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center' }}>
+                {localizedMessages['eventCopyText']}
+              </Button>
+            </div>
+            <ReactMarkdown className="notices">
+              {localizedMessages['eventNotices']}
+            </ReactMarkdown>
+          </div>
+        </EventArea>
 
-              </EventArea>
-
-              <CommunityEventBanner>
-              <GatsbyImage image={eventImageData} alt="" 
-                width={320}
-                height={320}
-              />
+        <CommunityEventBanner>
+          <GatsbyImage image={eventImageData} alt="" 
+            width={320}
+            height={320}
+          />
         </CommunityEventBanner>
 
         <StyledButton onClick={restart}>
@@ -409,6 +406,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
         <StyledButton>
           {localizedMessages['resultDownloadSticker']}
         </StyledButton>
+
         <Links>
           <StyledButton onClick={() => {
             window.location.href = 'https://villain.cookieruntest.com';
@@ -422,7 +420,9 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
             {localizedMessages['resultTryCharacterTest']}
           </StyledButton>
         </Links>
+
         <GatsbyImage image={getImage(localizedMessages['logoImage'])} />
+
         <Copyright>
           Copyright 2023 Devsisters. All rights reserved
         </Copyright>

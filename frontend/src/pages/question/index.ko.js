@@ -17,7 +17,6 @@ export const query = graphql`
 				}
 			}
     }
-
     allStrapiQuestion(sort: {order: ASC}) {
       nodes {
         answers {
@@ -25,6 +24,7 @@ export const query = graphql`
             data {
               attributes {
                 text
+                textRich
                 value
                 locale
               }
@@ -37,6 +37,7 @@ export const query = graphql`
             attributes {
               order
               question
+              questionRich
               locale
             }
           }
@@ -51,14 +52,14 @@ const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion =
     const answers = questionNode.answers.map((answerNode) => {
       const match = answerNode.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
       return {
-        text: match.text, 
+        text: match.textRich, 
         value: match.value
       }
     });
-    const { order, question } = questionNode.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+    const { order, questionRich } = questionNode.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
     return {
       order,
-      question,
+      question: questionRich,
       answers
     };
   });

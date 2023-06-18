@@ -62,6 +62,7 @@ const AnswerButton = styled(Button)`
   width: 320px;
   margin: 12px auto;
   background: linear-gradient(90deg, #925318 0%, #6B4026 97.86%);
+  white-space: pre-wrap;
 `;
 
 const colors = [
@@ -248,7 +249,7 @@ const QuestionMain = ({ lang, questions }) => {
         <Progress progress={100 * (currentQuestionIdx / questions.length)} />
         <Questions>
           <QuestionNumber color={colors[currentQuestionIdx]}>Q{currentQuestion.order}.</QuestionNumber> 
-          <p css={{ fontWeight: 700 }}>
+          <p css={{ fontWeight: 700, whiteSpace: 'pre-wrap' }}>
             {currentQuestion.question}
           </p>
         </Questions>
