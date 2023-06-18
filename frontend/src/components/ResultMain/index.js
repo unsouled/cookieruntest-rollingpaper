@@ -364,7 +364,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                 {localizedMessages['eventParticipationText']}
               </div>
             </div>
-            <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '25px', fontWeight: 400, textAlign: 'center' }}>
+            <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '22px', fontWeight: 400, textAlign: 'center' }}>
               {localizedMessages['eventParticipationDescription']}
             </p>
             <div css={{
