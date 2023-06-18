@@ -65,37 +65,33 @@ const PartnerCookies = styled.div`
 const BestCookie = styled.div`
   color: #9FD33A;
   font-weight: 700;
-  div {
-    letter-spacing: -1px;
-    font-size 16px;
-    color: #1C1C1E;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 155px;
-    height: 165px;
-    margin-top: 10px;
-    background: #fff;
-    border-radius: 5px;
-  }
 `;
 
 const WorstCookie = styled.div`
   color: #E06522;
   font-weight: 700;
-  div {
-    letter-spacing: -1px;
-    font-size 16px;
-    color: #1C1C1E;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 155px;
-    height: 165px;
-    margin-top: 10px;
-    background: #fff;
-    border-radius: 5px;
-  }
+`;
+
+const PeopleImage = styled.div`
+  width: 155px;
+  height: 165px;
+  margin-top: 10px;
+`;
+
+const PeopleName = styled.div`
+  letter-spacing: -1px;
+  font-size 16px;
+  color: #1C1C1E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 155px;
+  height: 165px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  position: relative;
+  top: -165px;
+  margin-bottom: -165px;
 `;
 
 const Links = styled.div`
@@ -170,7 +166,7 @@ const ResultShare = styled.div`
   font-size: 20px;
 `;
 
-const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage }) => {
+const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages }) => {
   const [modalOpen, setModalOpen] = useState(true);
   const restart = () => {
     navigate(`/${lang}`);
@@ -182,10 +178,19 @@ const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage
     setModalOpen(false);
   };
 
-  const eventImageData = getImage(eventImage.ko.localFile);
+  const eventImageData = getImage(eventImage[lang].localFile);
   const resultImageData = getImage(resultImage.localFile);
-  console.log(eventImage.ko.localFile);
-  console.log(resultImage.localFile);
+  const bestMatch  = result.bestMatch.localizations.data.filter(
+    ( { attributes: { locale } }) => locale === lang
+  )[0].attributes;
+  const bestMatchName = bestMatch.nameRich;
+  const bestMatchImage = getImage(peopleTypeImages.filter((image) => image.code === bestMatch.code)[0]?.bgImage.localFile);
+
+  const worstMatch= result.worstMatch.localizations.data.filter(
+    ( { attributes: { locale } }) => locale === lang
+  )[0].attributes;
+  const worstMatchName = worstMatch.nameRich;
+  const worstMatchImage = getImage(peopleTypeImages.filter((image) => image.code === worstMatch.code)[0]?.bgImage.localFile);
 
   return (
     <Layout>
@@ -205,7 +210,7 @@ const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage
           </RollingPaperDescription>
           <RollingPaperImage>
             <GatsbyImage image={resultImageData} 
-              widh={320}
+              width={320}
               height={450}
               alt=""
             />
@@ -213,20 +218,32 @@ const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage
         </RollingPaper>
 
         <PartnerCookies>
-              <BestCookie>
-              {localizedMessages['resultBestMatch']}
-              <div>
-              청량시원 쌉싸름<br />
-              사람
-              </div>
-              </BestCookie>
-              <WorstCookie>
-              {localizedMessages['resultWorstMatch']}
-              <div>
-              매콤딱딱<br />사람
-              </div>
-              </WorstCookie>
-              </PartnerCookies>
+          <BestCookie>
+            {localizedMessages['resultBestMatch']}
+            <PeopleImage>
+              <GatsbyImage image={bestMatchImage} alt="" 
+                width={155}
+                height={165}
+              />
+            </PeopleImage>
+            <PeopleName>
+              {bestMatchName}
+            </PeopleName>
+          </BestCookie>
+
+          <WorstCookie>
+            {localizedMessages['resultWorstMatch']}
+            <PeopleImage>
+              <GatsbyImage image={worstMatchImage} alt="" 
+                width={155}
+                height={165}
+              />
+            </PeopleImage>
+            <PeopleName>
+              {worstMatchName}
+            </PeopleName>
+          </WorstCookie>
+        </PartnerCookies>
 
               <ResultShare>
               <div>{localizedMessages['resultShare']}</div>
@@ -381,7 +398,7 @@ const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage
 
               <CommunityEventBanner>
               <GatsbyImage image={eventImageData} alt="" 
-                widh={320}
+                width={320}
                 height={320}
               />
         </CommunityEventBanner>
@@ -414,9 +431,17 @@ const ResultMain = ({ lang, messages: localizedMessages, eventImage, resultImage
   );
 }
 
-const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, resultImage } }) => {
+const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, resultImage, peopleTypeImages } }) => {
   return (
-    <ResultMain lang={langKey} messages={localizedMessages} eventImage={eventImage} resultImage={resultImage} />
+    <ResultMain 
+      lang={langKey} 
+      code={code}
+      messages={localizedMessages} 
+      eventImage={eventImage} 
+      result={result} 
+      resultImage={resultImage} 
+      peopleTypeImages={peopleTypeImages}
+    />
   );
 }
 

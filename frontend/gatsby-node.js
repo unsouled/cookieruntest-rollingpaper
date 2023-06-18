@@ -138,6 +138,35 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+
+      allStrapiResult {
+        nodes {
+          code
+          bestMatch {
+            localizations {
+              data {
+                attributes {
+                  code
+                  nameRich
+                  locale
+                }
+              }
+            }
+          }
+          worstMatch {
+            localizations {
+              data {
+                attributes {
+                  code
+                  nameRich
+                  locale
+                }
+              }
+            }
+          }
+        }
+      }
+
       allStrapiResultImage {
         nodes {
           code
@@ -203,6 +232,19 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+
+      allStrapiPeopleTypeImage {
+        nodes {
+          code
+          bgImage {
+            localFile {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+        }
+      }
     }
   `);
   supportedLocales.forEach(langKey => {
@@ -212,12 +254,18 @@ exports.createPages = async ({ graphql, actions }) => {
       const eventImage = data.strapiEventImage;
       const resultImage = data.allStrapiResultImage.nodes.filter(({ code }) => code === hashedCode);
 
+      const result = data.allStrapiResult.nodes.filter(({ code }) => code === hashedCode);
+
       const resultImageData = resultImage.length > 0 ? resultImage[0][langKey !== 'zh-Hans' ? langKey : 'zhHans'] : null;
+
+      const resultData = result.length > 0 ? result[0] : null;
+
+      const peopleTypeImages = data.allStrapiPeopleTypeImage.nodes
       
       actions.createPage({
         path: `${langKey}/result/${hashedCode}`,
         component: require.resolve(`./src/components/ResultMain/index.js`),
-        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData },
+        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages },
       });
     });
   });
