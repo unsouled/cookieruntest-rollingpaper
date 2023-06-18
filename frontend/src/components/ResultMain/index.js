@@ -383,7 +383,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                   {localizedMessages['eventHashtagsRich']}
                 </span>
               </div>
-              <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
+              <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '18px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -2 }}>
                 {localizedMessages['eventCopyText']}
               </Button>
             </div>

@@ -63,6 +63,8 @@ const AnswerButton = styled(Button)`
   margin: 12px auto;
   background: linear-gradient(90deg, #925318 0%, #6B4026 97.86%);
   white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 22px;
 `;
 
 const colors = [
