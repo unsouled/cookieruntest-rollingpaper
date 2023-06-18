@@ -4,7 +4,8 @@
   "info": {
     "singularName": "people-type-image",
     "pluralName": "people-type-images",
-    "displayName": "PeopleTypeImage"
+    "displayName": "PeopleTypeImage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,18 @@
       "type": "string"
     },
     "bgImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "mbti": {
+      "type": "string"
     }
   }
 }

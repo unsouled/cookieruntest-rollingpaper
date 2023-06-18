@@ -58,10 +58,18 @@
       "relation": "oneToOne",
       "target": "api::people-type.people-type"
     },
-    "people_type": {
+    "peopleType": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::people-type.people-type"
+    },
+    "mbti": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
