@@ -178,7 +178,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
     setModalOpen(false);
   };
 
-  const eventImageData = getImage(eventImage[lang].localFile);
+  const eventImageData = getImage(eventImage[lang !== 'zh-Hans' ? lang : 'zhHans'].localFile);
   const resultImageData = getImage(resultImage.localFile);
   const bestMatch  = result.bestMatch.localizations.data.filter(
     ( { attributes: { locale } }) => locale === lang
