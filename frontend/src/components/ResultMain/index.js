@@ -194,7 +194,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   const worstMatchName = worstMatch.nameRich;
   const worstMatchImage = getImage(peopleTypeImages.filter((image) => image.code === worstMatch.code)[0]?.bgImage.localFile);
 
-  console.log(banner);
+  console.log(langKey);
+  console.log(eventImage);
 
   return (
     <Layout>
