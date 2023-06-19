@@ -178,9 +178,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
     setModalOpen(false);
   };
 
-  console.log(fromQuestion);
-
-  const eventImageData = getImage(eventImage[lang !== 'zh-Hans' ? lang : 'zhHans'].localFile);
+  const langKey = lang !== 'zh-Hans' ? lang : 'zhHans';
+  const eventImageData = getImage(eventImage[langKey].localFile);
   const resultImageData = getImage(resultImage.localFile);
   const bestMatch  = result.bestMatch.localizations.data.filter(
     ( { attributes: { locale } }) => locale === lang
@@ -194,6 +193,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   )[0].attributes;
   const worstMatchName = worstMatch.nameRich;
   const worstMatchImage = getImage(peopleTypeImages.filter((image) => image.code === worstMatch.code)[0]?.bgImage.localFile);
+
+  console.log(banner);
 
   return (
     <Layout>

@@ -44,10 +44,99 @@ export const query = graphql`
         }
       }
     }
+    strapiBannerImage {
+      smallEn {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      smallKo {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      smallJa {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      smallTh {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      smallZh {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      smallZhHans {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      bigEn {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      bigKo {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      bigJa {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      bigTh {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      bigZh {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      bigZhHans {
+        localFile {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+    }
   }
 `;
 
-const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion = [] }, pageContext: { langKey } }) => {
+const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion = [], strapiBannerImage = {} }, pageContext: { langKey } }) => {
+  const fieldName = `small${langKey !== 'zh-hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+  const banner = strapiBannerImage[fieldName];
+
   const questions = allStrapiQuestion.nodes.map((questionNode) => {
     const answers = questionNode.answers.map((answerNode) => {
       const match = answerNode.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
@@ -69,6 +158,7 @@ const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion =
       <QuestionMain 
         lang={langKey} 
         questions={questions}
+        banner={banner}
       />
     </LocalizedMessageContext.Provider>
   );

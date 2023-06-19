@@ -245,6 +245,50 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      strapiBannerImage {
+        bigEn {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        bigKo {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        bigJa {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        bigTh {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        bigZh {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        bigZhHans {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+      }
     }
   `);
   supportedLocales.forEach(langKey => {
@@ -257,15 +301,16 @@ exports.createPages = async ({ graphql, actions }) => {
       const result = data.allStrapiResult.nodes.filter(({ code }) => code === hashedCode);
 
       const resultImageData = resultImage.length > 0 ? resultImage[0][langKey !== 'zh-Hans' ? langKey : 'zhHans'] : null;
-
       const resultData = result.length > 0 ? result[0] : null;
 
       const peopleTypeImages = data.allStrapiPeopleTypeImage.nodes
-      
+      const fieldName = `big${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+      const banner = data.strapiBannerImage[fieldName];
+
       actions.createPage({
         path: `${langKey}/result/${hashedCode}`,
         component: require.resolve(`./src/components/ResultMain/index.js`),
-        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages },
+        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages, banner },
       });
     });
   });

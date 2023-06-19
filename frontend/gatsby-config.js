@@ -17,6 +17,7 @@ const strapiConfig = {
     'question', 
     'result',
     'result-image',
+    'banner-image',
   ],
   singleTypes: [
     'event-image',
