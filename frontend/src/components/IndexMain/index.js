@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { navigate } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
+import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
@@ -24,9 +24,7 @@ const languagesByLocale = {
 };
 
 const Banner = styled.div`
-  background: #6B3F17;
-  margin: 0 -1rem;
-  height: 70px;
+  margin: 0 -8px;
 `;
 
 const Title = styled.div`
@@ -102,15 +100,19 @@ const CopyButton = styled(Button)`
   margin: 6px 0;
 `;
 
-const IndexMain = ({ showModal, lang = 'en' }) => {
+const IndexMain = ({ showModal, banner, lang = 'en' }) => {
   const localizedMessages = useContext(LocalizedMessageContext) || {};
   const handleStart = () => {
     navigate(`/${lang}/question`);
   };
 
+  const bannerImageData = getImage(banner?.localFile);
+
   return (
     <CustomLayout>
-      <Banner />
+      <Banner>
+        <GatsbyImage image={bannerImageData} width="100%" height="100%" />
+      </Banner>
       <div css={{ display: 'flex', maxWidth: '320px', margin: '0 auto' }}>
         <div css={{ width: '100px', justifyContent: 'flex', padding: '20px 0' }}>
           <StaticImage 

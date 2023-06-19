@@ -154,8 +154,8 @@ const Copyright = styled.div`
 
 const Banner = styled.div`
   background: #6B3F17;
-  height: 400px;
-  margin: 0 -2rem;
+  min-height: 400px;
+  margin: 0 -24px;
 `;
 
 const ResultShare = styled.div`
@@ -165,8 +165,9 @@ const ResultShare = styled.div`
   font-size: 20px;
 `;
 
-const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages }) => {
-  const [modalOpen, setModalOpen] = useState(true);
+const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, banner, fromQuestion }) => {
+  console.log(fromQuestion);
+  const [modalOpen, setModalOpen] = useState(fromQuestion);
   const restart = () => {
     navigate(`/${lang}`);
   }
@@ -177,6 +178,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
     setModalOpen(false);
   };
 
+  console.log(fromQuestion);
+
   const eventImageData = getImage(eventImage[lang !== 'zh-Hans' ? lang : 'zhHans'].localFile);
   const resultImageData = getImage(resultImage.localFile);
   const bestMatch  = result.bestMatch.localizations.data.filter(
@@ -184,6 +187,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   )[0].attributes;
   const bestMatchName = bestMatch.nameRich;
   const bestMatchImage = getImage(peopleTypeImages.filter((image) => image.code === bestMatch.code)[0]?.bgImage.localFile);
+  const bannerImageData = getImage(banner?.localFile);
 
   const worstMatch= result.worstMatch.localizations.data.filter(
     ( { attributes: { locale } }) => locale === lang
@@ -199,7 +203,9 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 				messages={localizedMessages}
 			/>
       <Main>
-        <Banner />
+        <Banner>
+          <GatsbyImage image={bannerImageData} width="100%" height="100%" />
+        </Banner>
         <RollingPaper>
           <RollingPaperTitle>
             {localizedMessages['resultTitle']}
@@ -431,7 +437,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   );
 }
 
-const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, resultImage, peopleTypeImages } }) => {
+const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, resultImage, peopleTypeImages, banner }, location }) => {
+  console.log(location);
   return (
     <ResultMain 
       lang={langKey} 
@@ -441,6 +448,8 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
       result={result} 
       resultImage={resultImage} 
       peopleTypeImages={peopleTypeImages}
+      banner={banner}
+      fromQuestion={!!window.history?.state?.fromQuestion}
     />
   );
 }

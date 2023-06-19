@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
-import { StaticImage } from 'gatsby-plugin-image';
+import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
 import hash from '/src/utils/hash';
@@ -26,11 +26,10 @@ const Background = styled.div`
 `;
 
 const Banner = styled.div`
-position: relative;
+  position: relative;
   z-index: 10;
-  background: #6B3F17;
-  margin: 0 -1rem;
-  height: 70px;
+  margin: 0 -8px;
+  min-height: 70px;
 `;
 
 const Questions = styled.div`
@@ -153,7 +152,7 @@ const Analyzing = () => {
   );
 }
 
-const QuestionMain = ({ lang, questions }) => {
+const QuestionMain = ({ lang, banner, questions }) => {
   const [analyzing, setAnalyzing] = useState(false);
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const next = () => {
@@ -178,15 +177,19 @@ const QuestionMain = ({ lang, questions }) => {
       abcd += (current['P'] || 0) > (current['J'] || 0) ? 'P' : 'J';
 
       await wait(4000);
-      navigate(`/${lang}/result/${hash(abcd)}`);
+      navigate(`/${lang}/result/${hash(abcd)}`, { state: { fromQuestion: true } });
     }
   };
+  const bannerImageData = getImage(banner?.localFile);
+  console.log(bannerImageData);
 
   if (analyzing) {
     return (
       <Layout>
         <Background>
-          <Banner />
+          <Banner>
+            <GatsbyImage image={bannerImageData} width="100%" height="100%" />
+          </Banner>
           <StaticImage css={{ position: 'absolute', top: 303, left: 54, width: 63, height: 104 }}
             src="../../images/img-cookie-sketch2@3x.png"
             srcSet="../../images/img-cookie-sketch2@3x.png 3x, ../../images/img-cookie-sketch2@2x.png 2x"
@@ -246,7 +249,9 @@ const QuestionMain = ({ lang, questions }) => {
 
   return (
     <Layout>
-      <Banner />
+      <Banner>
+        <GatsbyImage image={bannerImageData} width="100%" height="100%" />
+      </Banner>
       <Main>
         <Progress progress={100 * (currentQuestionIdx / questions.length)} />
         <Questions>
