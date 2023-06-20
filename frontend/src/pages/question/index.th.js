@@ -213,7 +213,7 @@ const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion =
 
 export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }, pageContext: { langKey } }) => {
 	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
-  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'ZhHans'}`;
+  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
   const ogImage = strapiOgImage[fieldName].formats.large.url;
   return (
     <>
