@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
 import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
@@ -15,6 +16,10 @@ import QQShareButton from '/src/components/QQShareButton';
 import Button from '/src/components/Button';
 import CouponModal from '/src/components/CouponModal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
+
+import parseISO from 'date-fns/parseISO'
+import isBefore from 'date-fns/isBefore';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const StyledButton = styled(Button)`
   height: 50px;
@@ -165,9 +170,38 @@ const ResultShare = styled.div`
   font-size: 20px;
 `;
 
+function numberFormat(num) {
+  if (!num) {
+    return '0';
+  }
+  if(num > 999 && num < 1000000){
+    return (num/1000).toFixed(1) + 'K';
+  }else if(num > 1000000){
+    return (num/1000000).toFixed(1) + 'M';
+  }else if(num < 999){
+    return num;
+  }
+}
+
 const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, banner, fromQuestion }) => {
-  console.log(fromQuestion);
-  const [modalOpen, setModalOpen] = useState(fromQuestion);
+  const [shareCounter, setShareCounter] = useState(0);
+  const [modalOpen, setModalOpen] = useState(lang !== 'zh-Hans' && fromQuestion);
+  const [eventVisible, setEventVisible] = useState(false);
+
+  const fetchCounter = async () => {
+    try {
+      const { data } = await axios.get(`${process.env.GATSBY_API_HOST}/counter/share`);
+      setShareCounter(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchCounter();
+    setEventVisible(lang !== 'zh-Hans' && isBefore(new Date(), parseISO(localizedMessages['eventEndAt'])));
+  }, [fetchCounter, setEventVisible, localizedMessages]);
+
   const restart = () => {
     navigate(`/${lang}`);
   }
@@ -194,8 +228,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   const worstMatchName = worstMatch.nameRich;
   const worstMatchImage = getImage(peopleTypeImages.filter((image) => image.code === worstMatch.code)[0]?.bgImage.localFile);
 
-  console.log(langKey);
-  console.log(eventImage);
+  const shareUrl = `${process.env.GATSBY_HOST}/${lang}/result/${code}`;
 
   return (
     <Layout>
@@ -254,159 +287,178 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 
         <ResultShare>
           <div>{localizedMessages['resultShare']}</div>
-          <KakaotalkShareButton />
-          <LineShareButton />
-          <TwitterShareButton />
-          <FacebookShareButton />
-          <LinkShareButton />
-          <WechatShareButton />
-          <QQShareButton />
-          <WeiboShareButton />
+
+          <div css={{ textAlign: 'center' }}>
+            <span css={{
+              minWidth: '78px',
+              padding: '2px 10px',
+              fontSize: '12px',
+              background: '#fff',
+              lineHeight: '14px',
+              color: '#141414',
+              borderRadius: '22px',
+              display: 'inline-block',
+              fontWeight: 800
+            }}>
+              {numberFormat(shareCounter)}
+            </span>
+          </div>
+
+
+          <ShareTools 
+            lang={lang} 
+            url={shareUrl} 
+            onShare={(count) => setShareCounter(count)}
+          />
         </ResultShare>
 
-        <EventArea>
-          <EventAreaTitle>
-            <h1>
-              <span>{localizedMessages['eventName']}</span>
+        {eventVisible && (
+          <EventArea>
+            <EventAreaTitle>
+              <h1>
+                <span>{localizedMessages['eventName']}</span>
+                <StaticImage
+                  src="../../images/img-bg-arrow@3x.png"
+                  style={{ position: 'absolute', right: -60, top: -8 }}
+                  width={29}
+                  height={66}
+                placeholder="none"
+                />
+              </h1>
+              <h2>{localizedMessages['eventDescriptionRich']}</h2>
+            </EventAreaTitle>
+            <div css={{
+              background: '#FFFFFF',
+              padding: '0 15px 20px',
+              margin: '-14px 0 0 0',
+              color: '#141414',
+            }}>
+            <div css={{ color: '#fff', margin: '14px 0', background: 'url("/images/img-bg-event-duration.png") no-repeat', backgroundSize: 'cover',  fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
               <StaticImage
-                src="../../images/img-bg-arrow@3x.png"
-                style={{ position: 'absolute', right: -60, top: -8 }}
-                width={29}
-                height={66}
-              placeholder="none"
+                src="../../images/img-star@3x.png"
+                width={35}
+                height={36}
+                placeholder="none"
+                style={{ position: 'absolute',left: -14, top: -25 }}
               />
-            </h1>
-            <h2>{localizedMessages['eventDescriptionRich']}</h2>
-          </EventAreaTitle>
-          <div css={{
-            background: '#FFFFFF',
-            padding: '0 15px 20px',
-            margin: '-14px 0 0 0',
-            color: '#141414',
-          }}>
-          <div css={{ color: '#fff', margin: '14px 0', background: 'url("/images/img-bg-event-duration.png") no-repeat', backgroundSize: 'cover',  fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
-            <StaticImage
-              src="../../images/img-star@3x.png"
-              width={35}
-              height={36}
-              placeholder="none"
-              style={{ position: 'absolute',left: -14, top: -25 }}
-            />
-              {localizedMessages['eventDuration']}: {localizedMessages['eventStartAt']} ~ {localizedMessages['eventEndAt']}
-            </div>
-            <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
-              <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <span css={{ marginBottom: '8px', fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#9FD33A', borderRadius: '5px', color: '#fff' }}>
-                  {localizedMessages['eventPrize1Winners']}
-                </span>
-                <div css={{ fontWeight: 700, fontSize: '20px', whiteSpace: 'pre', paddingTop: '4px' }}>
-                  <div css={{ lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
-                    <div css={{ fontSize: '22px', lineHeidht: '21px' }}>
-                      {localizedMessages['eventPrize1Name']}
+                {localizedMessages['eventDuration']}: {localizedMessages['eventStartAt']} ~ {localizedMessages['eventEndAt']}
+              </div>
+              <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
+                <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span css={{ marginBottom: '8px', fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#9FD33A', borderRadius: '5px', color: '#fff' }}>
+                    {localizedMessages['eventPrize1Winners']}
+                  </span>
+                  <div css={{ fontWeight: 700, fontSize: '20px', whiteSpace: 'pre', paddingTop: '4px' }}>
+                    <div css={{ lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
+                      <div css={{ fontSize: '22px', lineHeidht: '21px' }}>
+                        {localizedMessages['eventPrize1Name']}
+                      </div>
+                      <span css={{ fontWeight: 400, fontSize: '14px', color: '#a6a6a6' }}>
+                        {localizedMessages['eventPrize1Sub']}
+                      </span>
                     </div>
-                    <span css={{ fontWeight: 400, fontSize: '14px', color: '#a6a6a6' }}>
-                      {localizedMessages['eventPrize1Sub']}
-                    </span>
                   </div>
                 </div>
+                <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <StaticImage 
+                    src="../../images/img-event-reward-1@3x.png"
+                    width={120} height={87} 
+                    placeholder="none"
+                  />
+                </div>
               </div>
-              <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <StaticImage 
-                  src="../../images/img-event-reward-1@3x.png"
-                  width={120} height={87} 
-                  placeholder="none"
-                />
+              <div css={{ borderBottom: '1px solid #F3F3F3', padding: '16px 0', display: 'flex' }}>
+                <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
+                    {localizedMessages['eventPrize2Winners']}
+                  </span>
+                  <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
+                    {localizedMessages['eventPrize2Name']}
+                  </p>
+                </div>
+                <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <StaticImage 
+                    src="../../images/img-event-reward-2@3x.png"
+                    width={100} height={100} 
+                    placeholder="none"
+                  />
+                </div>
               </div>
-            </div>
-            <div css={{ borderBottom: '1px solid #F3F3F3', padding: '16px 0', display: 'flex' }}>
-              <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
-                  {localizedMessages['eventPrize2Winners']}
-                </span>
-                <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
-                  {localizedMessages['eventPrize2Name']}
-                </p>
+              <div css={{ padding: '16px 0', display: 'flex' }}>
+                <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
+                    {localizedMessages['eventPrize3Winners']}
+                  </span>
+                  <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
+                    {localizedMessages['eventPrize3Name']}
+                  </p>
+                </div>
+                <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <StaticImage 
+                    src="../../images/img-event-reward-3@3x.png"
+                    width={104} height={65} 
+                    placeholder="none"
+                  />
+                </div>
               </div>
-              <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <StaticImage 
-                  src="../../images/img-event-reward-2@3x.png"
-                  width={100} height={100} 
-                  placeholder="none"
-                />
+              <div css={{ color: '#C8C8C8', textAlign: 'center', fontSize: '11px', fontWeight: 400, lineHeight: '16px', paddingBottom: '8px', whiteSpace: 'pre-wrap' }}>
+                {localizedMessages['participantsDisclaimer']}
               </div>
-            </div>
-            <div css={{ padding: '16px 0', display: 'flex' }}>
-              <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <span css={{ marginBottom: '8px',fontWeight: 700, fontSize: '17px', textAlign: 'center', display: 'inline-block', minWidth: '42px', padding: '0 15px', background: '#FFDA5F', borderRadius: '5px', color: '#fff' }}>
-                  {localizedMessages['eventPrize3Winners']}
-                </span>
-                <p css={{ fontWeight: 700, fontSize: '15px', lineHeight: '20px', whiteSpace: 'pre-wrap' }}>
-                  {localizedMessages['eventPrize3Name']}
-                </p>
+              <div css={{ fontWeight: 700, textAlign: 'center', fontSize: '18px', marginTop: '10px', padding: '5px 0' }}>
+                <div>
+                  <span style={{
+                    background: 'rgba(253, 203, 39, 0.8)',
+                    color: 'transparent',
+                    borderRadius: '5px',
+                    marginTop: '-20px',
+                    padding: '0 4px',
+                    display: 'inline-block',
+                    height: 18,
+                    lineHeight: 0
+                  }}>{localizedMessages['eventParticipationText']}</span>
+                </div>
+                <div style={{ marginTop: '-28px' }}>
+                  {localizedMessages['eventParticipationText']}
+                </div>
               </div>
-              <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <StaticImage 
-                  src="../../images/img-event-reward-3@3x.png"
-                  width={104} height={65} 
-                  placeholder="none"
-                />
-              </div>
-            </div>
-            <div css={{ color: '#C8C8C8', textAlign: 'center', fontSize: '11px', fontWeight: 400, lineHeight: '16px', paddingBottom: '8px', whiteSpace: 'pre-wrap' }}>
-              {localizedMessages['participantsDisclaimer']}
-            </div>
-            <div css={{ fontWeight: 700, textAlign: 'center', fontSize: '18px', marginTop: '10px', padding: '5px 0' }}>
-              <div>
-                <span style={{
-                  background: 'rgba(253, 203, 39, 0.8)',
-                  color: 'transparent',
-                  borderRadius: '5px',
-                  marginTop: '-20px',
-                  padding: '0 4px',
-                  display: 'inline-block',
-                  height: 18,
-                  lineHeight: 0
-                }}>{localizedMessages['eventParticipationText']}</span>
-              </div>
-              <div style={{ marginTop: '-28px' }}>
-                {localizedMessages['eventParticipationText']}
-              </div>
-            </div>
-            <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '22px', fontWeight: 400, textAlign: 'center' }}>
-              {localizedMessages['eventParticipationDescription']}
-            </p>
-            <div css={{
-              display: 'flex',
-              margin: '12px 0',
-              height: '50px',
-              width: '100%',
-            }}>
+              <p className="participation-description" css={{ whiteSpace: 'pre-wrap', fontSize: '14px', lineHeight: '22px', fontWeight: 400, textAlign: 'center' }}>
+                {localizedMessages['eventParticipationDescription']}
+              </p>
               <div css={{
                 display: 'flex',
-                flex: 1,
-                borderRadius: '15px 5px 5px 15px',
-                background: '#F3F1EC',
+                margin: '12px 0',
+                height: '50px',
+                width: '100%',
               }}>
-                <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
-                  {localizedMessages['eventHashtagsRich']}
-                </span>
+                <div css={{
+                  display: 'flex',
+                  flex: 1,
+                  borderRadius: '15px 5px 5px 15px',
+                  background: '#F3F1EC',
+                }}>
+                  <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
+                    {localizedMessages['eventHashtagsRich']}
+                  </span>
+                </div>
+                <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
+                  {localizedMessages['eventCopyText']}
+                </Button>
               </div>
-              <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
-                {localizedMessages['eventCopyText']}
-              </Button>
+              <ReactMarkdown className="notices">
+                {localizedMessages['eventNotices']}
+              </ReactMarkdown>
             </div>
-            <ReactMarkdown className="notices">
-              {localizedMessages['eventNotices']}
-            </ReactMarkdown>
-          </div>
-        </EventArea>
+          </EventArea>
+        )}
 
-        <CommunityEventBanner>
-          <GatsbyImage image={eventImageData} alt="" 
-            width={320}
-            height={320}
-          />
-        </CommunityEventBanner>
+        {eventVisible && (
+          <CommunityEventBanner>
+            <GatsbyImage image={eventImageData} alt="" 
+              width={320}
+              height={320}
+            />
+          </CommunityEventBanner>
+        )}
 
         <StyledButton onClick={restart}>
           {localizedMessages['resultRetest']}
@@ -439,8 +491,44 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   );
 }
 
+const ShareTools = ({ lang, url, onShare }) => {
+  const increseShareCount = async (tool) => {
+    try {
+      const { data } = await axios.put(`${process.env.GATSBY_API_HOST}/counter/share/${tool}`);
+      onShare(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const kakaotalk = <KakaotalkShareButton url={url} />;
+  const line = <LineShareButton url={url} />;
+  const twitter = <TwitterShareButton url={url} />;
+  const fb = <FacebookShareButton url={url} />;
+  const copy = <LinkShareButton url={url} />;
+  const wechat = <WechatShareButton url={url} />;
+  const qq = <QQShareButton url={url} />;
+  const weibo = <WeiboShareButton url={url} />;
+
+  let tools;
+  if (lang === 'ko') {
+    tools = [kakaotalk, twitter, fb, copy];
+  } else if (lang === 'zh') {
+    tools = [line, fb, copy];
+  } else if (lang === 'zh-Hans') {
+    tools = [wechat, qq, weibo, copy];
+  } else if (lang === 'tw') {
+    tools = [line, fb, copy];
+  } else if (lang === 'ja') {
+    tools = [line, twitter, fb, copy];
+  } else {
+    tools = [twitter, fb, copy];
+  }
+ 
+  return <>{tools}</>
+}
+
 const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, resultImage, peopleTypeImages, banner }, location }) => {
-  console.log(location);
   return (
     <ResultMain 
       lang={langKey} 
@@ -451,7 +539,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
       resultImage={resultImage} 
       peopleTypeImages={peopleTypeImages}
       banner={banner}
-      fromQuestion={!!window.history?.state?.fromQuestion}
+      fromQuestion={!!location?.state?.fromQuestion}
     />
   );
 }

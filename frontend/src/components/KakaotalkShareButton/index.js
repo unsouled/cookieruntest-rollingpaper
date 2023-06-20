@@ -29,12 +29,12 @@ const Wrapper = makeAsyncScriptLoader(scriptUrl)(KakaotalkShareButton);
 export default (props) => {
   useEffect(() => {
     return () => {
-      window.Kakao.cleanup();
+      // window.Kakao.cleanup();
     }
   });
   return (
     <Wrapper asyncScriptOnLoad={() => {
-        window.Kakao.init(process.env.GATSBY_KAKAO_KEY);
+      // window.Kakao.init(process.env.GATSBY_KAKAO_KEY);
     }} />
   );
 }
