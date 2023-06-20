@@ -19,9 +19,11 @@ import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 import parseISO from 'date-fns/parseISO'
 import isBefore from 'date-fns/isBefore';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const sf = function(s, args) {
+  if (!s) {
+    return '';
+  }
   let formatted = s;
   for (const arg in args) {
     formatted = formatted.replace("{" + arg + "}", args[arg]);
@@ -555,7 +557,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
 }
 
 export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKey } }) => {
-  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'ZhHans'}`;
+  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
   const ogImageUrl = ogImage[fieldName].formats.large.url;
   return (
     <>

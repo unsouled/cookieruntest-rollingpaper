@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const sf = function(s, args) {
   let formatted = s;
@@ -195,9 +196,11 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
           <StartButton onClick={handleStart}>
             {localizedMessages['startText']}
           </StartButton>
-          <CopyButton>
-            {localizedMessages['copyLinkText']}
-          </CopyButton>
+          <CopyToClipboard text={process.env.GATSBY_HOST}>
+            <CopyButton>
+              {localizedMessages['copyLinkText']}
+            </CopyButton>
+          </CopyToClipboard>
         </Buttons>
       </Main>
     </CustomLayout>

@@ -13,6 +13,9 @@ export const query = graphql`
             analyzingText
             analyzingTextRich
 						locale
+            metaTitle
+            metaDescriptionEvent
+            metaDescription
 					}
 				}
 			}
@@ -130,6 +133,50 @@ export const query = graphql`
         }
       }
     }
+    strapiOgImage {
+      en {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      ko {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      ja {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      th {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      zh {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      zhHans {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -164,12 +211,20 @@ const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion =
   );
 }
 
-export const Head = ({ pageContext: { langKey } }) => (
-  <>
-    <html lang={langKey} />
-    <title>Cookierun</title>
-    <body className={`lang-${langKey}`} />
-  </>
-);
+export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }, pageContext: { langKey } }) => {
+	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'ZhHans'}`;
+  const ogImage = strapiOgImage[fieldName].formats.large.url;
+  return (
+    <>
+      <html lang={langKey} />
+      <meta name="description" content={messages['metaDescriptionEvent']} />
+      <meta name="og:title" content={messages['metaTitle']} />
+      <meta name="og:image" content={ogImage} />
+      <title>{messages['metaTitle']}</title>
+      <body className={`lang-${langKey} question`} />
+    </>
+  );
+}
 
 export default QuestionPage;
