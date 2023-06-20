@@ -72,6 +72,9 @@ exports.createPages = async ({ graphql, actions }) => {
               couponSentRich
               couponGameName
               couponLink
+              metaResultTitle
+              metaDescriptionEvent
+              metaDescription
             }
           }
         }
@@ -142,6 +145,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allStrapiResult {
         nodes {
           code
+          name
           bestMatch {
             localizations {
               data {
@@ -289,6 +293,50 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      strapiOgImage {
+        en {
+          formats {
+            large {
+              url
+            }
+          }
+        }
+        ko {
+          formats {
+            large {
+              url
+            }
+          }
+        }
+        ja {
+          formats {
+            large {
+              url
+            }
+          }
+        }
+        th {
+          formats {
+            large {
+              url
+            }
+          }
+        }
+        zh {
+          formats {
+            large {
+              url
+            }
+          }
+        }
+        zhHans {
+          formats {
+            large {
+              url
+            }
+          }
+        }
+      }
     }
   `);
   supportedLocales.forEach(langKey => {
@@ -296,6 +344,7 @@ exports.createPages = async ({ graphql, actions }) => {
       const hashedCode = hash(code); 
       const messages = data.strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
       const eventImage = data.strapiEventImage;
+      const ogImage = data.strapiOgImage;
       const resultImage = data.allStrapiResultImage.nodes.filter(({ code }) => code === hashedCode);
 
       const result = data.allStrapiResult.nodes.filter(({ code }) => code === hashedCode);
@@ -310,7 +359,7 @@ exports.createPages = async ({ graphql, actions }) => {
       actions.createPage({
         path: `${langKey}/result/${hashedCode}`,
         component: require.resolve(`./src/components/ResultMain/index.js`),
-        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages, banner },
+        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages, banner, ogImage },
       });
     });
   });

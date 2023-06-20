@@ -22,7 +22,8 @@ const strapiConfig = {
   singleTypes: [
     'event-image',
     'localized-message',
-    'logo-image'
+    'logo-image',
+    'og-image',
   ],
   remoteFileHeaders: {
     /**
@@ -38,7 +39,7 @@ const strapiConfig = {
 module.exports = {
   siteMetadata: {
     title: `Cookierun Rollingpaper`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://cookieruntest.com`
   },
   plugins: [
     {

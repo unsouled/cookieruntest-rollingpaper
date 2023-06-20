@@ -8,6 +8,12 @@ const StyledShareButton = styled(ShareButton)`
   background-size: 14px 17px;
 `;
 
-export default (props) => (
-  <StyledShareButton {...props} />
-);
+export default ({ url, onClick, ...props }) => {
+  const openShareWindow = (e) => {
+    onClick(e);
+    window.open(`http://connect.qq.com/widget/shareqq/index.html?url=${url}`, '_blank', 'toolbar=no,location=no,status=no,menubar=no,width=500,height=600');
+  };
+    return (
+      <StyledShareButton onClick={openShareWindow} {...props} />
+    );
+}

@@ -21,6 +21,14 @@ import parseISO from 'date-fns/parseISO'
 import isBefore from 'date-fns/isBefore';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+const sf = function(s, args) {
+  let formatted = s;
+  for (const arg in args) {
+    formatted = formatted.replace("{" + arg + "}", args[arg]);
+  }
+  return formatted;
+};
+
 const StyledButton = styled(Button)`
   height: 50px;
   margin: 7px 0;
@@ -492,7 +500,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 }
 
 const ShareTools = ({ lang, url, onShare }) => {
-  const increseShareCount = async (tool) => {
+  const increaseShareCount = async (tool) => {
     try {
       const { data } = await axios.put(`${process.env.GATSBY_API_HOST}/counter/share/${tool}`);
       onShare(data);
@@ -501,14 +509,20 @@ const ShareTools = ({ lang, url, onShare }) => {
     }
   };
 
-  const kakaotalk = <KakaotalkShareButton url={url} />;
-  const line = <LineShareButton url={url} />;
-  const twitter = <TwitterShareButton url={url} />;
-  const fb = <FacebookShareButton url={url} />;
-  const copy = <LinkShareButton url={url} />;
-  const wechat = <WechatShareButton url={url} />;
-  const qq = <QQShareButton url={url} />;
-  const weibo = <WeiboShareButton url={url} />;
+  const kakaotalk = <KakaotalkShareButton url={url} onClick={() => increaseShareCount('kakaotalk')} />;
+  const line = <LineShareButton url={url} onClick={() => increaseShareCount('line')} />;
+  const twitter = <TwitterShareButton url={url} onClick={() => increaseShareCount('twitter')} />;
+  const fb = <FacebookShareButton url={url} onClick={() => increaseShareCount('fb')} />;
+  const copy = <LinkShareButton url={url} onClick={() => increaseShareCount('copy')} onCopy={() => {
+    alert('Copied');
+  }} />;
+  const wechat = <WechatShareButton url={url} onClick={() => increaseShareCount('wechat')} />;
+  const qq = <QQShareButton url={url} onClick={() => increaseShareCount('qq')} />;
+  const weibo = <WeiboShareButton url={url} onClick={() => increaseShareCount('weibo')} />;
+  
+  return [
+    kakaotalk, line, twitter, fb, copy, wechat, qq, weibo
+  ];
 
   let tools;
   if (lang === 'ko') {
@@ -517,7 +531,7 @@ const ShareTools = ({ lang, url, onShare }) => {
     tools = [line, fb, copy];
   } else if (lang === 'zh-Hans') {
     tools = [wechat, qq, weibo, copy];
-  } else if (lang === 'tw') {
+  } else if (lang === 'th') {
     tools = [line, fb, copy];
   } else if (lang === 'ja') {
     tools = [line, twitter, fb, copy];
@@ -544,12 +558,19 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
   );
 }
 
-export const Head = ({ pageContext: { langKey } }) => (
-  <>
-    <html lang={langKey} />
-    <title>Cookierun</title>
-    <body className={`lang-${langKey}`} />
-  </>
-);
+export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKey } }) => {
+  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'ZhHans'}`;
+  const ogImageUrl = ogImage[fieldName].formats.large.url;
+  return (
+    <>
+      <html lang={langKey} />
+      <meta name="description" content={localizedMessages['metaDescriptionEvent']} />
+      <meta name="og:title" content={sf(localizedMessages['metaResultTitle'], { name: result['name'] })} />
+      <meta name="og:image" content={ogImageUrl} />
+      <title>{sf(localizedMessages['metaResultTitle'], { name: result['name'] })}</title>
+      <body className={`lang-${langKey}`} />
+      </>
+  );
+}
 
 export default ResultPage;

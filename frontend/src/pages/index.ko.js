@@ -28,9 +28,56 @@ export const query = graphql`
 						selectLanguageText
 						copyright
 						locale
+            metaTitle
+            metaDescriptionEvent
+            metaDescription
 					}
 				}
 			}
+    }
+    strapiOgImage {
+      en {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      ko {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      ja {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      th {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      zh {
+        formats {
+          large {
+            url
+          }
+        }
+      }
+      zhHans {
+        formats {
+          large {
+            url
+          }
+        }
+      }
     }
     strapiBannerImage {
       smallEn {
@@ -75,7 +122,7 @@ export const query = graphql`
           }
         }
       }
-          bigEn {
+      bigEn {
         localFile {
           childImageSharp {
             gatsbyImageData
@@ -126,13 +173,10 @@ const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {}
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
-  const fieldName = `small${langKey !== 'zh-hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+  const fieldName = `small${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
   const banner = strapiBannerImage[fieldName];
 
 	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
-  console.log(messages);
-  console.log(strapiBannerImage);
-  console.log(fieldName);
 
   return (
     <LocalizedMessageContext.Provider value={messages}>
@@ -144,10 +188,18 @@ const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {}
 
 export default IndexPage;
 
-export const Head = ({ pageContext: { langKey } }) => (
-  <>
-    <html lang={langKey} />
-    <title>Cookierun</title>
-    <body className={`lang-${langKey} index`} />
-  </>
-);
+export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }, pageContext: { langKey } }) => {
+	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;
+  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'ZhHans'}`;
+  const ogImage = strapiOgImage[fieldName].formats.large.url;
+  return (
+    <>
+      <html lang={langKey} />
+      <meta name="description" content={messages['metaDescriptionEvent']} />
+      <meta name="og:title" content={messages['metaTitle']} />
+      <meta name="og:image" content={ogImage} />
+      <title>{messages['metaTitle']}</title>
+      <body className={`lang-${langKey} index`} />
+    </>
+  );
+}

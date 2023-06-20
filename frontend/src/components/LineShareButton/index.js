@@ -7,6 +7,13 @@ const StyledShareButton = styled(ShareButton)`
   background-size: 20px 20px;
 `;
 
-export default (props) => (
-  <StyledShareButton {...props} />
-);
+export default ({ url, onClick, ...props }) => {
+  const openShareWindow = (e) => {
+    onClick(e);
+    window.open(`https://social-plugins.line.me/lineit/share?url=${url}`, '_blank', 'toolbar=no,location=no,status=no,menubar=no,width=500,height=600');
+  };
+
+  return (
+    <StyledShareButton onClick={openShareWindow} {...props} />
+  );
+}
