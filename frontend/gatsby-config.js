@@ -38,8 +38,12 @@ const strapiConfig = {
 
 module.exports = {
   siteMetadata: {
-    title: `Cookierun Rollingpaper`,
-    siteUrl: `https://cookieruntest.com`
+    title: `Cookie Run Test`,
+    description: ``,
+    author: 'DEVSISTERS',
+    languages: ['ko', 'en', 'th', 'zh', 'ja'],
+    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    copyright:  '© 2022 DEVSISTERS Corp. All Rights Reserved.'
   },
   plugins: [
     {
@@ -79,7 +83,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        'icon': 'src/images/icon.png'
+        'icon': 'src/images/img-icon-cro.png'
       }
     },
     {
@@ -88,6 +92,6 @@ module.exports = {
         langKeyDefault: 'ko',
         useLangKeyLayout: false
       },
-    }
+    },
   ]
 };

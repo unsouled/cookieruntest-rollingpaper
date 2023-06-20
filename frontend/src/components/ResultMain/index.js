@@ -520,10 +520,6 @@ const ShareTools = ({ lang, url, onShare }) => {
   const qq = <QQShareButton url={url} onClick={() => increaseShareCount('qq')} />;
   const weibo = <WeiboShareButton url={url} onClick={() => increaseShareCount('weibo')} />;
   
-  return [
-    kakaotalk, line, twitter, fb, copy, wechat, qq, weibo
-  ];
-
   let tools;
   if (lang === 'ko') {
     tools = [kakaotalk, twitter, fb, copy];
