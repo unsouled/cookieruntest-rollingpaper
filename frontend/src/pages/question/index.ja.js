@@ -219,8 +219,14 @@ export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }
     <>
       <html lang={langKey} />
       <meta name="description" content={messages['metaDescriptionEvent']} />
+      <meta name="og:url" content={process.env.GATSBY_HOST} />
       <meta name="og:title" content={messages['metaTitle']} />
       <meta name="og:image" content={ogImage} />
+      <meta name="og:type" content="website" />
+      <meta name="twitter:title" content={messages['metaTitle']} />
+      <meta name="twitter:description" content={messages['metaDescriptionEvent']} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image:src" content={ogImage} />
       <title>{messages['metaTitle']}</title>
       <body className={`lang-${langKey} question`} />
     </>

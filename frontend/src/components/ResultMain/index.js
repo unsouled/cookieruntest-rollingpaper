@@ -559,13 +559,20 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
 export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKey } }) => {
   const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
   const ogImageUrl = ogImage[fieldName].formats.large.url;
+  const title = sf(localizedMessages['metaResultTitle'], { name: result['name'] });
   return (
     <>
       <html lang={langKey} />
       <meta name="description" content={localizedMessages['metaDescriptionEvent']} />
-      <meta name="og:title" content={sf(localizedMessages['metaResultTitle'], { name: result['name'] })} />
+      <meta name="og:url" content={process.env.GATSBY_HOST} />
+      <meta name="og:title" content={title} />
       <meta name="og:image" content={ogImageUrl} />
-      <title>{sf(localizedMessages['metaResultTitle'], { name: result['name'] })}</title>
+      <meta name="og:type" content="website" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={localizedMessages['metaDescriptionEvent']} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image:src" content={ogImageUrl} />
+      <title>{title}</title>
       <body className={`lang-${langKey}`} />
       </>
   );
