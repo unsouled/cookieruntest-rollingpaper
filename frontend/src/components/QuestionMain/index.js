@@ -249,7 +249,7 @@ const QuestionMain = ({ lang, banner, questions }) => {
 
   return (
     <Layout>
-      <Banner>
+      <Banner onClick={() => window.location.href='https://ckie.run/test '}>
         <GatsbyImage image={bannerImageData} width="100%" height="100%" />
       </Banner>
       <Main>

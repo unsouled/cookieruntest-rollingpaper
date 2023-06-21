@@ -10,8 +10,15 @@ const StyledShareButton = styled(ShareButton)`
 
 const scriptUrl = 'https://developers.kakao.com/sdk/js/kakao.min.js';
 const KakaotalkShareButton = ({ onClick, isScriptLoaded, isScriptLoadSucceed, url, templateId, templateArgs, children, ...rest }) => {
+  useEffect(() => {
+    return () => {
+      window.Kakao.cleanup();
+    }
+  }, []);
   return (
     <StyledShareButton style={{ border: 0, verticalAlign: 'top', padding: 0 }} onClick={(e) => {
+      console.log(window.Kakao);
+      console.log(process.env.GATSBY_KAKAO_KEY);
       window.Kakao.Link.sendScrap({
         requestUrl: url,
         templateId,
@@ -27,14 +34,9 @@ const KakaotalkShareButton = ({ onClick, isScriptLoaded, isScriptLoadSucceed, ur
 const Wrapper = makeAsyncScriptLoader(scriptUrl)(KakaotalkShareButton);
 
 export default (props) => {
-  useEffect(() => {
-    return () => {
-      // window.Kakao.cleanup();
-    }
-  });
   return (
     <Wrapper asyncScriptOnLoad={() => {
-      // window.Kakao.init(process.env.GATSBY_KAKAO_KEY);
+      window.Kakao.init(process.env.GATSBY_KAKAO_KEY);
     }} />
   );
 }

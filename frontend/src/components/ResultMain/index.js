@@ -16,6 +16,7 @@ import QQShareButton from '/src/components/QQShareButton';
 import Button from '/src/components/Button';
 import CouponModal from '/src/components/CouponModal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import parseISO from 'date-fns/parseISO'
 import isBefore from 'date-fns/isBefore';
@@ -271,7 +272,10 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
           <BestCookie>
             {localizedMessages['resultBestMatch']}
             <PeopleImage>
-              <GatsbyImage image={bestMatchImage} alt="" 
+              <GatsbyImage 
+                css={{ borderRadius: 5 }}
+                image={bestMatchImage} 
+                alt="" 
                 width={155}
                 height={165}
               />
@@ -284,7 +288,10 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
           <WorstCookie>
             {localizedMessages['resultWorstMatch']}
             <PeopleImage>
-              <GatsbyImage image={worstMatchImage} alt="" 
+              <GatsbyImage 
+                css={{ borderRadius: 5 }}
+                image={worstMatchImage}
+                alt="" 
                 width={155}
                 height={165}
               />
@@ -314,10 +321,12 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
             </span>
           </div>
 
-
           <ShareTools 
+            code={code}
             lang={lang} 
             url={shareUrl} 
+            localizedMessages={localizedMessages}
+            ogImage={ogImage}
             onShare={(count) => setShareCounter(count)}
           />
         </ResultShare>
@@ -450,9 +459,12 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                     {localizedMessages['eventHashtagsRich']}
                   </span>
                 </div>
-                <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
-                  {localizedMessages['eventCopyText']}
-                </Button>
+
+                <CopyToClipboard text={localizedMessages['eventHashtags']}>
+                  <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
+                    {localizedMessages['eventCopyText']}
+                  </Button>
+                </CopyToClipboard>
               </div>
               <ReactMarkdown className="notices">
                 {localizedMessages['eventNotices']}
@@ -501,7 +513,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   );
 }
 
-const ShareTools = ({ lang, url, onShare }) => {
+const ShareTools = ({ lang, code, url, onShare, localizedMessages, ogImage }) => {
   const increaseShareCount = async (tool) => {
     try {
       const { data } = await axios.put(`${process.env.GATSBY_API_HOST}/counter/share/${tool}`);
@@ -511,7 +523,17 @@ const ShareTools = ({ lang, url, onShare }) => {
     }
   };
 
-  const kakaotalk = <KakaotalkShareButton url={url} onClick={() => increaseShareCount('kakaotalk')} />;
+  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
+  const ogImageUrl = ogImage[fieldName].formats.large.url;
+  const kakaotalk = 
+    <KakaotalkShareButton url={url}  templateId={78262} templateArgs={{
+        'TITLE': localizedMessages['metaResultTitle'],
+        'DESCRIPTION': localizedMessages['metaDescriptionEvent'],
+        'THU': ogImageUrl,
+        'PATH': `${lang}/result/${code}`
+      }}
+      onClick={() => increaseShareCount('kakaotalk')} 
+    />;
   const line = <LineShareButton url={url} onClick={() => increaseShareCount('line')} />;
   const twitter = <TwitterShareButton url={url} onClick={() => increaseShareCount('twitter')} />;
   const fb = <FacebookShareButton url={url} onClick={() => increaseShareCount('fb')} />;
@@ -540,7 +562,7 @@ const ShareTools = ({ lang, url, onShare }) => {
   return <>{tools}</>
 }
 
-const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, resultImage, peopleTypeImages, banner }, location }) => {
+const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, ogImage, resultImage, peopleTypeImages, banner }, location }) => {
   return (
     <ResultMain 
       lang={langKey} 

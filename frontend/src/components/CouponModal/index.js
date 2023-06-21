@@ -43,7 +43,7 @@ const customStyles = {
     textAlign: 'center',
     padding: '30px 20px',
     transform: 'translate(-50%, -50%)',
-    background: 'rgba(28, 28, 30, 0.6)',
+    background: 'rgba(28, 28, 30, 0.7)',
   }
 };
 
