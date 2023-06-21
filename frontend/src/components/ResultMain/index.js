@@ -171,7 +171,7 @@ const Copyright = styled.div`
 const Banner = styled.div`
   background: #6B3F17;
   min-height: 400px;
-  margin: 0 -24px;
+  margin: 0 -30px;
 `;
 
 const ResultShare = styled.div`
@@ -194,7 +194,7 @@ function numberFormat(num) {
   }
 }
 
-const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, banner, fromQuestion }) => {
+const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, ogImage, banner, fromQuestion }) => {
   const [shareCounter, setShareCounter] = useState(0);
   const [modalOpen, setModalOpen] = useState(lang !== 'zh-Hans' && fromQuestion);
   const [eventVisible, setEventVisible] = useState(false);
@@ -523,7 +523,7 @@ const ShareTools = ({ lang, code, url, onShare, localizedMessages, ogImage }) =>
     }
   };
 
-  const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
+  const fieldName = `${lang !== 'zh-Hans' ? lang : 'zhHans'}`;
   const ogImageUrl = ogImage[fieldName].formats.large.url;
   const kakaotalk = 
     <KakaotalkShareButton url={url}  templateId={78262} templateArgs={{
@@ -574,6 +574,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
       peopleTypeImages={peopleTypeImages}
       banner={banner}
       fromQuestion={!!location?.state?.fromQuestion}
+      ogImage={ogImage}
     />
   );
 }
