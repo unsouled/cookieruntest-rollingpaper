@@ -248,7 +248,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 				messages={localizedMessages}
 			/>
       <Main>
-        <Banner>
+        <Banner onClick={() => window.location.href='https://ckie.run/test '}>
           <GatsbyImage image={bannerImageData} width="100%" height="100%" />
         </Banner>
         <RollingPaper>

@@ -18,7 +18,7 @@ const Main = styled.main`
 `;
 
 const Background = styled.div`
-  width: 360px;
+  max-width: 380px;
   position: absolute;
   padding: 0;
   margin: 0 auto;
@@ -187,7 +187,7 @@ const QuestionMain = ({ lang, banner, questions }) => {
     return (
       <Layout>
         <Background>
-          <Banner>
+          <Banner onClick={() => window.location.href='https://ckie.run/test '}>
             <GatsbyImage image={bannerImageData} width="100%" height="100%" />
           </Banner>
           <StaticImage css={{ position: 'absolute', top: 303, left: 54, width: 63, height: 104 }}
