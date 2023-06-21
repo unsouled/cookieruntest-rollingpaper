@@ -324,6 +324,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
           <ShareTools 
             code={code}
             lang={lang} 
+            result={result}
             url={shareUrl} 
             localizedMessages={localizedMessages}
             ogImage={ogImage}
@@ -513,7 +514,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   );
 }
 
-const ShareTools = ({ lang, code, url, onShare, localizedMessages, ogImage }) => {
+const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogImage }) => {
   const increaseShareCount = async (tool) => {
     try {
       const { data } = await axios.put(`${process.env.GATSBY_API_HOST}/counter/share/${tool}`);
@@ -526,8 +527,8 @@ const ShareTools = ({ lang, code, url, onShare, localizedMessages, ogImage }) =>
   const fieldName = `${lang !== 'zh-Hans' ? lang : 'zhHans'}`;
   const ogImageUrl = ogImage[fieldName].formats.large.url;
   const kakaotalk = 
-    <KakaotalkShareButton url={url}  templateId={78262} templateArgs={{
-        'TITLE': localizedMessages['metaResultTitle'],
+    <KakaotalkShareButton url={url}  templateId={95239} templateArgs={{
+        'TITLE': sf(localizedMessages['metaResultTitle'], { name: result['name'] }),
         'DESCRIPTION': localizedMessages['metaDescriptionEvent'],
         'THU': ogImageUrl,
         'PATH': `${lang}/result/${code}`
