@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { navigate } from 'gatsby';
 import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
@@ -102,12 +103,23 @@ const CopyButton = styled(Button)`
 `;
 
 const IndexMain = ({ showModal, banner, lang = 'en' }) => {
+  const [counter, setCounter] = useState(0);
   const localizedMessages = useContext(LocalizedMessageContext) || {};
   const handleStart = () => {
     navigate(`/${lang}/question`);
   };
-
   const bannerImageData = getImage(banner?.localFile);
+  const fetchCounter = async () => {
+    try {
+      const { data } = await axios.get(`${process.env.GATSBY_API_HOST}/counter`);
+      setCounter(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    fetchCounter();
+  }, []);
 
   return (
     <CustomLayout>
@@ -143,8 +155,8 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
         <div css={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
           <StaticImage 
             css={{ position: 'absolute', top: 95, left: '-35px' }}
-            width={99}
-            height={117}
+            width={87}
+            height={99}
             src="../../images/img-cookie-1.png" 
             srcSet="../../images/img-cookie-1@3x.png 3x, ../../images/img-cookie-1@2x.png 2x" 
             alt=""
@@ -152,8 +164,8 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
           />
           <StaticImage 
             css={{ position: 'absolute', top: 195, right: '-35px' }}
-            width={83}
-            height={86}
+            width={95}
+            height={108}
             src="../../images/img-cookie-2.png" 
             srcSet="../../images/img-cookie-2@3x.png 3x, ../../images/img-cookie-2@2x.png 2x" 
             alt=""
@@ -196,7 +208,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
           <StartButton onClick={handleStart}>
             {localizedMessages['startText']}
           </StartButton>
-          <CopyToClipboard text={process.env.GATSBY_HOST}>
+          <CopyToClipboard text={process.env.GATSBY_HOST} onCopy={() => { alert(localizedMessages['alertCopied']) }}>
             <CopyButton>
               {localizedMessages['copyLinkText']}
             </CopyButton>

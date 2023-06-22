@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
@@ -204,6 +204,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   const [shareCounter, setShareCounter] = useState(0);
   const [modalOpen, setModalOpen] = useState(fromQuestion);
   const [eventVisible, setEventVisible] = useState(false);
+  const topRef = useRef();
 
   const fetchCounter = async () => {
     try {
@@ -213,6 +214,12 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView();
+    }
+  }, [topRef.current]);
 
   useEffect(() => {
     fetchCounter();
@@ -256,9 +263,13 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 			/>
       <Main>
         <Banner onClick={() => window.location.href='https://ckie.run/test '}>
-          <GatsbyImage image={bannerImageData} width="100%" height="100%" />
+          <GatsbyImage 
+            image={bannerImageData} 
+            width="100%" 
+            height="100%"
+          />
         </Banner>
-        <RollingPaper>
+        <RollingPaper ref={el => (topRef.current = el)}>
           <RollingPaperTitle>
             {localizedMessages['resultTitle']}
           </RollingPaperTitle>
@@ -367,7 +378,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                 placeholder="none"
                 style={{ position: 'absolute',left: -14, top: -25 }}
               />
-                {localizedMessages['eventDuration']}: {localizedMessages['eventStartAt']} ~ {localizedMessages['eventEndAt']}
+                {localizedMessages['eventDuration']}: {localizedMessages['eventStartAtText']} ~ {localizedMessages['eventEndAtText']}
               </div>
               <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
                 <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -467,7 +478,9 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                   </span>
                 </div>
 
-                <CopyToClipboard text={localizedMessages['eventHashtags']}>
+                <CopyToClipboard text={localizedMessages['eventHashtags']} onCopy={() => {
+                  alert(localizedMessages['alertCopied']);
+                }}>
                   <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
                     {localizedMessages['eventCopyText']}
                   </Button>
@@ -548,7 +561,7 @@ const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogIma
   const twitter = <TwitterShareButton url={url} onClick={() => increaseShareCount('twitter')} />;
   const fb = <FacebookShareButton url={url} onClick={() => increaseShareCount('fb')} />;
   const copy = <LinkShareButton url={url} onClick={() => increaseShareCount('copy')} onCopy={() => {
-    alert('Copied');
+    alert(localizedMessages['alertCopied']);
   }} />;
   const wechat = <WechatShareButton url={url} onClick={() => increaseShareCount('wechat')} />;
   const qq = <QQShareButton url={url} onClick={() => increaseShareCount('qq')} />;
@@ -573,6 +586,13 @@ const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogIma
 }
 
 const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, ogImage, resultImage, peopleTypeImages, banner }, location }) => {
+  useEffect(() => {
+    window.history.replaceState(location.pathname, null);
+    setTimeout(() => window.scrollTo(0, 423), 10);
+    return () => {
+    }
+  }, []);
+
   return (
     <ResultMain 
       lang={langKey} 

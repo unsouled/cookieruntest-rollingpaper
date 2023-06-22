@@ -16,10 +16,11 @@ const IdInput = styled.input`
   font-size: 24px;
   width: 100%;
   padding: 20px 12px;
+  font-weight: 700;
 
   ::placeholder {
     color: #D3CBC4;
-    fontWeight: 700;
+    font-weight: 700;
   }
 `;
 
@@ -53,7 +54,19 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
   const [userId, setUserId] = useState('');
   const claim = async () => {
     try {
-      const { data } = await axios.post('/');
+      const params = new URLSearchParams();
+      params.append('mid', userId);
+      params.append('event_id', '1');
+      params.append('reward_id', '3');
+      const { data } = await axios.post(`${process.env.GATSBY_API_HOST}/webevent/reward`);
+
+      if (!data.success) {
+        if (data['already_rewardead']) {
+          alert(localizedMessages['alertAlreadyReceived']);
+        } else {
+          alert(localizedMessages['alertInvalid']);
+        }
+      }
       setReceived(true);
     } catch {
       // todo invalid, duplicated 
@@ -175,7 +188,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                   }}
                 />
               </p>
-              <p style={{ fontSize: '12px', fontWeight: 700, textAlign: 'right', color: '#D3CBC4', margin: '5px 0' }}>
+              <p style={{ fontSize: '12px', fontWeight: 600, textAlign: 'right', color: '#D3CBC4', margin: '5px 0' }}>
                 {localizedMessages['couponMyInfo']}
               </p>
             </div>
@@ -200,10 +213,10 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             <div style={{ marginTop: '28px' }}>
               {received ? (
                 <div style={{ display: 'flex', position: 'absolute', left: 0, right: 0, justifyContent: 'center', alignItems: 'center' }}>
-                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
+                  <div onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
                     {localizedMessages['couponShowResult']}
-                  </a>
-                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
+                  </div>
+                  <div onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
                     <StaticImage 
                       loading="eager"
                       width={18}
@@ -213,14 +226,14 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                       placeholder="none"
                       alt="" 
                     />
-                  </a>
+                  </div>
                 </div>
               ) : (
                 <div style={{ display: 'flex', position: 'absolute', left: 0, right: 0, justifyContent: 'center', alignItems: 'center' }}>
-                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
+                  <div onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textDecoration: 'none', color: '#DCC9BA', marginRight: 12 }}>
                     {localizedMessages['couponTryLater']}
-                  </a>
-                  <a href="#" onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
+                  </div>
+                  <div onClick={onRequestClose} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'right', display: 'flex' }}>
                     <StaticImage 
                       loading="eager"
                       width={18}
@@ -230,7 +243,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                       placeholder="none"
                       alt="" 
                     />
-                  </a>
+                  </div>
                 </div>
               )}
             </div>

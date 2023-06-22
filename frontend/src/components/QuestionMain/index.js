@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { navigate } from 'gatsby';
+import axios from 'axios';
 import styled from '@emotion/styled';
+import Lottie from 'lottie-react';
 import { StaticImage, GatsbyImage, getImage } from 'gatsby-plugin-image';
 import Layout from '/src/components/Layout';
 import Button from '/src/components/Button';
 import hash from '/src/utils/hash';
+import animationData from '/src/animations/movie-loading.json';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 
 const Main = styled.main`
@@ -79,21 +82,16 @@ const colors = [
 ];
 
 const NoteWrapper = styled.div`
-  top: 203px;
   width: 164px;
   min-height: 100%;
   margin: 0 auto;
   position: relative;
-  margin-top: -25px;
-`;
-
-const Spring = styled.div`
-  background: url("/images/img-sketchbook@3x.png") no-repeat top center;
-  background-size: 142px 25px;
-  width: 163px;
-  height: 25px;
-  position: absolute;
-  top: 4px;
+  margin-top: -130px;
+  height: 180px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Note = styled.div`
@@ -115,14 +113,10 @@ const Note = styled.div`
   overflow: hidden;
 `;
 
-const Progress = ({ progress }) => (
-  <div css={{ paddingTop: 84, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <StaticImage
-      src="../../images/jelly-beans@3x.png"
-      placeholder="none"
-      width={304}
-      height={38}
-    />
+const Progress = ({ current, total }) => (
+  <div css={{ width: 304, paddingTop: 84, display: 'flex', margin: 'auto' }}>
+    <div css={{ width: 304 * current / total, height: 38, background: 'url("/images/jelly-beans@3x.png") no-repeat', backgroundSize: '304px 38px' }}>
+    </div>
   </div>
 );
 
@@ -137,17 +131,21 @@ const Analyzing = () => {
   }, [dotdotdot]);
   return (
     <div css={{ flexDirection: 'column', minHeight: '100%', display: 'flex' }}>
-      <NoteWrapper>
-        <Note>
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          autoplay={true}
+          isClickToPauseDisabled={true}
+          css={{width: '300px', height: '300px', position:'relative', top: 100, margin: '0 auto'}}
+        />
+       <NoteWrapper>
           <div css={{
             position: 'relative', whiteSpace: 'pre-wrap',
-            wordBreak: 'break-all', background: '#fff' 
+            wordBreak: 'break-all', background: '#red', fontWeight: 700
           }}>
             {localizedMessages['analyzingTextRich']}{dotdotdot}
           </div>
-        </Note>
-        <Spring />
-      </NoteWrapper>
+        </NoteWrapper>
     </div>
   );
 }
@@ -160,6 +158,9 @@ const QuestionMain = ({ lang, banner, questions }) => {
   }
   const currentQuestion = questions[currentQuestionIdx];
   const selectedAnswers = useRef({});
+  const increaseCounter = async () => {
+    await axios.put(`${process.env.GATSBY_API_HOST}/counter`);
+  }
   const wait = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   };
@@ -176,7 +177,12 @@ const QuestionMain = ({ lang, banner, questions }) => {
       abcd += (current['T'] || 0) > (current['F'] || 0) ? 'T' : 'F';
       abcd += (current['P'] || 0) > (current['J'] || 0) ? 'P' : 'J';
 
-      await wait(3900);
+      try { 
+        await Promise.all([increaseCounter(), wait(3900)]);
+      } catch(error) {
+        await wait(3900);
+        console.error(error);
+      } 
       navigate(`/${lang}/result/${hash(abcd)}`, { state: { fromQuestion: true } });
     }
   };
@@ -190,16 +196,6 @@ const QuestionMain = ({ lang, banner, questions }) => {
           <Banner onClick={() => window.location.href='https://ckie.run/test '}>
             <GatsbyImage image={bannerImageData} width="100%" height="100%" />
           </Banner>
-          <StaticImage css={{ position: 'absolute', top: 303, left: 54, width: 63, height: 104 }}
-            src="../../images/img-cookie-sketch2@3x.png"
-            srcSet="../../images/img-cookie-sketch2@3x.png 3x, ../../images/img-cookie-sketch2@2x.png 2x"
-            placeholder="none"
-          />
-          <StaticImage css={{ position: 'absolute', top: 305, right: 48, width: 91, height: 109 }}
-            src="../../images/img-cookie-sketch@3x.png"
-            srcSet="../../images/img-cookie-sketch@3x.png 3x,../../images/img-cookie-sketch@32.png 2x"
-            placeholder="none"
-          />
           <StaticImage css={{ position: 'absolute', top: 540, right: 65, width: 31, height: 31 }}
             src="../../images/img-bg-part1@3x.png"
             srcSet="../../images/img-bg-part1@3x.png 3x, ../../images/img-bg-part1@2x.png 2x"
@@ -253,7 +249,7 @@ const QuestionMain = ({ lang, banner, questions }) => {
         <GatsbyImage image={bannerImageData} width="100%" height="100%" />
       </Banner>
       <Main>
-        <Progress progress={100 * (currentQuestionIdx / questions.length)} />
+        <Progress current={currentQuestionIdx + 1} total={questions.length} />
         <Questions>
           <QuestionNumber color={colors[currentQuestionIdx]}>Q{currentQuestion.order}.</QuestionNumber> 
           <p css={{ fontWeight: 700, whiteSpace: 'pre-wrap' }}>

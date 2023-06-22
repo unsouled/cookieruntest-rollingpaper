@@ -17,6 +17,7 @@ export const query = graphql`
 				data {
 					id
 					attributes {
+            alertCopied
 						title
 						titleRich
 						description

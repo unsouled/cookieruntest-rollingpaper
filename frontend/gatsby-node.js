@@ -32,6 +32,7 @@ exports.createPages = async ({ graphql, actions }) => {
           data {
             attributes {
               locale
+              alertCopied
               alertInvalid
               alertAlreadyReceived
               eventCopyText
@@ -78,6 +79,8 @@ exports.createPages = async ({ graphql, actions }) => {
               metaResultTitle
               metaDescriptionEvent
               metaDescription
+              eventStartAtText
+              eventEndAtText
             }
           }
         }
