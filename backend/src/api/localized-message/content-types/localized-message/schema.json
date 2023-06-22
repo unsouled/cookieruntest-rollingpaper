@@ -283,7 +283,7 @@
           "localized": true
         }
       },
-      "type": "date"
+      "type": "datetime"
     },
     "eventPrize1Name": {
       "pluginOptions": {
@@ -526,6 +526,22 @@
       "type": "string"
     },
     "dot": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "eventStartAtText": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "eventEndAtText": {
       "pluginOptions": {
         "i18n": {
           "localized": true
