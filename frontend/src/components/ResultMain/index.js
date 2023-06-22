@@ -38,6 +38,12 @@ const StyledButton = styled(Button)`
   background: #FDCB27;
 `;
 
+const StyledLink = styled.a`
+  height: 50px;
+  margin: 7px 0;
+  background: #FDCB27;
+`;
+
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -196,7 +202,7 @@ function numberFormat(num) {
 
 const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, ogImage, banner, fromQuestion }) => {
   const [shareCounter, setShareCounter] = useState(0);
-  const [modalOpen, setModalOpen] = useState(lang !== 'zh-Hans' && fromQuestion);
+  const [modalOpen, setModalOpen] = useState(fromQuestion);
   const [eventVisible, setEventVisible] = useState(false);
 
   const fetchCounter = async () => {
@@ -486,7 +492,10 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
         <StyledButton onClick={restart}>
           {localizedMessages['resultRetest']}
         </StyledButton>
-        <StyledButton>
+
+        <StyledButton onClick={() => {
+          window.location.href = "https://www.dropbox.com/scl/fo/8gaamviknlzahv66kh5hc/h?dl=0&rlkey=olbtfvcu4eamxdci77y54hbo5";
+        }}>
           {localizedMessages['resultDownloadSticker']}
         </StyledButton>
 
@@ -583,7 +592,9 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
 export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKey } }) => {
   const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
   const ogImageUrl = ogImage[fieldName].formats.large.url;
-  const title = sf(localizedMessages['metaResultTitle'], { name: result['name'] });
+
+  const name = result.localizations.data.filter(({ attributes: { locale }}) => locale === langKey)[0].attributes.name;
+  const title = sf(localizedMessages['metaResultTitle'], { name: name });
   return (
     <>
       <html lang={langKey} />

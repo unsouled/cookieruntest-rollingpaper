@@ -32,6 +32,8 @@ exports.createPages = async ({ graphql, actions }) => {
           data {
             attributes {
               locale
+              alertInvalid
+              alertAlreadyReceived
               eventCopyText
               eventDescription
               eventDuration
@@ -66,6 +68,7 @@ exports.createPages = async ({ graphql, actions }) => {
               couponSent
               couponShowResult
               couponTryLater
+              participantsDisclaimer
               eventDescriptionRich
               eventHashtagsRich
               couponGiftReceivedRich
@@ -146,6 +149,14 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           code
           name
+          localizations {
+            data {
+              attributes {
+                locale
+                name
+              }
+            }
+          }
           bestMatch {
             localizations {
               data {
@@ -363,6 +374,4 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     });
   });
-
-
 }

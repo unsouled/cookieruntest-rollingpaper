@@ -130,7 +130,7 @@ const Analyzing = () => {
   const localizedMessages = useContext(LocalizedMessageContext) || {};
   const [dotdotdot, setDotDotDot] = useState('');
   useEffect(() => {
-      const interval = setTimeout(() => setDotDotDot(dotdotdot + '.'), 1300);
+      const interval = setTimeout(() => setDotDotDot(dotdotdot + localizedMessages['dot']), 1300);
       return () => {
         clearTimeout(interval);
       }
@@ -176,7 +176,7 @@ const QuestionMain = ({ lang, banner, questions }) => {
       abcd += (current['T'] || 0) > (current['F'] || 0) ? 'T' : 'F';
       abcd += (current['P'] || 0) > (current['J'] || 0) ? 'P' : 'J';
 
-      await wait(4000);
+      await wait(3900);
       navigate(`/${lang}/result/${hash(abcd)}`, { state: { fromQuestion: true } });
     }
   };
@@ -249,7 +249,7 @@ const QuestionMain = ({ lang, banner, questions }) => {
 
   return (
     <Layout>
-      <Banner onClick={() => window.location.href='https://ckie.run/test '}>
+      <Banner onClick={() => window.location.href='https://ckie.run/test'}>
         <GatsbyImage image={bannerImageData} width="100%" height="100%" />
       </Banner>
       <Main>

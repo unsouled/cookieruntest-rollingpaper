@@ -16,6 +16,7 @@ export const query = graphql`
             metaTitle
             metaDescriptionEvent
             metaDescription
+            dot
 					}
 				}
 			}

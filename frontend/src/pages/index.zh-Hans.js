@@ -173,7 +173,7 @@ const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {}
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
-  const fieldName = `small${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+  const fieldName = `small${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'zhHans'}`;
   const banner = strapiBannerImage[fieldName];
 
 	const messages = strapiLocalizedMessage.localizations.data.filter(({ attributes: { locale } }) => locale === langKey)[0].attributes;

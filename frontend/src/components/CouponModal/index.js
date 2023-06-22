@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Modal from 'react-modal';
@@ -49,6 +50,18 @@ const customStyles = {
 
 const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) => {
   const [received, setReceived] = useState(false);
+  const [userId, setUserId] = useState('');
+  const claim = async () => {
+    try {
+      const { data } = await axios.post('/');
+      setReceived(true);
+    } catch {
+      // todo invalid, duplicated 
+      alert(localizedMessages['alertInvalid']);
+      setUserId('');
+      setReceived(false);
+    }
+  }
 
   return (
     <Modal 
@@ -156,7 +169,11 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                 2023/06/27 - 2023/07/27
               </p>
               <p style={{ fontSize: '24px', color: '#D3CBC4', fontWeight: 700 }}>
-                <IdInput type="text" placeholder={localizedMessages['couponInputId']} />
+                <IdInput type="text" placeholder={localizedMessages['couponInputId']} 
+                  onChange={(e) => {
+                    setUserId(e.target.value);
+                  }}
+                />
               </p>
               <p style={{ fontSize: '12px', fontWeight: 700, textAlign: 'right', color: '#D3CBC4', margin: '5px 0' }}>
                 {localizedMessages['couponMyInfo']}
@@ -167,12 +184,15 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
           </div>
             <p style={{ width: '100%' }}>
             {received ? (
-              <Button style={{ width: '100%', background: 'url("/images/img-button-bg@3x.png") no-repeat', backgroundSize: 'cover', height: '75px', fontSize: '25px' }} onClick={() => setReceived(true)}>
+              <Button style={{ width: '100%', background: 'url("/images/img-button-bg@3x.png") no-repeat', backgroundSize: 'cover', height: '75px', fontSize: '25px' }} onClick={() => {
+                window.location.href = 'https://ckie.run/test';
+              }}>
                 <span style={{ fontSize: 19 }}>{localizedMessages['couponGameName']}</span><br />
                 <span style={{ fontSize: 25 }}>{localizedMessages['couponLink']}</span>
               </Button>
             ) : (
-              <Button style={{ width: '100%', background: 'url("/images/img-button-bg@3x.png") no-repeat', backgroundSize: 'cover', height: '75px', fontSize: '25px' }} onClick={() => setReceived(true)}>
+              <Button style={{ width: '100%', background: 'url("/images/img-button-bg@3x.png") no-repeat', backgroundSize: 'cover', height: '75px', fontSize: '25px' }} onClick={claim}
+                >
                 {localizedMessages['couponReceiveGift']}
               </Button>
             )}
@@ -212,7 +232,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                     />
                   </a>
                 </div>
-
               )}
             </div>
         </div>
