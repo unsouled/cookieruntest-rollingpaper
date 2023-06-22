@@ -4,7 +4,7 @@ import './index.css';
 export default function Layout({ children }) {
   return (
     <>
-      <div style={{ margin: `0 auto`, maxWidth: 380, height: '100%', padding: `0` }}>
+      <div style={{ margin: `0 auto`, maxWidth: 430, height: '100%', padding: `0` }}>
         {children}
       </div>
     </>

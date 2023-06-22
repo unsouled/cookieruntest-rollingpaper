@@ -21,7 +21,7 @@ const Main = styled.main`
 `;
 
 const Background = styled.div`
-  max-width: 380px;
+  max-width: 430px;
   position: absolute;
   padding: 0;
   margin: 0 auto;
@@ -31,7 +31,7 @@ const Background = styled.div`
 const Banner = styled.div`
   position: relative;
   z-index: 10;
-  margin: 0 -8px;
+  margin: 0;
   min-height: 70px;
 `;
 
@@ -187,7 +187,6 @@ const QuestionMain = ({ lang, banner, questions }) => {
     }
   };
   const bannerImageData = getImage(banner?.localFile);
-  console.log(bannerImageData);
 
   if (analyzing) {
     return (

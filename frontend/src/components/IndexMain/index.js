@@ -26,7 +26,7 @@ const languagesByLocale = {
 };
 
 const Banner = styled.div`
-  margin: 0 -8px;
+  margin: 0;
 `;
 
 const Title = styled.div`

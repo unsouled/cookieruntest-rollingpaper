@@ -175,9 +175,9 @@ const Copyright = styled.div`
 `;
 
 const Banner = styled.div`
+width: 100%;
   background: #6B3F17;
-  min-height: 400px;
-  margin: 0 -30px;
+  margin: 0;
 `;
 
 const ResultShare = styled.div`
@@ -261,16 +261,17 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 				onRequestClose={hideModal} 
 				messages={localizedMessages}
 			/>
+      <Banner onClick={() => window.location.href='https://ckie.run/test '}>
+        <GatsbyImage 
+        image={bannerImageData} 
+        width="100%" 
+        height="100%"
+      />
+      </Banner>
+
       <Main>
-        <Banner onClick={() => window.location.href='https://ckie.run/test '}>
-          <GatsbyImage 
-            image={bannerImageData} 
-            width="100%" 
-            height="100%"
-          />
-        </Banner>
-        <RollingPaper ref={el => (topRef.current = el)}>
-          <RollingPaperTitle>
+      <RollingPaper ref={el => (topRef.current = el)}>
+      <RollingPaperTitle>
             {localizedMessages['resultTitle']}
           </RollingPaperTitle>
           <RollingPaperDescription>
