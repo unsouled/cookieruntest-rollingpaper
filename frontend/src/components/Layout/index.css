@@ -674,7 +674,13 @@ html[lang="ja"] .participation-description {
 html[lang="ja"] .partner-name {
   font-size: 14px !important;
 }
-
+body.lang-en.index .xxx {
+  display: none;
+}
+body.lang-ja.index .xxx {
+  width: 40px;
+  opacity: 0;
+}
 body.lang-en.index .title {
   font-size: 30px !important;
 }
