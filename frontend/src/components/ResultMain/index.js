@@ -217,7 +217,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 
   useEffect(() => {
     if (topRef.current) {
-      topRef.current.scrollIntoView();
+      setTimeout(() => topRef.current.scrollIntoView(), 10);
     }
   }, [topRef.current]);
 
@@ -589,7 +589,6 @@ const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogIma
 const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, ogImage, resultImage, peopleTypeImages, banner }, location }) => {
   useEffect(() => {
     window.history.replaceState(location.pathname, null);
-    setTimeout(() => window.scrollTo(0, 423), 10);
     return () => {
     }
   }, []);

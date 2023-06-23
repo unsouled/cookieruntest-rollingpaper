@@ -94,8 +94,8 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             <StaticImage
               src="../../images/img-coin@3x.png"
               srcSet="../../images/img-coin@3x.png 3x,../../images/img-coin@2x.png 2x,../../images/img-coin.png 1x"
-              width={99}
-              height={99}
+              width={120}
+              height={137}
               placeholder="none"
               style={{ position: 'relative', left: -120, top: 20, zIndex: 10 }}
             />
@@ -121,7 +121,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               width={91}
               height={88}
               placeholder="none"
-              style={{ position: 'relative', left: -80, top: -260 }}
+              style={{ position: 'relative', left: -80, top: -320 }}
             />
             
             <StaticImage
@@ -130,7 +130,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               width={45}
               height={28}
               placeholder="none"
-              style={{ position: 'relative', right: -20, top: -220 }}
+              style={{ position: 'relative', right: -20, top: -280 }}
             />
             <StaticImage
               src="../../images/img-result-bg-part2@3x.png"
@@ -149,7 +149,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               style={{ position: 'relative', left: -156, top: 20 }}
             />
 
-            <div style={{ marginTop: -220 }}>
+            <div style={{ marginTop: -260 }}>
             {received ? (
               <div style={{ 
                 minHeight: '190px',
