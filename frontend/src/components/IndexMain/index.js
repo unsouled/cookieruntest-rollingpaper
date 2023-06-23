@@ -157,17 +157,17 @@ const IndexMain = ({ showModal, banner, lang = 'en', mid }) => {
       <Main>
         <div css={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
           <StaticImage 
-            css={{ position: 'absolute', top: 95, left: '-35px' }}
-            width={87}
-            height={99}
+            css={{ position: 'absolute', top: 95, left: '-55px' }}
+            width={112}
+            height={117}
             src="../../images/img-cookie-1@3x.png" 
             alt=""
             placeholder="none"
           />
           <StaticImage 
             css={{ position: 'absolute', top: 195, right: '-35px' }}
-            width={95}
-            height={108}
+            width={83}
+            height={86}
             src="../../images/img-cookie-2@3x.png" 
             alt=""
             placeholder="none"
