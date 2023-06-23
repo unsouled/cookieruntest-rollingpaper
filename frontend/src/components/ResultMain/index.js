@@ -227,12 +227,6 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   }
 
   useEffect(() => {
-    if (topRef.current) {
-      setTimeout(() => topRef.current.scrollIntoView(), 10);
-    }
-  }, [topRef.current]);
-
-  useEffect(() => {
     fetchCounter();
     setEventVisible(lang !== 'zh-Hans' && isBefore(new Date(), parseISO(localizedMessages['eventEndAt'])));
   }, [fetchCounter, setEventVisible, localizedMessages]);

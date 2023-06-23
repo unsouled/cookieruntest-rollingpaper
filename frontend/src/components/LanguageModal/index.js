@@ -67,7 +67,7 @@ const customStyles = {
   },
 };
 
-const LanguageModal = ({ isOpen, onRequestClose, lang }) => {
+const LanguageModal = ({ isOpen, onRequestClose, lang, mid }) => {
   const localizedMessages = useContext(LocalizedMessageContext) || {};
   return (
     <Modal 
@@ -94,12 +94,12 @@ const LanguageModal = ({ isOpen, onRequestClose, lang }) => {
         </Title>
 
         <LanguageSelector>
-          <LanguageSelectorItem selected={lang === 'ko'} onClick={() => { onRequestClose(); navigate('/ko'); }}>{languagesByLocale['ko']}</LanguageSelectorItem>
-          <LanguageSelectorItem selected={lang === 'en'} onClick={() => { onRequestClose(); navigate('/en'); }}>{languagesByLocale['en']}</LanguageSelectorItem>
-          <LanguageSelectorItem selected={lang === 'zh-Hans'} onClick={() => { onRequestClose(); navigate('/zh-Hans'); }}>{languagesByLocale['zh-Hans']}</LanguageSelectorItem>
-          <LanguageSelectorItem selected={lang === 'zh'} onClick={() => { onRequestClose(); navigate('/zh'); }}>{languagesByLocale['zh']}</LanguageSelectorItem>
-          <LanguageSelectorItem selected={lang === 'th'} onClick={() => { onRequestClose(); navigate('/th'); }}>{languagesByLocale['th']}</LanguageSelectorItem>
-          <LanguageSelectorItem selected={lang === 'ja'} onClick={() => { onRequestClose(); navigate('/ja'); }}>{languagesByLocale['ja']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'ko'} onClick={() => { onRequestClose(); navigate('/ko', { state: { mid } }); }}>{languagesByLocale['ko']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'en'} onClick={() => { onRequestClose(); navigate('/en', { state: { mid } }); }}>{languagesByLocale['en']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'zh-Hans'} onClick={() => { onRequestClose(); navigate('/zh-Hans', { state: { mid } }); }}>{languagesByLocale['zh-Hans']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'zh'} onClick={() => { onRequestClose(); navigate('/zh', { state: { mid } }); }}>{languagesByLocale['zh']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'th'} onClick={() => { onRequestClose(); navigate('/th', { state: { mid } }); }}>{languagesByLocale['th']}</LanguageSelectorItem>
+          <LanguageSelectorItem selected={lang === 'ja'} onClick={() => { onRequestClose(); navigate('/ja', { state: { mid } }); }}>{languagesByLocale['ja']}</LanguageSelectorItem>
         </LanguageSelector>
 
       </ModalContent>
