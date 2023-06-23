@@ -203,7 +203,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
         </div>
         <Buttons>
           <ParticipantsText>
-            {sf(localizedMessages['participantsText'], { participants: new Intl.NumberFormat(lang, { maximumSignificantDigits: 3 }).format(0) })}
+            {sf(localizedMessages['participantsText'], { participants: new Intl.NumberFormat(lang, { maximumSignificantDigits: 3 }).format(counter) })}
           </ParticipantsText>
           <StartButton onClick={handleStart}>
             {localizedMessages['startText']}
