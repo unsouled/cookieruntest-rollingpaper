@@ -175,8 +175,8 @@ const IndexMain = ({ showModal, banner, lang = 'en', mid }) => {
 
           <Description>
             <div>{localizedMessages['description1']}</div>
-            <div style={{ textAlign: 'left' }}>
-             <StaticImage 
+            <div className="description2" style={{ textAlign: 'left' }}>
+              <StaticImage 
                 className="xxx"
                 style={{ left: -10, top: -8, marginTop: 20, marginRight: 0, transform: 'rotate(8.29deg)' }}
                 width={77}

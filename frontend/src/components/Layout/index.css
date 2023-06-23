@@ -676,6 +676,9 @@ html[lang="ja"] .partner-name {
 }
 body.lang-en.index .xxx {
 }
+body.lang-en.index .description2 {
+  width: 260px;
+}
 body.lang-ja.index .xxx {
   width: 40px;
   opacity: 0;
