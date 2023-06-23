@@ -683,8 +683,13 @@ body.lang-ja.index .xxx {
   width: 40px;
   opacity: 0;
 }
-body.lang-en.index .title {
+body.lang-th.index .title {
   font-size: 30px !important;
+  line-height: 40px !important;
+}
+body.lang-en.index .title {
+  font-size: 31px !important;
+  line-height: 38px !important;
 }
 body.lang-en.result .hashtags {
   font-size: 11px !important;
