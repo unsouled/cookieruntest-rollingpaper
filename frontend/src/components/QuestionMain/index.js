@@ -150,7 +150,7 @@ const Analyzing = () => {
   );
 }
 
-const QuestionMain = ({ lang, banner, questions }) => {
+const QuestionMain = ({ lang, banner, questions, mid }) => {
   const [analyzing, setAnalyzing] = useState(false);
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const next = () => {
@@ -183,7 +183,7 @@ const QuestionMain = ({ lang, banner, questions }) => {
         await wait(3900);
         console.error(error);
       } 
-      navigate(`/${lang}/result/${hash(abcd)}`, { state: { fromQuestion: true } });
+      navigate(`/${lang}/result/${hash(abcd)}`, { state: { fromQuestion: true, mid } });
     }
   };
   const bannerImageData = getImage(banner?.localFile);

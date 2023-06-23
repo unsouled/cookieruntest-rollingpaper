@@ -200,7 +200,7 @@ function numberFormat(num) {
   }
 }
 
-const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, ogImage, banner, fromQuestion }) => {
+const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, ogImage, banner, fromQuestion, mid }) => {
   const [shareCounter, setShareCounter] = useState(0);
   const [modalOpen, setModalOpen] = useState(fromQuestion);
   const [eventVisible, setEventVisible] = useState(false);
@@ -260,6 +260,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 				isOpen={modalOpen} 
 				onRequestClose={hideModal} 
 				messages={localizedMessages}
+        mid={mid}
 			/>
       <Banner onClick={() => window.location.href='https://ckie.run/test '}>
         <GatsbyImage 
@@ -606,6 +607,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
       banner={banner}
       fromQuestion={!!location?.state?.fromQuestion}
       ogImage={ogImage}
+      mid={location?.state?.mid}
     />
   );
 }

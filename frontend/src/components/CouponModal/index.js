@@ -49,9 +49,9 @@ const customStyles = {
   }
 };
 
-const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) => {
+const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid }) => {
   const [received, setReceived] = useState(false);
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState(mid);
   const claim = async () => {
     try {
       const params = new URLSearchParams();
@@ -176,6 +176,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
               </p>
               <p style={{ fontSize: '24px', color: '#D3CBC4', fontWeight: 700 }}>
                 <IdInput type="text" placeholder={localizedMessages['couponInputId']} 
+                  value={userId}
                   onChange={(e) => {
                     setUserId(e.target.value);
                   }}

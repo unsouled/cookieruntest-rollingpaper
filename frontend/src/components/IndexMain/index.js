@@ -102,11 +102,11 @@ const CopyButton = styled(Button)`
   margin: 6px 0;
 `;
 
-const IndexMain = ({ showModal, banner, lang = 'en' }) => {
+const IndexMain = ({ showModal, banner, lang = 'en', mid }) => {
   const [counter, setCounter] = useState(0);
   const localizedMessages = useContext(LocalizedMessageContext) || {};
   const handleStart = () => {
-    navigate(`/${lang}/question`);
+    navigate(`/${lang}/question`, { state: { mid } });
   };
   const bannerImageData = getImage(banner?.localFile);
   const fetchCounter = async () => {

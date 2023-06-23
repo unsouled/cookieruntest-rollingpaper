@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { navigate } from 'gatsby';
+import queryString from "query-string";
 
 const getRedirectLanguage = () => {
   if (typeof navigator === `undefined`) {
@@ -22,9 +23,10 @@ const getRedirectLanguage = () => {
 };
 
 const IndexPage = () => {
+  const query = queryString.parse(window.location.search);
   useEffect(() => {
     const urlLang = getRedirectLanguage();
-    navigate(`/${urlLang}`);
+    navigate(`/${urlLang}`, { state: { mid: query.mid } });
   }, []);
 
   return null;

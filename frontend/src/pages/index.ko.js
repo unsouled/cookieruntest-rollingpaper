@@ -169,7 +169,7 @@ export const query = graphql`
   }
 `;
 
-const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {} }, pageContext: { langKey } }) => {
+const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {} }, pageContext: { langKey }, location }) => {
   const [counter, setCounter] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
@@ -181,8 +181,10 @@ const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {}
 
   return (
     <LocalizedMessageContext.Provider value={messages}>
-      <IndexMain showModal={() => setModalVisible(true)} lang={langKey} banner={banner} />
-      <LanguageModal isOpen={modalVisible} onRequestClose={closeModal} lang={langKey} />
+      <IndexMain showModal={() => setModalVisible(true)} lang={langKey} banner={banner}
+        mid={location?.state?.mid}
+      />
+      <LanguageModal isOpen={modalVisible} onRequestClose={closeModal} lang={langKey} mid={location?.state?.mid} />
     </LocalizedMessageContext.Provider>
   );
 }

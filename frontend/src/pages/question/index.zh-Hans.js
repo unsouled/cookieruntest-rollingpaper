@@ -9,17 +9,17 @@ export const query = graphql`
 			localizations {
 				data {
 					id
-          attributes {
+					attributes {
             analyzingText
             analyzingTextRich
-            locale
+						locale
             metaTitle
             metaDescriptionEvent
             metaDescription
             dot
-          }
-        }
-      }
+					}
+				}
+			}
     }
     allStrapiQuestion(sort: {order: ASC}) {
       nodes {
@@ -181,8 +181,8 @@ export const query = graphql`
   }
 `;
 
-const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion = [], strapiBannerImage = {} }, pageContext: { langKey } }) => {
-  const fieldName = `small${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion = [], strapiBannerImage = {} }, pageContext: { langKey }, location }) => {
+  const fieldName = `small${langKey !== 'zh-hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
   const banner = strapiBannerImage[fieldName];
 
   const questions = allStrapiQuestion.nodes.map((questionNode) => {
@@ -207,6 +207,7 @@ const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion =
         lang={langKey} 
         questions={questions}
         banner={banner}
+        mid={location?.state?.mid}
       />
     </LocalizedMessageContext.Provider>
   );
