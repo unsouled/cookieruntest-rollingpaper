@@ -136,7 +136,7 @@ const EventArea = styled.div({
     margin: '0 auto',
     top: '-24px',
     justifyContent: 'center',
-    background: 'url("/images/img-result-bg-event-title@3x.png") no-repeat',
+    background: 'url("/images/img-result-bg-event-title@2x.png") no-repeat',
     backgroundSize: 'cover',
     width: '178px',
     height: '45px',
@@ -152,7 +152,7 @@ const EventArea = styled.div({
 const EventAreaTitle = styled.div`
   width: 320px;
   height: 130px;
-  background: url("/images/img-result-event-bg@3x.png");
+  background: url("/images/img-result-event-bg@2x.png");
   background-size: cover;
 `;
 
@@ -356,7 +356,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
               <h1>
                 <span>{localizedMessages['eventName']}</span>
                 <StaticImage
-                  src="../../images/img-bg-arrow@3x.png"
+                  src="../../images/img-bg-arrow@2x.png"
                   style={{ position: 'absolute', right: -60, top: -8 }}
                   width={29}
                   height={66}
@@ -373,7 +373,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
             }}>
             <div css={{ color: '#fff', margin: '14px 0', background: 'url("/images/img-bg-event-duration.png") no-repeat', backgroundSize: 'cover',  fontSize: '14px', padding: '2px 5px', fontWeight: 700, textAlign: 'center', position: 'relative', top: '-12px' }}>
               <StaticImage
-                src="../../images/img-star@3x.png"
+                src="../../images/img-star@2x.png"
                 width={35}
                 height={36}
                 placeholder="none"
@@ -399,7 +399,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                 </div>
                 <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <StaticImage 
-                    src="../../images/img-event-reward-1@3x.png"
+                    src="../../images/img-event-reward-1@2x.png"
                     width={120} height={87} 
                     placeholder="none"
                   />
@@ -416,7 +416,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                 </div>
                 <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <StaticImage 
-                    src="../../images/img-event-reward-2@3x.png"
+                    src="../../images/img-event-reward-2@2x.png"
                     width={100} height={100} 
                     placeholder="none"
                   />
@@ -433,7 +433,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                 </div>
                 <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <StaticImage 
-                    src="../../images/img-event-reward-3@3x.png"
+                    src="../../images/img-event-reward-3@2x.png"
                     width={104} height={65} 
                     placeholder="none"
                   />
@@ -482,7 +482,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                 <CopyToClipboard text={localizedMessages['eventHashtags']} onCopy={() => {
                   alert(localizedMessages['alertCopied']);
                 }}>
-                  <Button style={{ background: 'url("/images/img-button-bg-copy@3x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
+                  <Button style={{ background: 'url("/images/img-button-bg-copy@2x.png") no-repeat center right / 82px 50px', fontSize: '16px', backgroundSize: '82px 50px', borderRadius: '5px 15px 15px 5px', margin: 0, width: 85, textAlign: 'center', letterSpacing: -1 }}>
                     {localizedMessages['eventCopyText']}
                   </Button>
                 </CopyToClipboard>
