@@ -66,7 +66,7 @@ const CustomLayout = styled(Layout)`
 
 const Main = styled.main`
   background: #fff;
-  background: url('/images/img-bg-main@2x.png') no-repeat;
+  background: url('/images/img-bg-main@3x.png') no-repeat;
   background-size: 310px 470px;
   border-radius: 6px;
   width: 310px;
@@ -131,7 +131,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
           <StaticImage 
             width={25}
             height={25}
-            src="../../images/img-icon-cro@2x.png" 
+            src="../../images/img-icon-cro@3x.png" 
             alt=""
             placeholder="none"
           />
@@ -144,7 +144,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
           </span>
           <span css={{ fontSize: '20px', lineHeight: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <StaticImage 
-              src="../../images/polygon@2x.png" width={10} height={8} 
+              src="../../images/polygon@3x.png" width={10} height={8} 
               placeholder="none"
             />
           </span>
@@ -156,7 +156,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
             css={{ position: 'absolute', top: 95, left: '-35px' }}
             width={87}
             height={99}
-            src="../../images/img-cookie-1@2x.png" 
+            src="../../images/img-cookie-1@3x.png" 
             alt=""
             placeholder="none"
           />
@@ -164,7 +164,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
             css={{ position: 'absolute', top: 195, right: '-35px' }}
             width={95}
             height={108}
-            src="../../images/img-cookie-2@2x.png" 
+            src="../../images/img-cookie-2@3x.png" 
             alt=""
             placeholder="none"
           />
@@ -176,7 +176,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
                 style={{ left: -10, top: -8, marginTop: 20, marginRight: 0, transform: 'rotate(8.29deg)' }}
                 width={77}
                 height={14}
-                src="../../images/img-xxx@2x.png" 
+                src="../../images/img-xxx@3x.png" 
                 alt=""
                 placeholder="none"
               />
@@ -185,7 +185,7 @@ const IndexMain = ({ showModal, banner, lang = 'en' }) => {
                 style={{ left: 6, top: -14 }}
                 width={41}
                 height={37}
-                src="../../images/img-heart@2x.png" 
+                src="../../images/img-heart@3x.png" 
                 alt=""
                 placeholder="none"
               />

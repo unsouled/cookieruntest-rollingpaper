@@ -93,7 +93,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
           }}>
             <StaticImage
               src="../../images/img-coin@3x.png"
-              srcSet="../../images/img-coin@3x.png 3x,../../images/img-coin@2x.png 2x,../../images/img-coin.png 1x"
               width={120}
               height={137}
               placeholder="none"
@@ -101,7 +100,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             />
             <StaticImage
               src="../../images/img-cookie-3@3x.png"
-              srcSet="../../images/img-cookie-3@3x.png 3x,../../images/img-cookie-3@2x.png 2x,../../images/img-cookie-3.png 1x"
               width={96}
               height={92}
               placeholder="none"
@@ -109,7 +107,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             />
             <StaticImage
               src="../../images/img-crystal2@3x.png"
-              srcSet="../../images/img-crystal2@3x.png 3x,../../images/img-crystal2@2x.png 2x,../../images/img-crystal2.png 1x"
               width={99}
               height={98}
               placeholder="none"
@@ -117,7 +114,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             />
             <StaticImage
               src="../../images/img-crystal@3x.png"
-              srcSet="../../images/img-crystal@3x.png 3x,../../images/img-crystal@2x.png 2x,../../images/img-crystal.png 1x"
               width={91}
               height={88}
               placeholder="none"
@@ -126,7 +122,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             
             <StaticImage
               src="../../images/img-result-bg-part1@3x.png"
-              srcSet="../../images/img-result-bg-part1@3x.png 3x,../../images/img-result-bg-part1@2x.png 2x,../../images/img-result-bg-part1.png 1x"
               width={45}
               height={28}
               placeholder="none"
@@ -134,7 +129,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             />
             <StaticImage
               src="../../images/img-result-bg-part2@3x.png"
-              srcSet="../../images/img-result-bg-part2@3x.png 3x,../../images/img-result-bg-part2@2x.png 2x,../../images/img-result-bg-part2.png 1x"
               width={37}
               height={35}
               placeholder="none"
@@ -142,7 +136,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
             />
             <StaticImage
               src="../../images/img-result-bg-part3@3x.png"
-              srcSet="../../images/img-result-bg-part3@3x.png 3x,../../images/img-result-bg-part3@2x.png 2x,../../images/img-result-bg-part3.png 1x"
               width={43}
               height={28}
               placeholder="none"
@@ -222,7 +215,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                       width={18}
                       height={18}
                       src="../../images/btn-close2@3x.png" 
-                      srcSet="../../images/btn-close2@3x.png 3x, ../../images/btn-close2@2x.png 2x" 
                       placeholder="none"
                       alt="" 
                     />
@@ -239,7 +231,6 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages }) =>
                       width={18}
                       height={18}
                       src="../../images/btn-close2@3x.png" 
-                      srcSet="../../images/btn-close2@3x.png 3x, ../../images/btn-close2@2x.png 2x" 
                       placeholder="none"
                       alt="" 
                     />

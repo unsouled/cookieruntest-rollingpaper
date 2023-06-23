@@ -115,7 +115,7 @@ const Note = styled.div`
 
 const Progress = ({ current, total }) => (
   <div css={{ width: 304, paddingTop: 84, display: 'flex', margin: 'auto' }}>
-    <div css={{ width: 304 * current / total, height: 38, background: 'url("/images/jelly-beans@2x.png") no-repeat', backgroundSize: '304px 38px' }}>
+    <div css={{ width: 304 * current / total, height: 38, background: 'url("/images/jelly-beans@3x.png") no-repeat', backgroundSize: '304px 38px' }}>
     </div>
   </div>
 );
@@ -196,35 +196,35 @@ const QuestionMain = ({ lang, banner, questions }) => {
             <GatsbyImage image={bannerImageData} width="100%" height="100%" />
           </Banner>
           <StaticImage css={{ position: 'absolute', top: 540, right: 65, width: 31, height: 31 }}
-            src="../../images/img-bg-part1@2x.png"
+            src="../../images/img-bg-part1@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 460, left: 2, width: 88, height: 67 }}
-            src="../../images/img-bg-part2@2x.png"
+            src="../../images/img-bg-part2@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 152, right: -10, width: 88, height: 107 }}
-            src="../../images/img-bg-part3@2x.png"
+            src="../../images/img-bg-part3@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 520, left: 90, width: 38, height: 20 }}
-            src="../../images/img-bg-part4@2x.png"
+            src="../../images/img-bg-part4@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 180, left: 70, width: 36, height: 33 }}
-            src="../../images/img-bg-part5@2x.png"
+            src="../../images/img-bg-part5@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 120, left: 100, width: 32, height: 26 }}
-            src="../../images/img-bg-part6@2x.png"
+            src="../../images/img-bg-part6@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 90, right: 90, width: 41, height: 26 }}
-            src="../../images/img-bg-part7@2x.png"
+            src="../../images/img-bg-part7@3x.png"
             placeholder="none"
           />
           <StaticImage css={{ position: 'absolute', top: 594, right: 150, width: 9, height: 18 }}
-            src="../../images/img-bg-part8@2x.png"
+            src="../../images/img-bg-part8@3x.png"
             placeholder="none"
           />
 
