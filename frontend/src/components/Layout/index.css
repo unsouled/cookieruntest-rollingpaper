@@ -674,3 +674,10 @@ html[lang="ja"] .participation-description {
 html[lang="ja"] .partner-name {
   font-size: 14px !important;
 }
+
+body.lang-en.index .title {
+  font-size: 30px !important;
+}
+body.lang-en.result .hashtags {
+  font-size: 11px !important;
+}

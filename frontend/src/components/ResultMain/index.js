@@ -156,6 +156,17 @@ const EventAreaTitle = styled.div`
   background-size: cover;
 `;
 
+const HashtagsText = styled.span`
+  display: flex;
+  font-size: 13px;
+  align-items: center;
+  margin-left: 10px;
+  flex: 1;
+  color: #141414;
+  white-space: pre-wrap;
+  letter-spacing: -1px
+`;
+
 const CommunityEventBanner = styled.div`
   width: 320px;
   height: 320px;
@@ -475,9 +486,9 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
                   borderRadius: '15px 5px 5px 15px',
                   background: '#F3F1EC',
                 }}>
-                  <span css={{ display: 'flex', fontSize: '13px', alignItems: 'center', marginLeft: '10px', flex: 1, color: '#141414', whiteSpace: 'pre-wrap', letterSpacing: '-1px' }}>
+                  <HashtagsText className="hashtags" >
                     {localizedMessages['eventHashtagsRich']}
-                  </span>
+                  </HashtagsText>
                 </div>
 
                 <CopyToClipboard text={localizedMessages['eventHashtags']} onCopy={() => {
@@ -631,7 +642,7 @@ export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKe
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image:src" content={ogImageUrl} />
       <title>{title}</title>
-      <body className={`lang-${langKey}`} />
+      <body className={`lang-${langKey} result`} />
       </>
   );
 }

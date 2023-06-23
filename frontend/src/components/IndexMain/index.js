@@ -31,13 +31,17 @@ const Banner = styled.div`
 
 const Title = styled.div`
   width: 260px;
-  margin: 90px auto 0;
+  margin: 130px auto 80px;
   text-align: center;
   font-style: normal;
   font-weight: 900;
   font-size: 35px;
-  line-height: 46px;
+  line-height: 44px;
   white-space: pre-wrap;
+  display: flex;
+  justify-content: center;
+  height: 65px;
+  align-items: center;
 `;
 
 const Description = styled.div`
@@ -192,7 +196,7 @@ const IndexMain = ({ showModal, banner, lang = 'en', mid }) => {
 
             </div>
           </Description>
-          <Title>
+          <Title className="title">
             {localizedMessages['titleRich']}
           </Title>
         </div>
