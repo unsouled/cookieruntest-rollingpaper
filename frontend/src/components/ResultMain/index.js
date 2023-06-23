@@ -561,8 +561,9 @@ const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogIma
   const line = <LineShareButton url={url} onClick={() => increaseShareCount('line')} />;
   const twitter = <TwitterShareButton url={url} onClick={() => increaseShareCount('twitter')} />;
   const fb = <FacebookShareButton url={url} onClick={() => increaseShareCount('fb')} />;
-  const copy = <LinkShareButton url={url} onClick={() => increaseShareCount('copy')} onCopy={() => {
+  const copy = <LinkShareButton url={url} onCopy={() => {
     alert(localizedMessages['alertCopied']);
+    increaseShareCount('copy');
   }} />;
   const wechat = <WechatShareButton url={url} onClick={() => increaseShareCount('wechat')} />;
   const qq = <QQShareButton url={url} onClick={() => increaseShareCount('qq')} />;
