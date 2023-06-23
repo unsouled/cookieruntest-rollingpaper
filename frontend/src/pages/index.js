@@ -23,8 +23,8 @@ const getRedirectLanguage = () => {
 };
 
 const IndexPage = () => {
-  const query = (typeof window !== undefined) ? queryString.parse(window.location.search) : {};
   useEffect(() => {
+    const query = (typeof window !== undefined) ? queryString.parse(window.location.search) : {};
     const urlLang = getRedirectLanguage();
     navigate(`/${urlLang}`, { state: { mid: query.mid } });
   }, []);

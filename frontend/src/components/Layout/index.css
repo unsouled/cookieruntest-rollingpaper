@@ -675,7 +675,6 @@ html[lang="ja"] .partner-name {
   font-size: 14px !important;
 }
 body.lang-en.index .xxx {
-  display: none;
 }
 body.lang-ja.index .xxx {
   width: 40px;
