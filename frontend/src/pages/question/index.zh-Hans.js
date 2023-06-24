@@ -182,7 +182,7 @@ export const query = graphql`
 `;
 
 const QuestionPage = ({ data: { strapiLocalizedMessage = {}, allStrapiQuestion = [], strapiBannerImage = {} }, pageContext: { langKey }, location }) => {
-  const fieldName = `small${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+  const fieldName = `small${langKey !== 'zh-hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
   const banner = strapiBannerImage[fieldName];
 
   const questions = allStrapiQuestion.nodes.map((questionNode) => {
@@ -219,7 +219,7 @@ export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }
   const ogImage = strapiOgImage[fieldName].formats.large.url;
   return (
     <>
-      <html lang={langKey} />
+      <html lang={langKey} css={{ height: '100%' }} />
       <meta name="description" content={messages['metaDescriptionEvent']} />
       <meta name="og:url" content={process.env.GATSBY_HOST} />
       <meta name="og:title" content={messages['metaTitle']} />

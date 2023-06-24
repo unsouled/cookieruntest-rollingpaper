@@ -610,7 +610,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
       } else {
         setShowSmallBanner(false);
       }
-      if (window.pageYOffset >= 527 && !modalOpened.current && fromQuestion) {
+      if (window.pageYOffset >= 240 && !modalOpened.current && fromQuestion) {
         //setModalOpened(true);
         modalOpened.current = true;
         showModal();
