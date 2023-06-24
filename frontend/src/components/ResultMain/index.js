@@ -596,11 +596,11 @@ const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogIma
 const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, ogImage, resultImage, peopleTypeImages, banner, logoImage, smallBanner }, location }) => {
   const modalOpened = useRef(false);
   const fromQuestion = !!location?.state?.fromQuestion;
-  const [modalOpen, setModalOpen] = useState(fromQuestion);
   const [showSmallBanner, setShowSmallBanner] = useState(false);
   const mid = location?.state?.mid;
   const showModal = () => setModalOpen(true);
   const hideModal = () => setModalOpen(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const smallBannerImageData = getImage(smallBanner?.localFile);
 
   useEffect(() => {
@@ -610,7 +610,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
       } else {
         setShowSmallBanner(false);
       }
-      if (window.pageYOffset >= 527 && !modalOpened.current) {
+      if (window.pageYOffset >= 527 && !modalOpened.current && fromQuestion) {
         //setModalOpened(true);
         modalOpened.current = true;
         showModal();
