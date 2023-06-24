@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useCallback, useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
@@ -172,7 +172,10 @@ const CommunityEventBanner = styled.div`
   height: 320px;
   background: #6B3F17;
   margin: 0 auto 15px;
-  border-radius: 5px;
+  border-radius: 0 0 5px 5px;
+  img {
+    border-radius: 0 0 5px 5px;
+  }
 `;
 
 const TestLink = styled.div`
@@ -211,9 +214,8 @@ function numberFormat(num) {
   }
 }
 
-const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, ogImage, banner, fromQuestion, mid }) => {
+const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventImage, result, resultImage, peopleTypeImages, ogImage, banner, logoImage, fromQuestion, mid }) => {
   const [shareCounter, setShareCounter] = useState(0);
-  const [modalOpen, setModalOpen] = useState(fromQuestion);
   const [eventVisible, setEventVisible] = useState(false);
   const topRef = useRef();
 
@@ -226,20 +228,11 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
     }
   }
 
+  const restart = () => navigate(`/${lang}`);
   useEffect(() => {
     fetchCounter();
     setEventVisible(lang !== 'zh-Hans' && isBefore(new Date(), parseISO(localizedMessages['eventEndAt'])));
-  }, [fetchCounter, setEventVisible, localizedMessages]);
-
-  const restart = () => {
-    navigate(`/${lang}`);
-  }
-  const showModal = () => {
-    setModalOpen(true);
-  };
-  const hideModal = () => {
-    setModalOpen(false);
-  };
+  }, [fetchCounter, setEventVisible]);
 
   const langKey = lang !== 'zh-Hans' ? lang : 'zhHans';
   const eventImageData = getImage(eventImage[langKey].localFile);
@@ -250,6 +243,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
   const bestMatchName = bestMatch.nameRich;
   const bestMatchImage = getImage(peopleTypeImages.filter((image) => image.code === bestMatch.code)[0]?.bgImage.localFile);
   const bannerImageData = getImage(banner?.localFile);
+  console.log(logoImage);
+  const logoImageData = getImage(logoImage?.localFile);
 
   const worstMatch= result.worstMatch.localizations.data.filter(
     ( { attributes: { locale } }) => locale === lang
@@ -261,18 +256,13 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 
   return (
     <Layout>
-			<CouponModal 
-				isOpen={modalOpen} 
-				onRequestClose={hideModal} 
-				messages={localizedMessages}
-        mid={mid}
-			/>
       <Banner onClick={() => window.location.href='https://ckie.run/test '}>
         <GatsbyImage 
-        image={bannerImageData} 
-        width="100%" 
-        height="100%"
-      />
+          alt=""
+          image={bannerImageData} 
+          width="100%" 
+          height="100%"
+        />
       </Banner>
 
       <Main>
@@ -502,7 +492,8 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
 
         {eventVisible && (
           <CommunityEventBanner>
-            <GatsbyImage image={eventImageData} alt="" 
+            <GatsbyImage image={eventImageData} 
+              alt="" 
               width={320}
               height={320}
             />
@@ -533,7 +524,16 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
           </StyledButton>
         </Links>
 
-        <GatsbyImage image={getImage(localizedMessages['logoImage'])} />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 24 }}>
+        <GatsbyImage 
+          image={getImage(logoImageData)} 
+          alt="" 
+          css={{
+            width: 115, height: 46,
+            margin: '0 auto', 
+          }}
+        />
+        </div>
 
         <Copyright>
           Copyright 2023 Devsisters. All rights reserved
@@ -541,7 +541,7 @@ const ResultMain = ({ lang, code, messages: localizedMessages, eventImage, resul
       </Main>
     </Layout>
   );
-}
+});
 
 const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogImage }) => {
   const increaseShareCount = async (tool) => {
@@ -593,27 +593,80 @@ const ShareTools = ({ lang, result, code, url, onShare, localizedMessages, ogIma
   return <>{tools}</>
 }
 
-const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, ogImage, resultImage, peopleTypeImages, banner }, location }) => {
+const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImage, result, ogImage, resultImage, peopleTypeImages, banner, logoImage, smallBanner }, location }) => {
+  const modalOpened = useRef(false);
+  const fromQuestion = !!location?.state?.fromQuestion;
+  const [modalOpen, setModalOpen] = useState(fromQuestion);
+  const [showSmallBanner, setShowSmallBanner] = useState(false);
+  const mid = location?.state?.mid;
+  const showModal = () => setModalOpen(true);
+  const hideModal = () => setModalOpen(false);
+  const smallBannerImageData = getImage(smallBanner?.localFile);
+
   useEffect(() => {
-    window.history.replaceState(location.pathname, null);
+    const handleScroll = () => {
+      if (window.pageYOffset >= 480) {
+        setShowSmallBanner(true);
+      } else {
+        setShowSmallBanner(false);
+      }
+      if (window.pageYOffset >= 527 && !modalOpened.current) {
+        //setModalOpened(true);
+        modalOpened.current = true;
+        showModal();
+      }
+    };
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(location.pathname, null);
+      window.addEventListener('scroll', handleScroll);
+    }
     return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', handleScroll)
+      }
     }
   }, []);
 
   return (
-    <ResultMain 
-      lang={langKey} 
-      code={code}
-      messages={localizedMessages} 
-      eventImage={eventImage} 
-      result={result} 
-      resultImage={resultImage} 
-      peopleTypeImages={peopleTypeImages}
-      banner={banner}
-      fromQuestion={!!location?.state?.fromQuestion}
-      ogImage={ogImage}
-      mid={location?.state?.mid}
-    />
+    <>
+      {showSmallBanner && (
+        <div 
+          css={{ position: 'fixed', top: 0, minHeight: 70, zIndex: 1000, width: '100%', margin: '0 auto', left: 0, right: 0  }}
+          onClick={() => {
+            window.location.href='https://ckie.run/test';
+          }}
+        >
+          <div 
+            css={{ margin: '0 auto', left: 0, right: 0, maxWidth: 430 }} 
+          >
+            <GatsbyImage 
+              alt=""
+              image={smallBannerImageData} 
+              width="100%" 
+              height="100%"
+            />
+          </div>
+        </div>
+      )}
+			<CouponModal 
+				isOpen={modalOpen} 
+				onRequestClose={hideModal} 
+				messages={localizedMessages}
+        mid={mid}
+			/>
+      <ResultMain 
+        lang={langKey} 
+        code={code}
+        messages={localizedMessages} 
+        eventImage={eventImage} 
+        result={result} 
+        resultImage={resultImage} 
+        peopleTypeImages={peopleTypeImages}
+        banner={banner}
+        logoImage={logoImage}
+        ogImage={ogImage}
+      />
+    </>
   );
 }
 
@@ -637,7 +690,7 @@ export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKe
       <meta name="twitter:image:src" content={ogImageUrl} />
       <title>{title}</title>
       <body className={`lang-${langKey} result`} />
-      </>
+    </>
   );
 }
 

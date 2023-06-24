@@ -25,6 +25,7 @@
     "gatsby-plugin-i18n": "^1.0.1",
     "gatsby-plugin-image": "^3.10.0",
     "gatsby-plugin-manifest": "^5.10.0",
+    "gatsby-plugin-scroll-position": "^1.2.1",
     "gatsby-plugin-sharp": "^5.10.0",
     "gatsby-plugin-sitemap": "^6.10.0",
     "gatsby-source-filesystem": "^5.10.0",

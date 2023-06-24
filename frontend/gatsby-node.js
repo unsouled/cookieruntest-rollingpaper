@@ -192,8 +192,8 @@ exports.createPages = async ({ graphql, actions }) => {
             localFile {
               childImageSharp {
                 gatsbyImageData(
-                  width: 320,
-                  height: 450
+                  width: 640,
+                  height: 900
                 )
               }
             }
@@ -202,8 +202,8 @@ exports.createPages = async ({ graphql, actions }) => {
             localFile {
               childImageSharp {
                 gatsbyImageData(
-                  width: 320,
-                  height: 450
+                  width: 640,
+                  height: 900
                 )
               }
             }
@@ -212,8 +212,8 @@ exports.createPages = async ({ graphql, actions }) => {
             localFile {
               childImageSharp {
                 gatsbyImageData(
-                  width: 320,
-                  height: 450
+                  width: 640,
+                  height: 900
                 )
               }
             }
@@ -222,8 +222,8 @@ exports.createPages = async ({ graphql, actions }) => {
             localFile {
               childImageSharp {
                 gatsbyImageData(
-                  width: 320,
-                  height: 450
+                  width: 640,
+                  height: 900
                 )
               }
             }
@@ -232,8 +232,8 @@ exports.createPages = async ({ graphql, actions }) => {
             localFile {
               childImageSharp {
                 gatsbyImageData(
-                  width: 320,
-                  height: 450
+                  width: 640,
+                  height: 900
                 )
               }
             }
@@ -242,8 +242,8 @@ exports.createPages = async ({ graphql, actions }) => {
             localFile {
               childImageSharp {
                 gatsbyImageData(
-                  width: 320,
-                  height: 450
+                  width: 640,
+                  height: 900
                 )
               }
             }
@@ -264,6 +264,48 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
       strapiBannerImage {
+        smallEn {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        smallKo {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        smallJa {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        smallTh {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        smallZh {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+        smallZhHans {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
         bigEn {
           localFile {
             childImageSharp {
@@ -351,6 +393,68 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      strapiLogoImage {
+        en {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 230,
+                height: 92
+              )
+            }
+          }
+        }
+        ko {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 230,
+                height: 92
+              )
+            }
+          }
+        }
+        ja {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 230,
+                height: 92
+              )
+            }
+          }
+        }
+        th {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 230,
+                height: 92
+              )
+            }
+          }
+        }
+        zh {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 230,
+                height: 92
+              )
+            }
+          }
+        }
+        zhHans {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 230,
+                height: 92
+              )
+            }
+          }
+        }
+      }
     }
   `);
   supportedLocales.forEach(langKey => {
@@ -368,12 +472,15 @@ exports.createPages = async ({ graphql, actions }) => {
 
       const peopleTypeImages = data.allStrapiPeopleTypeImage.nodes
       const fieldName = `big${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
+      const smallFieldName = `small${langKey !== 'zh-Hans' ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'ZhHans'}`;
       const banner = data.strapiBannerImage[fieldName];
+      const smallBanner = data.strapiBannerImage[smallFieldName];
+      const logoImage = data.strapiLogoImage[langKey !== 'zh-Hans' ? langKey : 'zhHans'];
 
       actions.createPage({
         path: `${langKey}/result/${hashedCode}`,
         component: require.resolve(`./src/components/ResultMain/index.js`),
-        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages, banner, ogImage },
+        context: { langKey, code: hashedCode, localizedMessages: messages, eventImage, resultImage: resultImageData, result: resultData, peopleTypeImages, banner, smallBanner, ogImage, logoImage },
       });
     });
   });

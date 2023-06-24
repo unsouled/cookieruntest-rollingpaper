@@ -18,6 +18,7 @@ const strapiConfig = {
     'result',
     'result-image',
     'banner-image',
+    'logo-image',
   ],
   singleTypes: [
     'event-image',
