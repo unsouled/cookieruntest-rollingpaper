@@ -6,6 +6,9 @@ const getRedirectLanguage = () => {
   if (typeof navigator === `undefined`) {
     return 'en';
   }
+  if (navigator.language === 'zh-CN' || navigator.language === 'zh-Hans') {
+    return 'zh-Hans';
+  }
   const lang = navigator && navigator.language && navigator.language.split('-')[0];
 
   switch (lang) {
