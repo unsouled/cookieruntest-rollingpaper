@@ -29,7 +29,7 @@ const IndexPage = () => {
   useEffect(() => {
     const query = (typeof window !== undefined) ? queryString.parse(window.location.search) : {};
     const urlLang = getRedirectLanguage();
-    navigate(`/${urlLang}`, { state: { mid: query.mid } });
+    navigate(`/${urlLang}`, { state: { mid: query.mid }, replace: true });
   }, []);
 
   return null;

@@ -375,7 +375,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
                 placeholder="none"
                 style={{ position: 'absolute',left: -14, top: -25 }}
               />
-                {localizedMessages['eventDuration']}: {localizedMessages['eventStartAtText']} ~ {localizedMessages['eventEndAtText']}
+                {localizedMessages['eventDuration']} {localizedMessages['eventStartAtText']} ~ {localizedMessages['eventEndAtText']}
               </div>
               <div css={{ marginTop: '0px', borderBottom: '1px solid #F3F3F3', padding: '8px 0 16px 0', display: 'flex' }}>
                 <div css={{ flex: 1, flexDirection: 'column', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -505,20 +505,20 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
         </StyledButton>
 
         <StyledButton onClick={() => {
-          window.location.href = "https://www.dropbox.com/scl/fo/8gaamviknlzahv66kh5hc/h?dl=0&rlkey=olbtfvcu4eamxdci77y54hbo5";
+          window.open("https://www.dropbox.com/scl/fo/8gaamviknlzahv66kh5hc/h?dl=0&rlkey=olbtfvcu4eamxdci77y54hbo5", '_blank');
         }}>
           {localizedMessages['resultDownloadSticker']}
         </StyledButton>
 
         <Links>
           <StyledButton onClick={() => {
-            window.location.href = 'https://villain.cookieruntest.com';
+            window.open('https://villain.cookieruntest.com', '_blank');
           }}>
             {localizedMessages['resultTryVillainTest']}
           </StyledButton>
 
           <StyledButton onClick={() => {
-            window.location.href = 'https://www.cookieruntest.com';
+            window.open('https://www.cookieruntest.com', '_blank');
           }}>
             {localizedMessages['resultTryCharacterTest']}
           </StyledButton>
