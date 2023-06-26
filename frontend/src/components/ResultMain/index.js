@@ -696,7 +696,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
   );
 }
 
-export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKey } }) => {
+export const Head = ({ pageContext: { localizedMessages, code, result, ogImage, langKey } }) => {
   const fieldName = `${langKey !== 'zh-Hans' ? langKey : 'zhHans'}`;
   const ogImageUrl = ogImage[fieldName].formats.large.url;
 
@@ -706,7 +706,7 @@ export const Head = ({ pageContext: { localizedMessages, result, ogImage, langKe
     <>
       <html lang={langKey} />
       <meta name="description" content={localizedMessages['metaDescriptionEvent']} />
-      <meta name="og:url" content={process.env.GATSBY_HOST} />
+      <meta name="og:url" content={`${process.env.GATSBY_HOST}/${langKey}/result/${code}`} />
       <meta name="og:title" content={title} />
       <meta name="og:image" content={ogImageUrl} />
       <meta name="og:type" content="website" />
