@@ -18,7 +18,7 @@ import CouponModal from '/src/components/CouponModal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import parseISO from 'date-fns/parseISO'
+import parseISO from 'date-fns/parseISO';
 import isBefore from 'date-fns/isBefore';
 
 const sf = function(s, args) {
@@ -159,6 +159,7 @@ const EventAreaTitle = styled.div`
 const HashtagsText = styled.span`
   display: flex;
   font-size: 13px;
+  line-height: 12px;
   align-items: center;
   margin-left: 10px;
   flex: 1;
@@ -411,11 +412,27 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
                   </p>
                 </div>
                 <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <StaticImage 
-                    src="../../images/img-event-reward-2@2x.png"
-                    width={100} height={100} 
-                    placeholder="none"
-                  />
+                  {(lang === 'ja' || lang === 'zh') && (
+                    <StaticImage 
+                      src="../../images/img-event-reward-2-apple@2x.png"
+                      width={100} height={104} 
+                      placeholder="none"
+                    />
+                  )}
+                  {lang === 'th' && (
+                    <StaticImage 
+                      src="../../images/img-event-reward-2-true@2x.png"
+                      width={100} height={98} 
+                      placeholder="none"
+                    />
+                  )}
+                  {(lang === 'en' || lang === 'ko' || lang === 'zh-Hans') && (
+                    <StaticImage 
+                      src="../../images/img-event-reward-2@2x.png"
+                      width={100} height={100} 
+                      placeholder="none"
+                    />
+                  )}
                 </div>
               </div>
               <div css={{ padding: '16px 0', display: 'flex' }}>
