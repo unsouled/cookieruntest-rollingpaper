@@ -159,7 +159,7 @@ const EventAreaTitle = styled.div`
 const HashtagsText = styled.span`
   display: flex;
   font-size: 13px;
-  line-height: 12px;
+  line-height: 18px;
   align-items: center;
   margin-left: 10px;
   flex: 1;
@@ -244,7 +244,6 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
   const bestMatchName = bestMatch.nameRich;
   const bestMatchImage = getImage(peopleTypeImages.filter((image) => image.code === bestMatch.code)[0]?.bgImage.localFile);
   const bannerImageData = getImage(banner?.localFile);
-  console.log(logoImage);
   const logoImageData = getImage(logoImage?.localFile);
 
   const worstMatch= result.worstMatch.localizations.data.filter(
@@ -357,7 +356,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
                   style={{ position: 'absolute', right: -60, top: -8 }}
                   width={29}
                   height={66}
-                placeholder="none"
+                  placeholder="none"
                 />
               </h1>
               <h2>{localizedMessages['eventDescriptionRich']}</h2>
@@ -397,7 +396,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
                 <div css={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <StaticImage 
                     src="../../images/img-event-reward-1@2x.png"
-                    width={120} height={87} 
+                    width={108} height={87} 
                     placeholder="none"
                   />
                 </div>
@@ -487,7 +486,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
                   borderRadius: '15px 5px 5px 15px',
                   background: '#F3F1EC',
                 }}>
-                  <HashtagsText className="hashtags" >
+                  <HashtagsText className="hashtags">
                     {localizedMessages['eventHashtagsRich']}
                   </HashtagsText>
                 </div>
@@ -544,9 +543,11 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 24 }}>
         <GatsbyImage 
           image={getImage(logoImageData)} 
+          loading="eager"
+          placeholder="none"
           alt="" 
           css={{
-            width: 115, height: 46,
+            width: 115,
             margin: '0 auto', 
           }}
         />

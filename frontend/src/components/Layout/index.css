@@ -699,4 +699,10 @@ body.lang-en.index .title {
 }
 body.lang-en.result .hashtags {
   font-size: 11px !important;
+  line-height: 12px !important;
 }
+body.lang-ja.result .hashtags {
+  font-size: 11px !important;
+  line-height: 12px !important;
+}
+

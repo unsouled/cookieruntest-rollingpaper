@@ -397,50 +397,35 @@ exports.createPages = async ({ graphql, actions }) => {
         en {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 230,
-                height: 92
-              )
+              gatsbyImageData
             }
           }
         }
         ko {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 230,
-                height: 92
-              )
+              gatsbyImageData
             }
           }
         }
         ja {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 230,
-                height: 92
-              )
+              gatsbyImageData
             }
           }
         }
         th {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 230,
-                height: 92
-              )
+              gatsbyImageData
             }
           }
         }
         zh {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 230,
-                height: 92
-              )
+              gatsbyImageData
             }
           }
         }
