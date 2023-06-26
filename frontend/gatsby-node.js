@@ -152,6 +152,7 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           code
           name
+          rewardId
           localizations {
             data {
               attributes {

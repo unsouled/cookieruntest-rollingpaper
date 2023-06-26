@@ -236,6 +236,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
   }, [fetchCounter, setEventVisible]);
 
   const langKey = lang !== 'zh-Hans' ? lang : 'zhHans';
+  const rewardId = result.rewardId;
   const eventImageData = getImage(eventImage[langKey].localFile);
   const resultImageData = getImage(resultImage.localFile);
   const bestMatch  = result.bestMatch.localizations.data.filter(
@@ -671,6 +672,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
 				onRequestClose={hideModal} 
 				messages={localizedMessages}
         mid={mid}
+        rewardId={rewardId}
 			/>
       <ResultMain 
         lang={langKey} 

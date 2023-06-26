@@ -49,7 +49,7 @@ const customStyles = {
   }
 };
 
-const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid }) => {
+const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid, rewardId }) => {
   const [received, setReceived] = useState(false);
   const [userId, setUserId] = useState(mid);
   const claim = async () => {
@@ -57,7 +57,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid 
       const params = new URLSearchParams();
       params.append('mid', userId);
       params.append('eventId', '1');
-      params.append('rewardId', '3');
+      params.append('rewardId', rewardId);
       const { data } = await axios.post(`${process.env.GATSBY_REWARD_API_HOST}/webevent/reward`, params);
       if (!data.success) {
         alert('a');
