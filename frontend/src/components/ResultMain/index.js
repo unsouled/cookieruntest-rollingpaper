@@ -518,7 +518,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
           </StyledButton>
 
           <StyledButton onClick={() => {
-            window.location.href = 'https://cookieruntest.com';
+            window.location.href = 'https://www.cookieruntest.com';
           }}>
             {localizedMessages['resultTryCharacterTest']}
           </StyledButton>
