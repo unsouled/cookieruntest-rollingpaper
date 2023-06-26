@@ -54,6 +54,14 @@
         }
       },
       "type": "string"
+    },
+    "rewardId": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "integer"
     }
   }
 }
