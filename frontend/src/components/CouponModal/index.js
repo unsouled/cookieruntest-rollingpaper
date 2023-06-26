@@ -59,18 +59,16 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid 
       params.append('eventId', '1');
       params.append('rewardId', '3');
       const { data } = await axios.post(`${process.env.GATSBY_REWARD_API_HOST}/webevent/reward`, params);
-
       if (!data.success) {
-        if (data['already_rewardead']) {
-          alert(localizedMessages['alertAlreadyReceived']);
-        } else {
-          alert(localizedMessages['alertInvalid']);
-        }
+        alert(localizedMessages['alertInvalid']);
       }
       setReceived(true);
-    } catch {
-      // todo invalid, duplicated 
-      alert(localizedMessages['alertInvalid']);
+    } catch (e) {
+      if (e.response.data['already_rewardead']) {
+        alert(localizedMessages['alertAlreadyReceived']);
+      } else {
+        alert(localizedMessages['alertInvalid']);
+      }
       setUserId('');
       setReceived(false);
     }
