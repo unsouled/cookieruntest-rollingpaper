@@ -3,8 +3,6 @@ import axios from 'axios';
 import { StaticImage } from 'gatsby-plugin-image';
 import styled from '@emotion/styled';
 import Modal from 'react-modal';
-import parseISO from 'date-fns/parseISO'
-import format from 'date-fns/format';
 import Button from '../Button';
 
 Modal.setAppElement('#___gatsby');

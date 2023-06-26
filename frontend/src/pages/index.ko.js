@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { graphql, navigate } from 'gatsby';
-import styled from '@emotion/styled';
+import { graphql } from 'gatsby';
 import IndexMain from '/src/components/IndexMain';
 import LanguageModal from '/src/components/LanguageModal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
-
-import { useContext } from 'react';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#___gatsby');
@@ -170,7 +167,6 @@ export const query = graphql`
 `;
 
 const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {} }, pageContext: { langKey }, location }) => {
-  const [counter, setCounter] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 

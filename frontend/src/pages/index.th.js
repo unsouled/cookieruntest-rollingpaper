@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { graphql, navigate } from 'gatsby';
-import styled from '@emotion/styled';
+import { graphql } from 'gatsby';
 import IndexMain from '/src/components/IndexMain';
 import LanguageModal from '/src/components/LanguageModal';
 import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
-
-import { useContext } from 'react';
 
 import Modal from 'react-modal';
 Modal.setAppElement('#___gatsby');
@@ -170,7 +167,6 @@ export const query = graphql`
 `;
 
 const IndexPage = ({ data: { strapiLocalizedMessage = {}, strapiBannerImage = {} }, pageContext: { langKey }, location }) => {
-  const [counter, setCounter] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => setModalVisible(false);
 
@@ -198,18 +194,21 @@ export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }
   return (
     <>
       <html lang={langKey} />
+      <title>{messages['metaTitle']}</title>
       <meta name="description" content={messages['metaDescriptionEvent']} />
+      <meta name="og:type" content="website" />
       <meta name="og:url" content={`${process.env.GATSBY_HOST}}/${langKey}`} />
       <meta name="og:title" content={messages['metaTitle']} />
       <meta name="og:image" content={ogImage} />
+      <meta name="og:description" content={messages['metaDescriptionEvent']} />
       <meta name="og:image:width" content="1000" />
       <meta name="og:image:height" content="525" />
-      <meta name="og:type" content="website" />
       <meta name="twitter:title" content={messages['metaTitle']} />
       <meta name="twitter:description" content={messages['metaDescriptionEvent']} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image:src" content={ogImage} />
-      <title>{messages['metaTitle']}</title>
+      <meta name="twitter:image:width" content="1000" />
+      <meta name="twitter:image:height" content="525" />
       <body className={`lang-${langKey} index`} />
     </>
   );

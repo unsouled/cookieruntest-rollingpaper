@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { navigate } from 'gatsby';
@@ -15,7 +15,6 @@ import WeiboShareButton from '/src/components/WeiboShareButton';
 import QQShareButton from '/src/components/QQShareButton';
 import Button from '/src/components/Button';
 import CouponModal from '/src/components/CouponModal';
-import LocalizedMessageContext from '/src/contexts/LocalizedMessageContext';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import parseISO from 'date-fns/parseISO';
@@ -33,12 +32,6 @@ const sf = function(s, args) {
 };
 
 const StyledButton = styled(Button)`
-  height: 50px;
-  margin: 7px 0;
-  background: #FDCB27;
-`;
-
-const StyledLink = styled.a`
   height: 50px;
   margin: 7px 0;
   background: #FDCB27;
@@ -135,7 +128,6 @@ const EventArea = styled.div({
   width: '320px',
   margin: '10px auto 0',
   'h1': { 
-    margin: '0 0 0 0',
     color: '#fff', 
     textAlign: 'center',
     fontSize: '18px',
@@ -187,9 +179,6 @@ const CommunityEventBanner = styled.div`
   }
 `;
 
-const TestLink = styled.div`
-`;
-
 const Copyright = styled.div`
   color: #DCC9BA;
   text-align: center;
@@ -227,26 +216,25 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
   const [shareCounter, setShareCounter] = useState(0);
   const [eventVisible, setEventVisible] = useState(false);
   const topRef = useRef();
-
-  const fetchCounter = async () => {
-    try {
-      const { data } = await axios.get(`${process.env.GATSBY_API_HOST}/counter/share`);
-      setShareCounter(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   const restart = () => navigate(`/${lang}`);
+
   useEffect(() => {
+    const fetchCounter = async () => {
+      try {
+        const { data } = await axios.get(`${process.env.GATSBY_API_HOST}/counter/share`);
+        setShareCounter(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     fetchCounter();
     setEventVisible(lang !== 'zh-Hans' && isBefore(new Date(), parseISO(localizedMessages['eventEndAt'])));
-  }, [fetchCounter, setEventVisible]);
+  }, [lang, localizedMessages, setEventVisible]);
 
   const langKey = lang !== 'zh-Hans' ? lang : 'zhHans';
   const eventImageData = getImage(eventImage[langKey].localFile);
   const resultImageData = getImage(resultImage.localFile);
-  console.log(resultImageData);
   const bestMatch  = result.bestMatch.localizations.data.filter(
     ( { attributes: { locale } }) => locale === lang
   )[0].attributes;
@@ -650,7 +638,7 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
         window.removeEventListener('scroll', handleScroll)
       }
     }
-  }, []);
+  }, [fromQuestion, location.pathname]);
 
   return (
     <>

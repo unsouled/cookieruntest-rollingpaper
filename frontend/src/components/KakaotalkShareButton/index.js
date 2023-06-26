@@ -17,9 +17,6 @@ const KakaotalkShareButton = ({ onClick, isScriptLoaded, isScriptLoadSucceed, ur
   }, []);
   return (
     <StyledShareButton style={{ border: 0, verticalAlign: 'top', padding: 0 }} onClick={(e) => {
-      console.log(window.Kakao);
-      console.log(process.env.GATSBY_KAKAO_KEY);
-      console.log(url);
       window.Kakao.Link.sendScrap({
         requestUrl: url,
         templateId,
