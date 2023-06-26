@@ -146,7 +146,7 @@ const EventArea = styled.div({
       padding: '10px 16px',
     }
   },
-  'h2': { color: '#000', margin: '-10px 0 26px 0', textAlign: 'center', textShadow: '0px 5px 15px rgba(200, 180, 10, 0.8)', whiteSpace: 'pre-wrap', fontSize: '26px', lineHeight: '32px', wordWrap: 'pre-wrap' }
+  'h2': { color: '#000', margin: '-10px 0 26px 0', textAlign: 'center', textShadow: '0px 3px 0px rgba(255, 255, 255, 1)', whiteSpace: 'pre-wrap', fontSize: '26px', lineHeight: '32px', wordWrap: 'pre-wrap' }
 });
 
 const EventAreaTitle = styled.div`

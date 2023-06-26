@@ -56,8 +56,8 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid 
     try {
       const params = new URLSearchParams();
       params.append('mid', userId);
-      params.append('event_id', '1');
-      params.append('reward_id', '3');
+      params.append('eventId', '1');
+      params.append('rewardId', '3');
       const { data } = await axios.post(`${process.env.GATSBY_REWARD_API_HOST}/webevent/reward`, params);
 
       if (!data.success) {
@@ -172,7 +172,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid 
                 {localizedMessages['couponGiftReceivedRich']}
               </p>
               <p style={{ height: '25px', justifyContent: 'center', alignItems: 'center',display: 'flex', background: 'url("/images/img-coupon-bg@3x.png") no-repeat', backgroundSize: 'cover', color: '#fff', fontSize: '14px', fontWeight: 700, marginBottom: '25px' }}>
-                2023/06/27 - 2023/07/27
+                {localizedMessages['eventStartAtText']} ~ {localizedMessages['eventEndAtText']}
               </p>
               <p style={{ fontSize: '24px', color: '#D3CBC4', fontWeight: 700 }}>
                 <IdInput type="text" placeholder={localizedMessages['couponInputId']} 
