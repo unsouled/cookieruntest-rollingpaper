@@ -696,7 +696,7 @@ export const Head = ({ pageContext: { localizedMessages, code, result, ogImage, 
       <title>{title}</title>
       <meta name="description" content={localizedMessages['metaDescriptionEvent']} />
       <meta name="og:type" content="website" />
-      <meta name="og:url" content={`${process.env.GATSBY_HOST}/${langKey}/result/${code}`} />
+      <meta name="og:url" content={`${process.env.GATSBY_HOST}/${langKey}/result/${code}/`} />
       <meta name="og:title" content={title} />
       <meta name="og:description" content={localizedMessages['metaDescriptionEvent']} />
       <meta name="og:image" content={ogImageUrl} />

@@ -197,7 +197,7 @@ export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }
       <title>{messages['metaTitle']}</title>
       <meta name="description" content={messages['metaDescriptionEvent']} />
       <meta name="og:type" content="website" />
-      <meta name="og:url" content={`${process.env.GATSBY_HOST}}/${langKey}`} />
+      <meta name="og:url" content={`${process.env.GATSBY_HOST}}/${langKey}/`} />
       <meta name="og:title" content={messages['metaTitle']} />
       <meta name="og:image" content={ogImage} />
       <meta name="og:description" content={messages['metaDescriptionEvent']} />

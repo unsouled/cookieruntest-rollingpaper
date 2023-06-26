@@ -19,7 +19,3 @@ const data = [
   'EFJ',
   'EFP'
 ];
-
-data.forEach(datum => {
-  console.log(datum, hash(datum));
-});
