@@ -219,7 +219,7 @@ export const Head = ({ data: { strapiLocalizedMessage = {}, strapiOgImage = {} }
   const ogImage = strapiOgImage[fieldName].formats.large.url;
   return (
     <>
-      <html lang={langKey} css={{ height: '100%' }} />
+      <html lang={langKey} className="question" css={{ height: '100% !important' }} />
       <meta name="description" content={messages['metaDescriptionEvent']} />
       <meta name="og:url" content={process.env.GATSBY_HOST} />
       <meta name="og:title" content={messages['metaTitle']} />

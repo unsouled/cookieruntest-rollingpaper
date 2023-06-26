@@ -4,6 +4,9 @@ html {
 html, body {
   min-height: 100%;
 }
+html.question {
+  height: 100% !important;
+}
 body {
   margin: 0;
   padding: 0;
