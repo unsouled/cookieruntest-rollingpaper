@@ -47,6 +47,9 @@ module.exports = {
     copyright:  '© 2022 DEVSISTERS Corp. All Rights Reserved.'
   },
   plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-strapi`,
       options: strapiConfig,
@@ -68,9 +71,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     {
       resolve: 'gatsby-plugin-google-gtag', 
       options: {

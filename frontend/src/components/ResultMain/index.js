@@ -238,6 +238,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
   const langKey = lang !== 'zh-Hans' ? lang : 'zhHans';
   const eventImageData = getImage(eventImage[langKey].localFile);
   const resultImageData = getImage(resultImage.localFile);
+  console.log(resultImageData);
   const bestMatch  = result.bestMatch.localizations.data.filter(
     ( { attributes: { locale } }) => locale === lang
   )[0].attributes;

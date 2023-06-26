@@ -192,60 +192,42 @@ exports.createPages = async ({ graphql, actions }) => {
           ko {
             localFile {
               childImageSharp {
-                gatsbyImageData(
-                  width: 640,
-                  height: 900
-                )
+                gatsbyImageData(width: 640, height: 900, quality: 100) 
               }
             }
           }
           en {
             localFile {
               childImageSharp {
-                gatsbyImageData(
-                  width: 640,
-                  height: 900
-                )
+                gatsbyImageData(width: 640, height: 900, quality: 100)
               }
             }
           }
           ja {
             localFile {
               childImageSharp {
-                gatsbyImageData(
-                  width: 640,
-                  height: 900
-                )
+                gatsbyImageData(width: 640, height: 900, quality: 100)
               }
             }
           }
           th {
             localFile {
               childImageSharp {
-                gatsbyImageData(
-                  width: 640,
-                  height: 900
-                )
+                gatsbyImageData(width: 640, height: 900, quality: 100)
               }
             }
           }
           zh {
             localFile {
               childImageSharp {
-                gatsbyImageData(
-                  width: 640,
-                  height: 900
-                )
+                gatsbyImageData(width: 640, height: 900, quality: 100)
               }
             }
           }
           zhHans {
             localFile {
               childImageSharp {
-                gatsbyImageData(
-                  width: 640,
-                  height: 900
-                )
+                gatsbyImageData(width: 640, height: 900, quality: 100)
               }
             }
           }
@@ -433,10 +415,7 @@ exports.createPages = async ({ graphql, actions }) => {
         zhHans {
           localFile {
             childImageSharp {
-              gatsbyImageData(
-                width: 230,
-                height: 92
-              )
+              gatsbyImageData
             }
           }
         }
