@@ -705,16 +705,21 @@ export const Head = ({ pageContext: { localizedMessages, code, result, ogImage, 
   return (
     <>
       <html lang={langKey} />
+      <title>{title}</title>
       <meta name="description" content={localizedMessages['metaDescriptionEvent']} />
+      <meta name="og:type" content="website" />
       <meta name="og:url" content={`${process.env.GATSBY_HOST}/${langKey}/result/${code}`} />
       <meta name="og:title" content={title} />
+      <meta name="og:description" content={localizedMessages['metaDescriptionEvent']} />
       <meta name="og:image" content={ogImageUrl} />
-      <meta name="og:type" content="website" />
+      <meta name="og:image:width" content="1000" />
+      <meta name="og:image:height" content="525" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={localizedMessages['metaDescriptionEvent']} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image:src" content={ogImageUrl} />
-      <title>{title}</title>
+      <meta name="twitter:image:width" content="1000" />
+      <meta name="twitter:image:height" content="525" />
       <body className={`lang-${langKey} result`} />
     </>
   );
