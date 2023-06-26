@@ -58,7 +58,7 @@ const CouponModal = ({ isOpen, onRequestClose, messages: localizedMessages, mid 
       params.append('mid', userId);
       params.append('event_id', '1');
       params.append('reward_id', '3');
-      const { data } = await axios.post(`${process.env.GATSBY_REWARD_API_HOST}/webevent/reward`);
+      const { data } = await axios.post(`${process.env.GATSBY_REWARD_API_HOST}/webevent/reward`, params);
 
       if (!data.success) {
         if (data['already_rewardead']) {
