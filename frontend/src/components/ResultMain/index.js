@@ -78,7 +78,6 @@ const PartnerCookies = styled.div`
   display: flex;
   width: 320px;
   flex-direction: row;
-  gap: 10px;
   text-align: center;
   margin: 20px auto;
 `;
@@ -86,6 +85,7 @@ const PartnerCookies = styled.div`
 const BestCookie = styled.div`
   color: #9FD33A;
   font-weight: 700;
+  margin-right: 10px;
 `;
 
 const WorstCookie = styled.div`
