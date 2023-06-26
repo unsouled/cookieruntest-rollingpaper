@@ -15,7 +15,7 @@ const Main = styled.main`
   flex-direction: column;
   height: 100%;
   margin-top: -70px;
-  background: url('/images/img-note-bg.png') repeat-y center #F2EEE5;
+  background: url('/images/img-note-bg.png') repeat-x center #F2EEE5;
   background-size: 319p× 454px;
   position: relative;
 `;
