@@ -97,6 +97,14 @@ const PeopleImage = styled.div`
   width: 155px;
   height: 165px;
   margin-top: 10px;
+  border-radius: 5px;
+
+  div {
+    border-radius: 5px;
+  }
+  img {
+    border-radius: 5px;
+  }
 `;
 
 const PeopleName = styled.div`
@@ -288,7 +296,6 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
             {localizedMessages['resultBestMatch']}
             <PeopleImage>
               <GatsbyImage 
-                css={{ borderRadius: 5 }}
                 image={bestMatchImage} 
                 alt="" 
                 width={155}
@@ -304,7 +311,6 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
             {localizedMessages['resultWorstMatch']}
             <PeopleImage>
               <GatsbyImage 
-                css={{ borderRadius: 5 }}
                 image={worstMatchImage}
                 alt="" 
                 width={155}
@@ -542,16 +548,16 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
         </Links>
 
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 24 }}>
-        <GatsbyImage 
-          image={getImage(logoImageData)} 
-          loading="eager"
-          placeholder="none"
-          alt="" 
-          css={{
-            width: 115,
-            margin: '0 auto', 
-          }}
-        />
+          <GatsbyImage 
+            image={getImage(logoImageData)} 
+            loading="eager"
+            placeholder="none"
+            alt="" 
+            css={{
+              width: 115,
+              margin: '0 auto', 
+            }}
+          />
         </div>
 
         <Copyright>
