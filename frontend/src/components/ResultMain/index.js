@@ -516,7 +516,7 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
         </StyledButton>
 
         <StyledButton onClick={() => {
-          window.open("https://www.dropbox.com/scl/fo/8gaamviknlzahv66kh5hc/h?dl=0&rlkey=olbtfvcu4eamxdci77y54hbo5", '_blank');
+          window.open("https://ckie.run/sticker", '_blank');
         }}>
           {localizedMessages['resultDownloadSticker']}
         </StyledButton>
