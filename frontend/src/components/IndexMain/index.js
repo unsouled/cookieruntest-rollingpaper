@@ -128,9 +128,6 @@ const IndexMain = ({ showModal, banner, lang = 'en', mid }) => {
   return (
     <>
       <CustomLayout css={{ position: 'absolute', top: 0 }}>
-        <Banner onClick={() => window.location.href='https://ckie.run/test '}>
-          <GatsbyImage image={bannerImageData} width="100%" height="100%" />
-        </Banner>
         <div css={{ display: 'flex', maxWidth: '320px', margin: '0 auto' }}>
           <div css={{ width: '100px', justifyContent: 'flex', padding: '20px 0' }}>
             <StaticImage 

@@ -253,15 +253,6 @@ const ResultMain = React.memo(({ lang, code, messages: localizedMessages, eventI
 
   return (
     <Layout>
-      <Banner onClick={() => window.location.href='https://ckie.run/test '}>
-        <GatsbyImage 
-          alt=""
-          image={bannerImageData} 
-          width="100%" 
-          height="100%"
-        />
-      </Banner>
-
       <Main>
       <RollingPaper ref={el => (topRef.current = el)}>
       <RollingPaperTitle>
@@ -615,30 +606,6 @@ const ResultPage = ({ pageContext: { langKey, code, localizedMessages, eventImag
   const hideModal = () => setModalOpen(false);
   const [modalOpen, setModalOpen] = useState(false);
   const smallBannerImageData = getImage(smallBanner?.localFile);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset >= 480) {
-        setShowSmallBanner(true);
-      } else {
-        setShowSmallBanner(false);
-      }
-      if (window.pageYOffset >= 240 && !modalOpened.current && fromQuestion) {
-        //setModalOpened(true);
-        modalOpened.current = true;
-        showModal();
-      }
-    };
-    if (typeof window !== 'undefined') {
-      window.history.replaceState(location.pathname, null);
-      window.addEventListener('scroll', handleScroll);
-    }
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [fromQuestion, location.pathname]);
 
   return (
     <>

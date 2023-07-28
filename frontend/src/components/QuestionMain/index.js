@@ -14,7 +14,6 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-top: -70px;
   background: url('/images/img-note-bg.png') repeat-x center #F2EEE5;
   background-size: 319p× 454px;
   position: relative;
@@ -26,6 +25,8 @@ const Background = styled.div`
   padding: 0;
   margin: 0 auto;
   min-height: 100%;
+  left: 0;
+  right: 0;
 `;
 
 const Banner = styled.div`
@@ -114,7 +115,7 @@ const Note = styled.div`
 `;
 
 const Progress = ({ current, total }) => (
-  <div css={{ width: 304, paddingTop: 84, display: 'flex', margin: 'auto' }}>
+  <div css={{ width: 304, paddingTop: 14, display: 'flex', margin: 'auto' }}>
     <div css={{ width: 304 * current / total, height: 38, background: 'url("/images/jelly-beans@3x.png") no-repeat', backgroundSize: '304px 38px' }}>
     </div>
   </div>
@@ -192,9 +193,6 @@ const QuestionMain = ({ lang, banner, questions, mid }) => {
     return (
       <Layout>
         <Background>
-          <Banner onClick={() => window.location.href='https://ckie.run/test '}>
-            <GatsbyImage image={bannerImageData} width="100%" height="100%" />
-          </Banner>
           <StaticImage css={{ position: 'absolute', top: 540, right: 65, width: 31, height: 31 }}
             src="../../images/img-bg-part1@3x.png"
             placeholder="none"
@@ -236,9 +234,6 @@ const QuestionMain = ({ lang, banner, questions, mid }) => {
 
   return (
     <Layout>
-      <Banner onClick={() => window.location.href='https://ckie.run/test'}>
-        <GatsbyImage image={bannerImageData} width="100%" height="100%" />
-      </Banner>
       <Main>
         <Progress current={currentQuestionIdx + 1} total={questions.length} />
         <Questions>
